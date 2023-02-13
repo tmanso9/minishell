@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 16:21:50 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:37:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,19 @@
 # include <limits.h>
 # include "libft.h"
 
+typedef struct s_variables
+{
+	char	**new_env;
+	char	malloced;
+}	t_variables;
+
 //Built-ins
-void	ft_env(char **env);
+void		ft_env(char **env);
+void		ft_export(char ***env, char *variable);
+
+//Utils
+t_variables	*vars(void);
+void		free_arr(void **arr);
 void	ft_echo(char **args);
 void	ft_unset(char *name, char ***env);
 

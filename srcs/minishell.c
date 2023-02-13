@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 16:28:03 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:38:16 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
-	ft_unset(argv[1], &env);
-	ft_env(env);
+	if (argc > 1)
+	{
+		// ft_env(env);
+		ft_export(&env, argv[1]);
+		ft_env(env);
+		if (vars()->malloced)
+			free(vars()->new_env);
+	}
 }

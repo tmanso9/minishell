@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 15:49:34 by touteiro         ###   ########.fr       */
+/*   Created: 2023/02/13 15:56:27 by touteiro          #+#    #+#             */
+/*   Updated: 2023/02/13 16:26:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+t_variables	*vars(void)
+{
+	static t_variables	all_vars;
+
+	return (&all_vars);
+}
+
+void	free_arr(void **arr)
 {
 	int	i;
 
 	i = 0;
-	while (env[i++])
-	{
-		if (env && ft_strlen(env[i]))
-			printf("%s\n", env[i]);
-	}
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

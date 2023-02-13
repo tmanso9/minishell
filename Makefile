@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 15:55:23 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/13 16:36:03 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRC = 	minishell.c \
 		env.c \
 		echo.c \
 		unset.c
+		export.c \
+		utils.c
 # cd.c 
 OBJ = $(addprefix srcs/, $(SRC:.c=.o))
 LIBFT = libft/libft.a
