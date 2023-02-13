@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 12:24:19 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/13 14:01:25 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ ifeq ($(DEBUG), 1)
 	CFLAGS += -fsanitize=address
 endif
 
-SRC = pwd.c
+SRC = 	pwd.c \
+		cd.c
 OBJ = $(addprefix srcs/, $(SRC:.c=.o))
 
 %.o: %.c incs/minishell.h
