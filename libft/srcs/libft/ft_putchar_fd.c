@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:50 by touteiro         ###   ########.fr       */
+/*   Created: 2022/10/10 20:19:05 by touteiro          #+#    #+#             */
+/*   Updated: 2023/01/19 19:36:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(char **env)
+/*
+Outputs the character ’c’ to the given file descriptor.
+*/
+void	ft_putchar_fd(char c, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (env[i++])
-	{
-		if (ft_strlen(env[i]))
-			printf("%s\n", env[i]);
-	}
+	write(fd, &c, 1);
 }

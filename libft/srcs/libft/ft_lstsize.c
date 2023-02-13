@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:50 by touteiro         ###   ########.fr       */
+/*   Created: 2022/10/10 21:20:54 by touteiro          #+#    #+#             */
+/*   Updated: 2023/01/19 19:36:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(char **env)
+/*
+Counts the number of elements in a list.
+Returns the length of the list.
+*/
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	while (env[i++])
+	size = 0;
+	while (lst)
 	{
-		if (ft_strlen(env[i]))
-			printf("%s\n", env[i]);
+		size += 1;
+		lst = lst->next;
 	}
+	return (size);
 }

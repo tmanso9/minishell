@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:50 by touteiro         ###   ########.fr       */
+/*   Created: 2022/10/10 20:12:33 by touteiro          #+#    #+#             */
+/*   Updated: 2023/01/19 19:36:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(char **env)
+/*
+Applies the function f to each character of the
+string passed as argument, and passing its index
+as first argument.  Each character is passed by
+address to f to be modified if necessary.
+*/
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	while (env[i++])
+	if (s == NULL)
+		return ;
+	while (s[i])
 	{
-		if (ft_strlen(env[i]))
-			printf("%s\n", env[i]);
+		(*f)(i, &s[i]);
+		i++;
 	}
 }

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:50 by touteiro         ###   ########.fr       */
+/*   Created: 2022/10/06 19:38:47 by touteiro          #+#    #+#             */
+/*   Updated: 2023/01/19 19:36:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(char **env)
+/*
+The bzero() function writes n zeroed bytes to the string s.  If n is zero,
+bzero() does nothing.
+*/
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	char	*str;
+	size_t	i;
 
+	if (n == 0)
+		return ;
+	str = s;
 	i = 0;
-	while (env[i++])
+	while (i < n)
 	{
-		if (ft_strlen(env[i]))
-			printf("%s\n", env[i]);
+		str[i] = 0;
+		i++;
 	}
 }

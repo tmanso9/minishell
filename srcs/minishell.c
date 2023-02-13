@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:50 by touteiro         ###   ########.fr       */
+/*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
+/*   Updated: 2023/02/13 14:17:14 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+int	main(int argc, char **argv, char **env)
 {
-	int	i;
-
-	i = 0;
-	while (env[i++])
+	if (argc > 1)
 	{
-		if (ft_strlen(env[i]))
-			printf("%s\n", env[i]);
+		(void)argv;
+		ft_env(env);
 	}
 }

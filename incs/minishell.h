@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 11:45:40 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:26:16 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@
 # include <curses.h>
 # include <term.h> 
 # include <limits.h>
+# include "libft.h"
+
+//Built-ins
+void	ft_env(char **env);
 
 #endif

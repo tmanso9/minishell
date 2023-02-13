@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:50 by touteiro         ###   ########.fr       */
+/*   Created: 2022/10/06 18:17:58 by touteiro          #+#    #+#             */
+/*   Updated: 2023/02/13 14:29:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(char **env)
+/*
+Testing the original function, we verify that it segfaults when given a NULL
+string as parameter. For this reason, in our version of the function we don't
+check to see if the input is null before running the rest of the code.
+*/
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	while (env[i++])
-	{
-		if (ft_strlen(env[i]))
-			printf("%s\n", env[i]);
-	}
+	size = 0;
+	if (!str)
+		return (0);
+	while (str[size])
+		size++;
+	return (size);
 }
