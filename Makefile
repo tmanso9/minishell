@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 18:03:57 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/13 18:13:32 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,17 @@ libft_fclean:
 	@make --no-print-directory -C libft fclean
 
 clean: libft_clean
-	@rm -rf $(OBJ) $(B_OBJ)
+	@rm -rf $(OBJ)
 	@echo "\033[31mTemporary object files deleted\033[0m"
 
 fclean: clean libft_fclean
 	@rm -rf $(NAME)
 	@echo "\033[31mExecutable deleted\033[0m"
 	@echo ""
+
+minishell_clean:
+	@rm -rf $(OBJ)
+	@echo "\033[31mTemporary object files deleted\033[0m"
 
 re: fclean all
 
