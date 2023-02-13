@@ -15,5 +15,6 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <curses.h>
-# include <term.h> 
+# include <term.h>
+ola
 #endif
