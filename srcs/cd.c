@@ -6,11 +6,11 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/13 13:49:22 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:55:34 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/minishell.h"
+#include "minishell.h"
 
 void	cd(char *path)
 {
