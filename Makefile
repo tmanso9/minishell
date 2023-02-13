@@ -3,43 +3,53 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 14:01:25 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/13 14:26:12 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -I incs -Wall -Wextra -Werror -g
+CFLAGS = -I incs -I libft/incs -Wall -Wextra -Werror -g
 
 ifeq ($(DEBUG), 1)
 	CFLAGS += -fsanitize=address
 endif
 
-SRC = 	pwd.c \
-		cd.c
+SRC = 	minishell.c \
+		pwd.c \
+		env.c
+# cd.c 
 OBJ = $(addprefix srcs/, $(SRC:.c=.o))
+LIBFT = libft/libft.a
 
 %.o: %.c incs/minishell.h
 	$(CC) -c $(CFLAGS) -o $@ $< 
 	@echo "\033[33m[OK]	" $@ "\033[0m"
 
 $(NAME): $(OBJ)
+	@make --no-print-directory -C libft
 	@echo "------------------------------"
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -L libft/ -lft -o $(NAME)
 	@echo "\033[92m[OK]	 minishell ready to use\033[0m"
 	@echo "------------------------------"
 
 all: $(NAME)
 
-clean:
-	@rm -rf $(OBJ) 2> /dev/null
+libft_clean:
+	@make --no-print-directory -C libft clean
+
+libft_fclean:
+	@make --no-print-directory -C libft fclean
+
+clean: libft_clean
+	@rm -rf $(OBJ) $(B_OBJ)
 	@echo "\033[31mTemporary object files deleted\033[0m"
 
-fclean: clean
-	@rm -f $(NAME) 2> /dev/null
+fclean: clean libft_fclean
+	@rm -rf $(NAME)
 	@echo "\033[31mExecutable deleted\033[0m"
 	@echo ""
 

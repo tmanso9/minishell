@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:26:16 by touteiro         ###   ########.fr       */
+/*   Created: 2023/01/19 15:44:29 by touteiro          #+#    #+#             */
+/*   Updated: 2023/01/19 19:18:46 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-# include <stdio.h>
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <signal.h>
+# include <stdlib.h>
+# include <sys/types.h>
 # include <sys/stat.h>
-# include <dirent.h>
-# include <string.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h> 
-# include <limits.h>
-# include "libft.h"
+# include <fcntl.h>
+# include <stdio.h>
 
-//Built-ins
-void	ft_env(char **env);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 9
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_join(char *temp, char *buffer);
+int		ft_check(char *buffer);
 
 #endif
