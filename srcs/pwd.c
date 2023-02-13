@@ -6,7 +6,13 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:54:31 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 11:54:32 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:46:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+void	ft_cwd(void)
+{
+	printf("%s\n", getcwd(NULL, 0));
+}
