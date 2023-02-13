@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 14:01:25 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/13 14:05:04 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ ifeq ($(DEBUG), 1)
 endif
 
 SRC = 	pwd.c \
-		cd.c
+		cd.c \
+		env.c
 OBJ = $(addprefix srcs/, $(SRC:.c=.o))
 
 %.o: %.c incs/minishell.h
