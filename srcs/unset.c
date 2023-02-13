@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 16:28:03 by amorais-         ###   ########.fr       */
+/*   Created: 2023/02/13 15:55:09 by amorais-          #+#    #+#             */
+/*   Updated: 2023/02/13 16:23:54 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_unset(char *name, char ***env)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
-	ft_unset(argv[1], &env);
-	ft_env(env);
+	int	i;
+	int	flag;
+
+	if (!getenv(name))
+		return ;
+	i = 0;
+	flag = 0;
+	while ((*env)[i])
+	{
+		if (ft_strncmp(name, (*env)[i], ft_strlen(name)) == 0)
+			flag = 1;
+		printf("%d\n", flag);
+		if (flag == 1)
+			(*env)[i] = (*env)[i + 1];
+		i++;
+	}
 }

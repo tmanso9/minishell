@@ -6,13 +6,13 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/13 15:39:30 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:27:42 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_combo(char c)
+int	is_combo(char c)
 {
 	if (c == 'a')
 		write(1, "\a", 1);
@@ -41,7 +41,7 @@ void	put_str(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] != 92)
 			write(1, &str[i], 1);

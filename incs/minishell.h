@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 14:41:21 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:21:50 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@
 //Built-ins
 void	ft_env(char **env);
 void	ft_echo(char **args);
+void	ft_unset(char *name, char ***env);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 14:39:45 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/13 15:55:23 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ endif
 SRC = 	minishell.c \
 		pwd.c \
 		env.c \
-		echo.c
+		echo.c \
+		unset.c
 # cd.c 
 OBJ = $(addprefix srcs/, $(SRC:.c=.o))
 LIBFT = libft/libft.a
