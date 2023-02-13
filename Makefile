@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 16:36:03 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/13 18:03:57 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,18 @@ ifeq ($(DEBUG), 1)
 	CFLAGS += -fsanitize=address
 endif
 
-SRC = 	minishell.c \
-		pwd.c \
-		env.c \
-		echo.c \
-		unset.c
-		export.c \
-		utils.c
-# cd.c 
-OBJ = $(addprefix srcs/, $(SRC:.c=.o))
+BUILTIN_SRC = 	pwd.c \
+				env.c \
+				echo.c \
+				unset.c \
+				export.c \
+				# cd.c 
+
+GENERAL_SRC = minishell.c utils.c
+
+BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
+GENERAL_OBJ = $(addprefix srcs/, $(GENERAL_SRC:.c=.o))
+OBJ = $(BUILTIN_OBJ) $(GENERAL_OBJ)
 LIBFT = libft/libft.a
 
 %.o: %.c incs/minishell.h
