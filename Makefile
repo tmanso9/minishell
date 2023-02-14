@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/14 12:55:10 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/14 16:26:31 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ BUILTIN_SRC = 	pwd.c \
 				unset.c \
 				export.c \
 				# cd.c 
-PARSING_SRC = parse_args.c
+PARSING_SRC = parse_args.c parse_each.c
 GENERAL_SRC = minishell.c utils.c
 
 BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))

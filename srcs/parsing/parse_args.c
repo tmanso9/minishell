@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 14:29:41 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:15:22 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,7 @@ void	dup_env(char **env)
 	}
 }
 
-int	is_builtin(char *command)
-{
-	if (!ft_strncmp(command, BI1, ft_strlen(command)) || \
-		!ft_strncmp(command, BI2, ft_strlen(command)) || \
-		!ft_strncmp(command, BI3, ft_strlen(command)) || \
-		!ft_strncmp(command, BI4, ft_strlen(command)) || \
-		!ft_strncmp(command, BI5, ft_strlen(command)) || \
-		!ft_strncmp(command, BI6, ft_strlen(command)) || \
-		!ft_strncmp(command, BI7, ft_strlen(command)))
-		return (1);
-	return (0);
-}
+
 
 void	com_add_back(t_com **lst, t_com *new)
 {
@@ -51,7 +40,13 @@ void	com_add_back(t_com **lst, t_com *new)
 	{
 		if (*lst)
 		{
-			elem = (t_com *)ft_lstlast((t_list *)*lst);
+			elem = *lst;
+			while (elem)
+			{
+				if (!elem->next)
+					break ;
+				elem = elem->next;
+			}
 			elem->next = new;
 		}
 		else
@@ -76,23 +71,34 @@ t_com	*parse_args(char *command_line)
 	t_com	**first;
 	t_com	*com;
 	int		i;
+	int		to_add;
 
-	arr = ft_split(command_line, ' ');
+	arr = ft_split(treated_input(command_line), ' ');
+	// arr = ft_split(command_line, ' ');
 	i = 0;
 	first = ft_calloc(1, sizeof(t_com *));
 	if (!first)
 		return (NULL);
-	com = com_new();
-	com_add_back(first, com);
-	while (arr[i])
+	while (arr && arr[i])
 	{
-		printf("%s\n", arr[i]);
-		if (is_builtin(arr[i]))
-			printf("It's a builtin!\n");
+		to_add = 0;
+		com = com_new();
+		parse_each(arr, &i, &com, &to_add);
+		if (to_add)
+			com_add_back(first, com);
 		else
-			printf("Nop\n");
-		i++;
+			free(com);
 	}
 	free_arr((void *)arr);
-	return (NULL);
+	/* Print to check commands */
+	/* com = *first;
+	while (com)
+	{
+		i = 0;
+		printf("Command args:\n");
+		while (com->args[i])
+			printf("%s\n", com->args[i++]);
+		com = com->next;
+	} */
+	return (*first);
 }

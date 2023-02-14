@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 13:56:54 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:42:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,20 @@ void	wait_commands(void)
 {
 	char	*new_line;
 	char	*prompt;
+	t_com	*first;
 
 	while (1)
 	{
 		prompt = get_prompt();
 		new_line = readline(prompt);
-		parse_args(new_line);
+		first = parse_args(new_line);
+		// Execute
+		// printf("%s\n", first->args[0]);
+		if (!(ft_strncmp(first->args[0], "echo", ft_strlen(first->args[0]))))
+			ft_echo(first->args);
 		free(new_line);
 		free(prompt);
+		// Free command list
 	}
 }
 

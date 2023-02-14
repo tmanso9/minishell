@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 14:04:48 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:59:04 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void		ft_unset(char *name, char ***env);
 //Utils
 t_variables	*vars(void);
 void		dup_env(char **env);
-t_com		*parse_args(char *command_line);
 void		free_arr(void **arr);
 
+//Parsing
+t_com		*parse_args(char *command_line);
+char		*treated_input(char *str);
+void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 #endif
