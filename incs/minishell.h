@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 16:37:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:43:15 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ typedef struct s_variables
 	char	**new_env;
 	char	malloced;
 }	t_variables;
+
+typedef struct s_com
+{
+	char			*path;
+	char			**args;
+	int				pip[2];
+	int				builtin;
+	char			**env;
+	struct s_com	*next;
+}				t_com;
 
 //Built-ins
 void		ft_env(char **env);
