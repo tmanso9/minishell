@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 19:42:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:49:05 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*process_env_var(char *str, int begin, char *new_var, int to_remove)
 		i++;
 	}
 	j = 0;
-	while (new_var[j])
+	while (new_var && new_var[j])
 		temp[i++] = new_var[j++];
 	while (str[begin + to_remove + 1])
 		temp[i++] = str[begin++ + to_remove + 1];
