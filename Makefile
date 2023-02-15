@@ -6,7 +6,7 @@
 #    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/15 11:27:59 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/15 12:31:22 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,8 @@ BUILTIN_SRC = 	pwd.c \
 				echo.c \
 				unset.c \
 				export.c \
-				# cd.c 
-PARSING_SRC = parse_args.c parse_each.c
-GENERAL_SRC = minishell.c utils.c
+				cd.c 
+PARSING_SRC = parse_args.c parse_each.c path_finder.c
 
 GENERAL_SRC = 	minishell.c \
 				utils.c \

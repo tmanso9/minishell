@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 11:34:09 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:50:31 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ char	*get_right_part(void)
 		}
 		right_part[j + 1] = '$';
 		right_part[j + 2] = ' ';
+		free(wd);
+		free(home);
 	}
-	free(wd);
-	free(home);
 	return (right_part);
 }
 
@@ -120,10 +120,7 @@ void	wait_commands(void)
 		prompt = get_prompt();
 		new_line = readline(prompt);
 		first = parse_args(new_line);
-		// Execute
-		// printf("%s\n", first->args[0]);
-		if (!(ft_strncmp(first->args[0], "echo", ft_strlen(first->args[0]))))
-			ft_echo(first->args);
+		execute(first);
 		free(new_line);
 		free(prompt);
 		// Free command list
