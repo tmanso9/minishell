@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_each.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 12:29:52 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:06:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,5 +209,13 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 		(*i)++;
 	}
 	(*com)->args = list_to_array(*head);
+	t_list	*temp;
+	while (head && *head)
+	{
+		temp = (*head)->next;
+		free(*head);
+		*head = temp;
+	}
+	free(head);
 	(*com)->path = find_path((*com)->env, (*com)->args[0]);
 }

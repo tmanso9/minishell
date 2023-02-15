@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 15:21:42 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:10:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,23 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
+void	free_commands(t_com **command)
+{
+	t_com	*temp;
+
+	if (!command || !*command)
+		return ;
+	while (command && *command)
+	{
+		temp = (*command)->next;
+		free_arr((void *)(*command)->args);
+		free((*command)->path);
+		free(*command);
+		*command = temp;
+	}
+	command = NULL;
+}
+
 void	wait_commands(void)
 {
 	char	*new_line;
@@ -121,6 +138,7 @@ void	wait_commands(void)
 		new_line = readline(prompt);
 		first = parse_args(new_line);
 		execute(first);
+		free_commands(&first);
 		free(new_line);
 		free(prompt);
 		// Free command list

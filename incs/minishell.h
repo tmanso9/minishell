@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 15:22:53 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:59:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		ft_unset(char *name, char ***env);
 t_variables	*vars(void);
 void		dup_env(char **env);
 void		free_arr(void **arr);
+void		free_commands(t_com **command);
 
 //Parsing
 t_com		*parse_args(char *command_line);
