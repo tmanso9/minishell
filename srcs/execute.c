@@ -26,6 +26,8 @@ void	execute_builtin(t_com *com)
 		ft_pwd();
 	else if (!ft_strncmp(com->args[0], "unset", ft_strlen(com->args[0])))
 		ft_unset(com->args[1], &(com->env));
+	//else if (!ft_strncmp(com->args[0], "exit", ft_strlen(com->args[0])))
+	//	ft_exit();
 }
 
 void	execute_command(t_com *com)
