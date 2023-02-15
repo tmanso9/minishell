@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/15 15:20:26 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:33:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ void	ft_cd(char *original_path)
 	char	*path;
 
 	path = ft_strdup(original_path);
-	if (!path)
-		path = getenv("HOME");
-	if (path[0] == '~')
+	if (!ft_strlen(path))
+		path = ft_strdup(getenv("HOME"));
+	if (path && path[0] == '~')
 		path = new_path(path);
 	if (chdir(path))
 	{
 		free(path);
 		//error_management();
 	}
-	free(path);
+	else
+		free(path);
 }
