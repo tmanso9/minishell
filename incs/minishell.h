@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 12:26:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:22:53 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_com
 //Built-ins
 void		ft_env(char **env);
 void		ft_export(char ***env, char *variable);
-void		ft_echo(char **args);
 void		ft_cd(char *path);
+void		ft_echo(char **args);
 void		ft_pwd(void);
 void		ft_unset(char *name, char ***env);
 
