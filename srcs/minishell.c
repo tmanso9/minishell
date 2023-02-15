@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 19:42:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:13:31 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*get_hostname(void)
 	temp_hostname = ft_strdup(getenv("SESSION_MANAGER"));
 	split_hostname = ft_split(temp_hostname, '/');
 	i = 0;
-	while (split_hostname[1][i] != ':')
+	while (ft_isalpha(split_hostname[1][i]) || ft_isdigit(split_hostname[1][i]))
 		i++;
 	hostname = ft_calloc(i + 1, sizeof(char));
 	i = 0;
-	while (split_hostname[1][i] != ':')
+	while (ft_isalpha(split_hostname[1][i]) || ft_isdigit(split_hostname[1][i]))
 	{
 		hostname[i] = split_hostname[1][i];
 		i++;

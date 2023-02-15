@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 18:15:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:13:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,12 @@ t_com	*parse_args(char *command_line)
 	int		i;
 	int		to_add;
 
+	if (!command_line)
+	{
+		printf("exit\n");
+		exit(0);
+	}
 	arr = ft_split(treated_input(command_line), ' ');
-	// arr = ft_split(command_line, ' ');
 	i = 0;
 	first = ft_calloc(1, sizeof(t_com *));
 	if (!first)

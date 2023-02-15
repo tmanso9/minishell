@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/14 19:49:05 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:07:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	*remove_quotes(char *str, int j, char c)
 	char	*temp;
 
 	i = j - 1;
+	quote = 0;
 	temp = ft_calloc(ft_strlen(str) - 1, 1);
 	if (!temp)
 		return (NULL); //Rever
