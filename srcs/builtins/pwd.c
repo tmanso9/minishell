@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:54:31 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 13:46:51 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:07:02 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cwd(void)
+void	ft_pwd(void)
 {
 	printf("%s\n", getcwd(NULL, 0));
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/13 18:13:32 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/14 15:19:00 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ BUILTIN_SRC = 	pwd.c \
 				echo.c \
 				unset.c \
 				export.c \
-				# cd.c 
+				#cd.c 
 
-GENERAL_SRC = minishell.c utils.c
+GENERAL_SRC = 	minishell.c \
+				utils.c \
+				execute.c
 
 BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
 GENERAL_OBJ = $(addprefix srcs/, $(GENERAL_SRC:.c=.o))

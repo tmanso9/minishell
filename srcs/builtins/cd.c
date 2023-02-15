@@ -6,13 +6,13 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/13 13:55:34 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:18:45 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cd(char *path)
+void	ft_cd(char *path)
 {
 	if (chdir(path))
 		error_management();
