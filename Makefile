@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/14 16:26:31 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/15 11:27:59 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ BUILTIN_SRC = 	pwd.c \
 				# cd.c 
 PARSING_SRC = parse_args.c parse_each.c
 GENERAL_SRC = minishell.c utils.c
+
+GENERAL_SRC = 	minishell.c \
+				utils.c \
+				execute.c
 
 BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
 PARSING_OBJ = $(addprefix srcs/parsing/, $(PARSING_SRC:.c=.o))

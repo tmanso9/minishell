@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:55:09 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:23:54 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:16:59 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_unset(char *name, char ***env)
 	{
 		if (ft_strncmp(name, (*env)[i], ft_strlen(name)) == 0)
 			flag = 1;
-		printf("%d\n", flag);
 		if (flag == 1)
 			(*env)[i] = (*env)[i + 1];
 		i++;

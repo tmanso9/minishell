@@ -60,6 +60,8 @@ typedef struct s_com
 void		ft_env(char **env);
 void		ft_export(char ***env, char *variable);
 void		ft_echo(char **args);
+void		ft_cd(char *path);
+void		ft_pwd(void);
 void		ft_unset(char *name, char ***env);
 
 //Utils
@@ -71,4 +73,8 @@ void		free_arr(void **arr);
 t_com		*parse_args(char *command_line);
 char		*treated_input(char *str);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
+void		ft_unset(char *name, char ***env);
+
+//Execute
+void	execute(t_com *com);
 #endif
