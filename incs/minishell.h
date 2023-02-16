@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 14:09:07 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:07:43 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ typedef struct s_variables
 	char	*builtins[7];
 	char	malloced;
 	char	*infile;
+	int		fd_in;
 	char	*outfile;
+	int		fd_out;
 }	t_variables;
 
 typedef struct s_com
@@ -77,6 +79,7 @@ void		free_commands(t_com **command);
 //Parsing
 t_com		*parse_args(char *command_line);
 char		*treated_input(char *str);
+void		redirection(char **arr, int *i);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 void		ft_unset(char *name, char ***env);
 char		*find_path(char **env_path, char *cmd);

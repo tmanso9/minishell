@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 19:49:32 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:36:12 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 		return ;
 	}
 	(*to_add) = 1;
+	if (arr[*i][0] == '<' || arr[*i][0] == '>')
+		redirection(arr, i);
 	while (arr[*i] && ft_strncmp(arr[*i], ";", ft_strlen(arr[*i])) && \
 		ft_strncmp(arr[*i], "|", ft_strlen(arr[*i])))
 	{

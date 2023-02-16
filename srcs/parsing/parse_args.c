@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 19:46:50 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:45:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	dup_env(char **env)
 		i++;
 	}
 }
-
-
 
 void	com_add_back(t_com **lst, t_com *new)
 {
@@ -109,5 +107,9 @@ t_com	*parse_args(char *command_line)
 	} */
 	com = *first;
 	free(first);
+	if (vars()->fd_in)
+		com->in = vars()->fd_in;
+	if (vars()->fd_out)
+		((t_com *)ft_lstlast((t_list *)com))->out = vars()->fd_out;
 	return (com);
 }
