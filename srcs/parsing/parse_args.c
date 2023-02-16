@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 12:37:19 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:46:50 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ t_com	*parse_args(char *command_line)
 	t_com	*com;
 	int		i;
 	int		to_add;
+	char	*treated;
 
 	if (!command_line)
 	{
 		printf("exit\n");
 		exit(0);
 	}
-	arr = ft_split(treated_input(command_line), ' ');
+	treated = treated_input(command_line);
+	arr = ft_split(treated, ' ');
 	i = 0;
 	first = ft_calloc(1, sizeof(t_com *));
 	if (!first)
@@ -93,6 +95,7 @@ t_com	*parse_args(char *command_line)
 		else
 			free(com);
 	}
+	free(treated);
 	free_arr((void *)arr);
 	/* Print to check commands */
 	/* com = *first;
@@ -104,5 +107,7 @@ t_com	*parse_args(char *command_line)
 			printf("%s\n", com->args[i++]);
 		com = com->next;
 	} */
-	return (*first);
+	com = *first;
+	free(first);
+	return (com);
 }

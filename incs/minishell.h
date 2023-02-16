@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 15:24:48 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:06:16 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		ft_unset(char *name, char ***env);
 t_variables	*vars(void);
 void		dup_env(char **env);
 void		free_arr(void **arr);
+void		free_commands(t_com **command);
 
 //Parsing
 t_com		*parse_args(char *command_line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_each.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/15 12:29:52 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:49:32 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ char	*treated_input(char *str)
 				}
 				temp = getenv(var_to_search);
 				str = process_env_var(str, i, temp, ft_strlen(var_to_search));
+				free(var_to_search);
 			}
 			else
 				str = remove_quotes(str, i, '\'');
@@ -196,6 +197,7 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 	if (!ft_strncmp(arr[*i], ";", ft_strlen(arr[*i])) || \
 		!ft_strncmp(arr[*i], "|", ft_strlen(arr[*i])))
 	{
+		free(head);
 		(*i)++;
 		return ;
 	}
@@ -209,5 +211,7 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 		(*i)++;
 	}
 	(*com)->args = list_to_array(*head);
+	ft_lstclear(head, free);
+	free(head);
 	(*com)->path = find_path((*com)->env, (*com)->args[0]);
 }
