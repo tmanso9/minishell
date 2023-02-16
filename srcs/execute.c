@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 14:15:03 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:48:22 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ void	execute_builtin(t_com *com)
 	}
 }
 
+void	output_decider(t_com **com)
+{
+	if ((*com)->out > 1)
+		dup2((*com)->out, 1);
+	else if ((*com)->next)
+		dup2((*com)->pip[1], 1);
+}
+
 void	execute_command(t_com **com)
 {
 	int	id;
@@ -52,8 +60,7 @@ void	execute_command(t_com **com)
 			dup2((*com)->in, 0);
 			close((*com)->in);
 		}
-		if ((*com)->next)
-			dup2((*com)->pip[1], 1);
+		output_decider(com);
 		close((*com)->pip[1]);
 		if ((*com)->builtin)
 			execute_builtin(*com);
