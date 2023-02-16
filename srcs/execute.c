@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 16:48:22 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:05:48 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ void	execute_command(t_com **com)
 	{
 		close((*com)->pip[0]);
 		if ((*com)->in)
-		{
 			dup2((*com)->in, 0);
-			close((*com)->in);
-		}
 		output_decider(com);
+		close((*com)->pip[0]);
 		close((*com)->pip[1]);
 		if ((*com)->builtin)
 			execute_builtin(*com);
