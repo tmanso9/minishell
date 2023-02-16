@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/15 15:21:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:15:03 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,34 @@ void	execute_command(t_com **com)
 {
 	int	id;
 
+	pipe((*com)->pip);
 	id = fork();
 	if (id == 0)
 	{
+		close((*com)->pip[0]);
+		if ((*com)->in)
+		{
+			dup2((*com)->in, 0);
+			close((*com)->in);
+		}
+		if ((*com)->next)
+			dup2((*com)->pip[1], 1);
+		close((*com)->pip[1]);
 		execve((*com)->path, (*com)->args, (*com)->env);
 	}
 	else
+	{
 		wait(0);
+		close((*com)->pip[1]);
+		if ((*com)->next)
+			(*com)->next->in = dup((*com)->pip[0]);
+		close((*com)->pip[0]);
+	}
 }
 
 void	execute(t_com *com)
 {
+	com->in = 0;
 	while (com)
 	{
 		if (com->builtin)

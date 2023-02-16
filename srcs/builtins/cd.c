@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 14:06:34 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:26:46 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ void	ft_cd(char *original_path)
 		path = ft_strdup(getenv("HOME"));
 	if (path && path[0] == '~')
 		path = new_path(path);
-	if (chdir(path))
-	{
-		free(path);
-		//error_management();
-	}
-	else
-		free(path);
+	chdir(path);
+	//if (chdir(path))
+		//error_management(errno);
+	free(path);
 }

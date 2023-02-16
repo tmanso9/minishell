@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 14:06:16 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:09:07 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_com
 	char			*path;
 	char			**args;
 	int				pip[2];
+	int				in;
 	int				builtin;
 	char			**env;
 	struct s_com	*next;
