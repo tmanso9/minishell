@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 15:46:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:42:10 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	process_outfile(char **arr, int *i)
 		vars()->outfile = ft_strdup(arr[*i]);
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
+		// printf("out is %d\n", vars()->fd_out);
 	}
 	// if (vars()->fd_in < 0)
 		// error_handle(BLA);

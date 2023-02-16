@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_each.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 16:17:47 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:49:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,9 +201,13 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 		(*i)++;
 		return ;
 	}
-	(*to_add) = 1;
 	if (arr[*i][0] == '<' || arr[*i][0] == '>')
+	{
 		redirection(arr, i);
+		free(head);
+		return ;
+	}
+	(*to_add) = 1;
 	while (arr[*i] && ft_strncmp(arr[*i], ";", ft_strlen(arr[*i])) && \
 		ft_strncmp(arr[*i], "|", ft_strlen(arr[*i])) && \
 		arr[*i][0] != '>')

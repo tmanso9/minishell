@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 16:07:43 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:33:46 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_variables	*vars(void);
 void		dup_env(char **env);
 void		free_arr(void **arr);
 void		free_commands(t_com **command);
+t_com		*last_command(t_com *com);
 
 //Parsing
 t_com		*parse_args(char *command_line);
