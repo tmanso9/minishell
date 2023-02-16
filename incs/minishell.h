@@ -44,6 +44,8 @@ typedef struct s_variables
 	char	**new_env;
 	char	*builtins[7];
 	char	malloced;
+	char	*infile;
+	char	*outfile;
 }	t_variables;
 
 typedef struct s_com
@@ -52,6 +54,7 @@ typedef struct s_com
 	char			**args;
 	int				pip[2];
 	int				in;
+	int				out;
 	int				builtin;
 	char			**env;
 	struct s_com	*next;
