@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 17:05:48 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:56:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	execute_builtin(t_com *com)
 		/* exit_code =  */ft_unset(com->args[1], &(com->env));
 	//else if (!ft_strncmp(com->args[0], "exit", ft_strlen(com->args[0])))
 	//	exit_code = ft_exit();
-	if (com->in || com->out)
-	{
+	if (com->in || com->out || com->pip_after)
+	{;
 		//free
 		exit(exit_code);
 	}
@@ -42,7 +42,7 @@ void	output_decider(t_com **com)
 {
 	if ((*com)->out > 1)
 		dup2((*com)->out, 1);
-	else if ((*com)->next)
+	else if ((*com)->pip_after)
 		dup2((*com)->pip[1], 1);
 }
 
@@ -68,8 +68,10 @@ void	execute_command(t_com **com)
 	{
 		wait(0);
 		close((*com)->pip[1]);
-		if ((*com)->next /* && (*com)->out */)
+		if ((*com)->next && (*com)->pip_after)
+		{
 			(*com)->next->in = dup((*com)->pip[0]);
+		}
 		close((*com)->pip[0]);
 	}
 }
@@ -78,7 +80,7 @@ void	execute(t_com *com)
 {
 	while (com)
 	{
-		if (!(com->builtin) || com->in || com->out)
+		if (!(com->builtin) || com->in || com->out || com->pip_after)
 			execute_command(&com);
 		else
 			execute_builtin(com);

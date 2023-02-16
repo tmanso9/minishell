@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 16:33:46 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:59:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_com
 	int				pip[2];
 	int				in;
 	int				out;
+	int				pip_after;
 	int				builtin;
 	char			**env;
 	struct s_com	*next;

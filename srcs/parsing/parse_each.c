@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 16:49:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:59:12 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,8 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 		ft_strncmp(arr[*i], "|", ft_strlen(arr[*i])) && \
 		arr[*i][0] != '>')
 	{
+		if (arr[*i + 1] && arr[*i + 1][0] == '|')
+			(*com)->pip_after = 1;
 		if (is_builtin(arr[*i]))
 			(*com)->builtin = 1;
 		ft_lstadd_back(head, ft_lstnew(ft_strdup(arr[*i])));
