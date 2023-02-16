@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/15 15:21:58 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/16 14:49:50 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,10 @@ BUILTIN_SRC = 	pwd.c \
 				unset.c \
 				export.c \
 				cd.c 
-PARSING_SRC = parse_args.c parse_each.c path_finder.c
+PARSING_SRC =	parse_args.c \
+				parse_each.c \
+				path_finder.c \
+				redirections.c
 
 GENERAL_SRC = 	minishell.c \
 				utils.c \

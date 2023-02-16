@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 14:09:07 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:41:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef struct s_variables
 	char	**new_env;
 	char	*builtins[7];
 	char	malloced;
+	char	*infile;
+	int		fd_in;
+	char	*outfile;
+	int		fd_out;
 }	t_variables;
 
 typedef struct s_com
@@ -52,6 +56,7 @@ typedef struct s_com
 	char			**args;
 	int				pip[2];
 	int				in;
+	int				out;
 	int				builtin;
 	char			**env;
 	struct s_com	*next;
@@ -74,6 +79,7 @@ void		free_commands(t_com **command);
 //Parsing
 t_com		*parse_args(char *command_line);
 char		*treated_input(char *str);
+void		redirection(char **arr, int *i);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 void		ft_unset(char *name, char ***env);
 char		*find_path(char **env_path, char *cmd);
