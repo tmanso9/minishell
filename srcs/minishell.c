@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 18:02:45 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:56:07 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,22 @@ void	wait_commands(void)
 	char	*new_line;
 	char	*prompt;
 	t_com	*first;
-
+	
 	while (1)
 	{
 		prompt = get_prompt();
 		new_line = readline(prompt);
+		if (!new_line)
+		{
+			printf("exit\n");
+			rl_clear_history();
+			exit(0);
+		}
+		add_history(new_line);
 		first = parse_args(new_line);
 		execute(first);
+		(vars())->fd_out = 0;
+		(vars())->fd_in = 0;
 		free_commands(&first);
 		free(new_line);
 		free(prompt);

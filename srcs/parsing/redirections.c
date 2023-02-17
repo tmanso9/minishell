@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 16:42:10 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:53:00 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,21 @@ void	process_infile(char **arr, int *i)
 
 void	process_outfile(char **arr, int *i)
 {
-	if (arr[*i][1])
+	if (vars()->outfile)
+		{
+			close(vars()->fd_out);
+			free(vars()->outfile);
+		}
+	if (!arr[*i][1]/*  || (arr[*i][1] == '>' && !arr[*i][2]) */)
+	{
+		(*i)++;
+		vars()->outfile = ft_strdup(arr[*i]);
+	}
+	else
+		vars()->outfile = ft_strdup(&arr[*i][1 /* + (arr[*i][1] == '>') */]);
+	(vars())->fd_out = open(vars()->outfile, \
+		O_RDWR | O_CREAT | O_TRUNC, 0666);
+	/* if (arr[*i][1])
 	{
 		if (vars()->outfile)
 		{
@@ -65,7 +79,7 @@ void	process_outfile(char **arr, int *i)
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
 		// printf("out is %d\n", vars()->fd_out);
-	}
+	} */
 	// if (vars()->fd_in < 0)
 		// error_handle(BLA);
 	(*i)++;

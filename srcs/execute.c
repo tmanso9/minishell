@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 17:56:51 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:04:43 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	execute(t_com *com)
 {
 	while (com)
 	{
+		printf("Com: %s\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 			execute_command(&com);
 		else

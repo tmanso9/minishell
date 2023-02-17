@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/16 17:21:07 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:43:03 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ t_com	*parse_args(char *command_line)
 	int		to_add;
 	char	*treated;
 
-	if (!command_line)
+	/* if (!command_line)
 	{
 		printf("exit\n");
+		rl_clear_history();
 		exit(0);
-	}
+	} */
 	treated = treated_input(command_line);
 	arr = ft_split(treated, ' ');
 	i = 0;
