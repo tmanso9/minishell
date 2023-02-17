@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 12:53:00 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:32:08 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	process_outfile(char **arr, int *i)
 			close(vars()->fd_out);
 			free(vars()->outfile);
 		}
-	if (!arr[*i][1]/*  || (arr[*i][1] == '>' && !arr[*i][2]) */)
+	if (!arr[*i][1] || (arr[*i][1] == '>' && !arr[*i][2]))
 	{
 		(*i)++;
 		vars()->outfile = ft_strdup(arr[*i]);
 	}
 	else
-		vars()->outfile = ft_strdup(&arr[*i][1 /* + (arr[*i][1] == '>') */]);
+		vars()->outfile = ft_strdup(&arr[*i][1 + (arr[*i][1] == '>')]);
 	(vars())->fd_out = open(vars()->outfile, \
 		O_RDWR | O_CREAT | O_TRUNC, 0666);
 	/* if (arr[*i][1])
