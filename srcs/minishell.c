@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 15:34:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:15:34 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ void	wait_commands(void)
 		free(new_line);
 		if (vars()->fd_in)
 		{
+			if (!ft_strncmp(vars()->infile, ".heredoc", 9))
+				unlink(vars()->infile);
 			close(vars()->fd_in);
 			vars()->fd_in = 0;
 			free(vars()->infile);
@@ -176,6 +178,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	init_vars(env);
 	wait_commands();
+	
 	//free vars
 	exit (0);
 }
