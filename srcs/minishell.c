@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 13:31:01 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:34:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	wait_commands(void)
 	char	*new_line;
 	char	*prompt;
 	t_com	*first;
-	
+
 	while (1)
 	{
 		prompt = get_prompt();
@@ -140,15 +140,25 @@ void	wait_commands(void)
 		{
 			printf("exit\n");
 			rl_clear_history();
-			exit(0);
+			return ;
 		}
 		add_history(new_line);
 		first = parse_args(new_line);
 		execute(first);
-		(vars())->fd_out = 0;
-		(vars())->fd_in = 0;
 		free_commands(&first);
 		free(new_line);
+		if (vars()->fd_in)
+		{
+			close(vars()->fd_in);
+			vars()->fd_in = 0;
+			free(vars()->infile);
+		}
+		if (vars()->fd_out)
+		{
+			close(vars()->fd_out);
+			vars()->fd_out = 0;
+			free(vars()->outfile);
+		}
 		free(prompt);
 		// Free command list
 	}
@@ -166,9 +176,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	init_vars(env);
 	wait_commands();
-	// ft_env(env);
-	// ft_export(&env, argv[1]);
-	// ft_env(env);
-	// if (vars()->malloced)
-		// free(vars()->new_env);
+	//free vars
+	exit (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 13:32:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:24:32 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	process_infile(char **arr, int *i)
 {
 	if (arr[*i][1])
 	{
-		if (vars()->infile)
+		if (vars()->fd_in)
 		{
 			close(vars()->fd_in);
 			free(vars()->infile);
@@ -27,7 +27,7 @@ void	process_infile(char **arr, int *i)
 	else
 	{
 		(*i)++;
-		if (vars()->infile)
+		if (vars()->fd_in)
 		{
 			close(vars()->fd_in);
 			free(vars()->infile);
@@ -42,11 +42,11 @@ void	process_infile(char **arr, int *i)
 
 void	process_outfile(char **arr, int *i)
 {
-	if (vars()->outfile)
-		{
-			close(vars()->fd_out);
-			free(vars()->outfile);
-		}
+	if (vars()->fd_out)
+	{
+		close(vars()->fd_out);
+		free(vars()->outfile);
+	}
 	if (!arr[*i][1] || (arr[*i][1] == '>' && !arr[*i][2]))
 	{
 		(*i)++;
