@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 17:22:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:39:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	list_to_command(t_list **head, t_com **com)
 {
 	if (*(char *)(*head)->content)
 	{
-		printf("here\n");
 		if (is_builtin((*head)->content))
 			(*com)->builtin = 1;
 		(*com)->args = list_to_array(*head);
@@ -116,6 +115,10 @@ void	lexer(char *line, int *i, t_com **com)
 	else if (line[*i] == '<' || line[*i] == '>')
 		while (line[*i] == '<' || line[*i] == '>')
 			redirection(line, i);
+	while (ft_is_space(line[*i]))
+		(*i)++;
+	if (line[*i] == '|')
+		(*com)->pip_after = 1;
 	list_to_command(head, com);
 }
 
@@ -139,7 +142,7 @@ t_com	*parse_args(char *line)
 			free(com);
 	}
 	/* Print to check commands */
-	com = *head;
+	/* com = *head;
 	while (com)
 	{
 		i = 0;
@@ -147,7 +150,7 @@ t_com	*parse_args(char *line)
 		while (com->args[i])
 			printf("%s\n", com->args[i++]);
 		com = com->next;
-	}
+	} */
 	// Space for parsing and expanding
 	com = *head;
 	free(head);
