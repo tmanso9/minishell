@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 16:39:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:02:07 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 void		ft_unset(char *name, char ***env);
 char		*find_path(char **env_path, char *cmd);
+void		parser(t_com **com);
 
 //Execute
 void		execute(t_com *com);
