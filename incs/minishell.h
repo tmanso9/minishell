@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 19:15:40 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:50:22 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ void		ft_unset(char *name, char ***env);
 t_variables	*vars(void);
 void		dup_env(char **env);
 void		free_arr(void **arr);
+t_com		*com_new(void);
+void		com_add_back(t_com **lst, t_com *new);
+char		**list_to_array(t_list *lst);
 void		free_commands(t_com **command);
 t_com		*last_command(t_com *com);
 

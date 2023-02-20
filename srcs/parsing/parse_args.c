@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 13:30:02 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:06:41 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ t_com	*com_new(void)
 	return (com);
 }
 
-t_com	*parse_args(char *command_line)
+/* t_com	*parse_args(char *command_line)
 {
 	char	**arr;
 	t_com	**first;
 	t_com	*com;
 	int		i;
 	int		to_add;
-	char	*treated;
+	char	*treated; */
 
 	/* if (!command_line)
 	{
@@ -78,7 +78,7 @@ t_com	*parse_args(char *command_line)
 		rl_clear_history();
 		exit(0);
 	} */
-	treated = treated_input(command_line);
+/* 	treated = treated_input(command_line);
 	arr = ft_split(treated, ' ');
 	i = 0;
 	first = ft_calloc(1, sizeof(t_com *));
@@ -95,7 +95,7 @@ t_com	*parse_args(char *command_line)
 			free(com);
 	}
 	free(treated);
-	free_arr((void *)arr);
+	free_arr((void *)arr); */
 	/* Print to check commands */
 	/* com = *first;
 	while (com)
@@ -107,11 +107,11 @@ t_com	*parse_args(char *command_line)
 			printf("%s\n", com->args[i++]);
 		com = com->next;
 	} */
-	com = *first;
+/* 	com = *first;
 	free(first);
 	if (com && vars()->fd_in)
 		com->in = vars()->fd_in;
 	if (com && vars()->fd_out)
 		last_command(com)->out = vars()->fd_out;
 	return (com);
-}
+} */

@@ -6,13 +6,13 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 19:28:38 by touteiro          #+#    #+#             */
-/*   Updated: 2023/01/19 19:36:20 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:05:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_space(char c)
+int	ft_is_space(char c)
 {
 	if (c == '\t'
 		|| c == '\n'
@@ -92,9 +92,9 @@ int	ft_atoi(const char *str)
 
 	posneg = 1;
 	res = 0;
-	if (is_space(*str) || is_operator(*str) || ft_isdigit(*str))
+	if (ft_is_space(*str) || is_operator(*str) || ft_isdigit(*str))
 	{
-		while (is_space(*str))
+		while (ft_is_space(*str))
 			str++;
 		if (is_operator(*str))
 		{
