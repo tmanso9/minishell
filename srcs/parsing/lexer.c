@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 13:05:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:15:35 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ void	first_token(char *line, int *i, t_list **head)
 	int	token_size;
 
 	token_size = 0;
-	while (ft_is_space(line[*i]))
+	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
 	while (line[(*i) + token_size] && !ft_is_space(line[(*i) + token_size]))
 		token_size++;
 	ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size)));
-	(*i) += token_size + 1;
+	if (line[*i])
+		(*i) += token_size;
 }
 
 void	rest_of_tokens(char *line, int *i, t_list **head)
@@ -53,9 +54,8 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 			token_until_char(line, i, head, '\'');
 		else if (line[*i + token_size] == '\"')
 			token_until_char(line, i, head, '\"');
-		else if (!ft_is_space(line[*i + token_size]))
+		else if (!ft_is_space(line[*i + token_size++]))
 		{
-			token_size++;
 			while (line[*i + token_size] && \
 				!ft_is_space(line[*i + token_size]) && \
 				line[*i + token_size] != '\'' && line[*i + token_size] != '\"')
@@ -69,6 +69,19 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 	}
 }
 
+void	list_to_command(t_list **head, t_com **com)
+{
+	if (*(char *)(*head)->content)
+	{
+		if (is_builtin((*head)->content))
+			(*com)->builtin = 1;
+		(*com)->args = list_to_array(*head);
+		(*com)->path = find_path((*com)->env, (*com)->args[0]);
+	}
+	ft_lstclear(head, free);
+	free(head);
+}
+
 void	lexer(char *line, int *i, t_com **com)
 {
 	t_list	**head;
@@ -79,14 +92,16 @@ void	lexer(char *line, int *i, t_com **com)
 	(*com)->env = vars()->new_env;
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
-	// while (line[*i] == '<' || line[*i] == '>')
-		// redirection(line, i); //Need to change it to str
+	while (line[*i] == '<' || line[*i] == '>')
+		redirection(line, i);
 	first_token(line, i, head);
 	rest_of_tokens(line, i, head);
-	if (*(char *)(*head)->content)
-		(*com)->args = list_to_array(*head);
-	ft_lstclear(head, free);
-	(*com)->path = find_path((*com)->env, (*com)->args[0]);
+	if (line[*i] == '|')
+		(*com)->pip_after = 1;
+	else if (line[*i] == '<' || line[*i] == '>')
+		while (line[*i] == '<' || line[*i] == '>')
+			redirection(line, i);
+	list_to_command(head, com);
 }
 
 t_com	*parse_args(char *line)

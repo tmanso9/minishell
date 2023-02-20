@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 12:50:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:39:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ t_com		*last_command(t_com *com);
 //Parsing
 t_com		*parse_args(char *command_line);
 char		*treated_input(char *str);
-void		redirection(char **arr, int *i);
+void		redirection(char *line, int *i);
+void		process_heredoc(char *line, int *i);
+int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 void		ft_unset(char *name, char ***env);
 char		*find_path(char **env_path, char *cmd);
 
 //Execute
-void	execute(t_com *com);
+void		execute(t_com *com);
 #endif

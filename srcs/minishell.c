@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 19:15:34 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:46:59 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_hostname(void)
 	return (hostname);
 }
 
-char	*get_left_part()
+char	*get_left_part(void)
 {
 	char	*hostname;
 	char	*temp_left_part;

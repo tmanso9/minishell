@@ -6,49 +6,31 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/17 19:26:18 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:45:46 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	process_heredoc(char **arr, int *i)
+char	*filename(char *line, int *i)
 {
-	char	*str;
-	char	*lim;
-	int		joined;
+	int		file;
+	char	*name;
 
-	joined = 0;
-	if (arr[*i][2])
-		joined = 2;
-	else
+	(*i)++;
+	file = 0;
+	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
-	vars()->infile = ft_strdup(".heredoc");
-	(vars())->fd_in = open(vars()->infile, O_RDWR | O_CREAT, 0666);
-	lim = ft_strjoin(arr[*i] + joined, "\n");
-	write(1, "> ", 2);
-	str = get_next_line(0);
-	while (str)
-	{
-		if (/* ft_strchr(str, *lim) && \ */
-			(!ft_strncmp(/* ft_strchr( */str/* , *lim) */, lim, ft_strlen(lim))))
-			break ;
-		ft_putstr_fd(str, vars()->fd_in);
-		free(str);
-		write(1, "> ", 2);
-		str = get_next_line(0);
-	}
-	if (str)
-		free(str);
-	free(lim);
-	close(vars()->fd_in);
+	while (line[*i + file] && !ft_is_space(line[*i + file]) && \
+		line[*i + file] != '<')
+		file++;
+	name = ft_substr(line, *i, file);
+	(*i) += file;
+	return (name);
 }
 
-void	process_infile(char **arr, int *i)
+void	process_infile(char *line, int *i)
 {
-	int	together;
-
-	together = 0;
 	if (vars()->fd_in)
 	{
 		if (!ft_strncmp(vars()->infile, ".heredoc", 9))
@@ -56,37 +38,33 @@ void	process_infile(char **arr, int *i)
 		close(vars()->fd_in);
 		free(vars()->infile);
 	}
-	if (arr[*i][1] && arr[*i][1] == '<')
-		process_heredoc(arr, i);
-	if (arr[*i][1])
-		together = 1;
+	if (line[*i + 1] && line[*i + 1] == '<')
+		process_heredoc(line, i);
 	else
-		(*i)++;
-	if (ft_strncmp(vars()->infile, ".heredoc", 9))
-		vars()->infile = ft_strdup(&(arr[*i][together]));
+		(vars())->infile = filename(line, i);
 	(vars())->fd_in = open(vars()->infile, O_RDONLY);
 	// if (vars()->fd_in < 0)
 		// error_handle(BLA);
-	(*i)++;
 }
 
-void	process_outfile(char **arr, int *i)
+void	process_outfile(char *line, int *i)
 {
 	int	append;
+	int	name_size;
 
-	append = arr[*i][1] == '>';
 	if (vars()->fd_out)
 	{
 		close(vars()->fd_out);
 		free(vars()->outfile);
 	}
-	if (!arr[*i][1] || (append && !arr[*i][2]))
-	{
+	append = line[*i + 1] == '>';
+	(*i) += append + 1;
+	name_size = 0;
+	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
-		vars()->outfile = ft_strdup(arr[*i]);
-	}
-	else
-		vars()->outfile = ft_strdup(&arr[*i][1 + append]);
+	while (line[*i + name_size] && !ft_is_space(line[*i + name_size]))
+		name_size++;
+	(vars())->outfile = ft_substr(line, *i, name_size);
 	if (append)
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
@@ -95,13 +73,13 @@ void	process_outfile(char **arr, int *i)
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
 	// if (vars()->fd_in < 0)
 		// error_handle(BLA);
-	(*i)++;
+	(*i) += name_size;
 }
 
-void	redirection(char **arr, int *i)
+void	redirection(char *line, int *i)
 {
-	if (arr[*i][0] == '<')
-		process_infile(arr, i);
+	if (line[*i] == '<')
+		process_infile(line, i);
 	else
-		process_outfile(arr, i);
+		process_outfile(line, i);
 }

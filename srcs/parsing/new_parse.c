@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/20 14:16:26 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:22:02 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ char	*no_quotes(char *str)
 	return (new);
 }
 
-int	main()
+/* int	main()
 {
 	char	*str = no_quotes("OLA$USER-naosei$SHELL");
 	printf("%s\n", str);
 	free(str);;
-}
+} */
 
 /*
 void	parser(t_com **com)

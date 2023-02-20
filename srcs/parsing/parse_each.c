@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 13:05:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:37:02 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ char	**list_to_array(t_list *lst)
 	return (args);
 }
 
-void	parse_each(char **arr, int *i, t_com **com, int *to_add)
+/* void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 {
 	t_list	**head;
 
@@ -226,4 +226,4 @@ void	parse_each(char **arr, int *i, t_com **com, int *to_add)
 	ft_lstclear(head, free);
 	free(head);
 	(*com)->path = find_path((*com)->env, (*com)->args[0]);
-}
+} */

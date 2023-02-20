@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/20 14:48:21 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/20 16:39:55 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ PARSING_SRC =	parse_args.c \
 				parse_each.c \
 				path_finder.c \
 				redirections.c \
+				heredoc.c \
 				new_parse.c
 
 GENERAL_SRC = 	minishell.c \
