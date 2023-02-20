@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 12:07:39 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:05:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,11 @@ char	**list_to_array(t_list *lst)
 		return (NULL);
 	while (lst)
 	{
-		args[i] = ft_strdup(lst->content);
-		i++;
+		if (lst->content && ft_strlen(lst->content))
+		{
+			args[i] = ft_strdup(lst->content);
+			i++;
+		}
 		lst = lst->next;
 	}
 	return (args);

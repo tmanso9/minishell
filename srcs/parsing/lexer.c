@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 12:55:34 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:05:22 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,10 @@ void	first_token(char *line, int *i, t_list **head)
 	(*i) += token_size + 1;
 }
 
-void	lexer(char *line, int *i, t_com **com)
+void	rest_of_tokens(char *line, int *i, t_list **head)
 {
-	t_list	**head;
-	int		token_size;
+	int	token_size;
 
-	head = ft_calloc(1, sizeof(t_list *));
-	if (!head)
-		return ;
-	(*com)->env = vars()->new_env;
-	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
-		(*i)++;
-	// while (line[*i] == '<' || line[*i] == '>')
-		// redirection(line, i); //Need to change it to str
-	first_token(line, i, head);
 	token_size = 0;
 	while (line && line[*i + token_size] && line[*i + token_size] != '|' && \
 		line[*i + token_size] != ';' && line[*i + token_size] != '<' && \
@@ -77,6 +67,22 @@ void	lexer(char *line, int *i, t_com **com)
 			(*i)++;
 		token_size = 0;
 	}
+}
+
+void	lexer(char *line, int *i, t_com **com)
+{
+	t_list	**head;
+
+	head = ft_calloc(1, sizeof(t_list *));
+	if (!head)
+		return ;
+	(*com)->env = vars()->new_env;
+	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
+		(*i)++;
+	// while (line[*i] == '<' || line[*i] == '>')
+		// redirection(line, i); //Need to change it to str
+	first_token(line, i, head);
+	rest_of_tokens(line, i, head);
 	if (*(char *)(*head)->content)
 		(*com)->args = list_to_array(*head);
 	ft_lstclear(head, free);
@@ -101,6 +107,23 @@ t_com	*parse_args(char *line)
 			com_add_back(head, com);
 		else
 			free(com);
-	}	
-	return (NULL);
+	}
+	/* Print to check commands */
+	/* com = *head;
+	while (com)
+	{
+		i = 0;
+		printf("Command args:\n");
+		while (com->args[i])
+			printf("%s\n", com->args[i++]);
+		com = com->next;
+	} */
+	// Space for parsing and expanding
+	com = *head;
+	free(head);
+	if (com && vars()->fd_in)
+		com->in = vars()->fd_in;
+	if (com && vars()->fd_out)
+		last_command(com)->out = vars()->fd_out;
+	return (com);
 }
