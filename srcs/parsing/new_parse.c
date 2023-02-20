@@ -6,35 +6,12 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/20 13:05:59 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:16:26 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	env_var(char *str, int *i)
-{
-	char	*env_var;
-	int		j;
-	int		y;
-
-	j = 0;
-	while (ft_isalnum(str[++(*i)]))
-		j++;
-	env_var = malloc(sizeof(char) * (j + 1));
-	y = 0;
-	while (y < j)
-	{
-		env_var[y] = str[*i - j + y];
-		y++;
-	}
-	env_var[y] = '\0';
-	y = ft_strlen(getenv(env_var));
-	free(env_var);
-	return (y);
-}
-
-int	new_str_size(char *str)
+/* int	new_str_size(char *str)
 {
 	int	size;
 	int	i;
@@ -52,32 +29,96 @@ int	new_str_size(char *str)
 		}
 	}
 	return (size + 1);
+} */
+
+char	*env_var(char *str, int *i)
+{
+	char	*env_var;
+	char	*final;
+	int		j;
+	int		y;
+
+	j = 0;
+	while (ft_isalnum(str[++(*i)]))
+		j++;
+	env_var = ft_calloc(j + 1, 1);
+	y = 0;
+	while (y < j)
+	{
+		env_var[y] = str[*i - j + y];
+		y++;
+	}
+	final = getenv(env_var);
+	free(env_var);
+	return (final);
+}
+
+char	*append_rest(char *new, char *str, int *i)
+{
+	char	*temp;
+	char	*final;
+	int		j;
+	int		y;
+
+	j = 0;
+	y = 0;
+	while (str[j] && str[j] != '$')
+		j++;
+	temp = ft_calloc(j + 1, 1);
+	while (y < j)
+	{
+		printf("%c\n", *str);
+		temp[y++] = (*str)++;
+	}
+	if (new)
+	{
+		final = ft_strjoin(new, temp);
+		free(temp);
+		free(new);
+	}
+	else
+		final = temp;
+	(*i) += j;
+	return (final);
+}
+
+char	*append_env_var(char *new, char *str, int *i)
+{
+	char	*final;
+	
+	if (new)
+	{
+		final = ft_strjoin(new, env_var(str, i));
+		free(new);
+	}
+	else
+		final = env_var(str, i);
+	return (final);
 }
 
 char	*no_quotes(char *str)
 {
 	char	*new;
 	int		i;
-	int		j;
-	int		y;
-
+	
 	i = 0;
-	y = 0;
-	new = malloc(sizeof(char) * new_str_size(str));
+	new = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$')
-		{
-			j = 0;
-			while ()
-		}
+		if (str[i] != '&')
+			new = append_rest(new, &str[i], &i);
+		else
+			new = append_env_var(new, &str[i], &i);
 	}
+	//free(str);
+	return (new);
 }
 
 int	main()
 {
-	char *str = "Ola$USER-eu$SHELL";
-	printf("Ola%s-eu%s\n%d\n", getenv("USER"), getenv("SHELL"), new_str_size(str));
+	char	*str = no_quotes("OLA$USER-naosei$SHELL");
+	printf("%s\n", str);
+	free(str);;
 }
 
 /*
