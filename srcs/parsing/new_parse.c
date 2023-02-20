@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/20 17:48:33 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:23:14 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*env_var(char *str, int *i)
 		env_var[y] = str[*i - j + y];
 		y++;
 	}
-	final = getenv(env_var);
+	final = ft_strdup(getenv(env_var));
 	free(env_var);
 	return (final);
 }
@@ -101,7 +101,7 @@ char	*no_quotes(char *str, int flag)
 {
 	char	*new;
 	int		i;
-	
+
 	i = 0;
 	new = NULL;
 	if (flag)
@@ -119,17 +119,41 @@ char	*no_quotes(char *str, int flag)
 
 char	*single_quotes(char *str)
 {
+	char	*temp;
 	char	*new;
 	int		i;
+	int		count_slashes;
 
 	i = 0;
-	new = ft_calloc(ft_strlen(str) - 1, 1);
+	temp = ft_calloc(ft_strlen(str) - 1, 1);
+	if (!temp)
+		return (NULL);
 	while (str[i + 1] != '\'')
 	{
-		new[i] = str[i + 1];
+		temp[i] = str[i + 1];
 		i++;
 	}
+	i = 0;
+	count_slashes = 0;
+	while (temp[i])
+	{
+		if (temp[i] == '\\')
+			count_slashes++;
+		i++;
+	}
+	new = ft_calloc(ft_strlen(temp) + count_slashes + 1, 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	count_slashes = 0;
+	while (temp[i])
+	{
+		new[count_slashes++] = temp[i];
+		if (temp[i] != '\\' || new[count_slashes - 2] == '\\')
+			i++;
+	}
 	free(str);
+	free(temp);
 	return (new);
 }
 

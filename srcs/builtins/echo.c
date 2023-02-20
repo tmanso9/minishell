@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 17:51:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:08:16 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	put_str(char *str)
 	{
 		if (str[i] != 92)
 			write(1, &str[i], 1);
-		else if (is_combo(str[i + 1]))
+		else if (!(str[i - 1] && str[i - 1] == '\\') && is_combo(str[i + 1]))
 			i++;
 		i++;
 	}
