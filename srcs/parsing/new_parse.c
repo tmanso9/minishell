@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:23:14 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 21:39:00 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,35 @@ char	*bar_treatment(char *str)
 	return (new);
 }
 
+char	*escape_chars(char *str)
+{
+	int		count_slashes;
+	int		i;
+	char	*new;
+
+	count_slashes = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\\')
+			count_slashes++;
+		i++;
+	}
+	new = ft_calloc(ft_strlen(str) + count_slashes + 1, 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	count_slashes = 0;
+	while (str[i])
+	{
+		new[count_slashes++] = str[i];
+		if (str[i] != '\\' || new[count_slashes - 2] == '\\')
+			i++;
+	}
+	free(str);
+	return (new);
+}
+
 char	*no_quotes(char *str, int flag)
 {
 	char	*new;
@@ -119,41 +148,21 @@ char	*no_quotes(char *str, int flag)
 
 char	*single_quotes(char *str)
 {
-	char	*temp;
 	char	*new;
 	int		i;
-	int		count_slashes;
 
 	i = 0;
-	temp = ft_calloc(ft_strlen(str) - 1, 1);
-	if (!temp)
+	new = ft_calloc(ft_strlen(str) - 1, 1);
+	if (!new)
 		return (NULL);
 	while (str[i + 1] != '\'')
 	{
-		temp[i] = str[i + 1];
+		new[i] = str[i + 1];
 		i++;
 	}
 	i = 0;
-	count_slashes = 0;
-	while (temp[i])
-	{
-		if (temp[i] == '\\')
-			count_slashes++;
-		i++;
-	}
-	new = ft_calloc(ft_strlen(temp) + count_slashes + 1, 1);
-	if (!new)
-		return (NULL);
-	i = 0;
-	count_slashes = 0;
-	while (temp[i])
-	{
-		new[count_slashes++] = temp[i];
-		if (temp[i] != '\\' || new[count_slashes - 2] == '\\')
-			i++;
-	}
 	free(str);
-	free(temp);
+	new = escape_chars(new);
 	return (new);
 }
 
@@ -188,7 +197,7 @@ void	parser(t_com **com)
 		{
 			if (current->args[i][0] == '\'')
 				current->args[i] = single_quotes(current->args[i]);
-			else if (current->args[i][0] == '"')
+			else if (current->args[i][0] == '\"')
 				current->args[i] = no_quotes(current->args[i], 0);
 			else
 				current->args[i] = no_quotes(current->args[i], 1);
