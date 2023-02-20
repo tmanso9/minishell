@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/20 17:01:50 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:48:33 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ char	*append_rest(char *new, char *str, int *i)
 
 	j = 0;
 	y = 0;
-	while (str[(*i)] && str[(*i)++] != '$')
+	while (str[(*i)] && str[(*i)] != '$')
+	{
 		j++;
+		(*i)++;
+	}
 	temp = ft_calloc(j + 1, 1);
 	while (y < j)
 	{
-		temp[y] = str[*i - 1 - j + y];
+		temp[y] = str[*i - j + y];
 		y++;
 	}
 	if (new)
@@ -130,12 +133,30 @@ char	*single_quotes(char *str)
 	return (new);
 }
 
+void	printer(t_com *current)
+{
+	int	i;
+
+	while (current)
+	{
+		i = 0;
+		while (current->args[i])
+		{
+			printf("%s\n", current->args[i]);
+			i++;
+		}
+		current = current->next;
+	}
+}
+
 void	parser(t_com **com)
 {
 	t_com	*current;
 	int		i;
 	
 	current = *com;
+	//printer(*com);
+	//printf("------------\n");
 	while (current)
 	{
 		i = 0;
@@ -151,15 +172,5 @@ void	parser(t_com **com)
 		}
 		current = current->next;
 	}
-	current = *com;
-	i = 0;
-	while (current)
-	{
-		while (current->args[i])
-		{
-			printf("%s\n", current->args[i]);
-			i++;
-		}
-		current = current->next;
-	}
+	//printer(*com);
 }
