@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 16:15:35 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:22:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,25 @@ void	first_token(char *line, int *i, t_list **head)
 	token_size = 0;
 	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
-	while (line[(*i) + token_size] && !ft_is_space(line[(*i) + token_size]))
+	if (line[*i + token_size] && line[*i + token_size] == '\'')
+	{
 		token_size++;
+		while (line[*i + token_size] && line[*i + token_size] != '\'')
+			token_size++;
+		token_size++;
+	}
+	else if (line[*i + token_size] && line[*i + token_size] == '\"')
+	{
+		token_size++;
+		while (line[*i + token_size] && line[*i + token_size] != '\"')
+			token_size++;
+		token_size++;
+	}
+	else
+		while (line[(*i) + token_size] && !ft_is_space(line[(*i) + token_size]))
+			token_size++;
 	ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size)));
-	if (line[*i])
-		(*i) += token_size;
+	(*i) += token_size;
 }
 
 void	rest_of_tokens(char *line, int *i, t_list **head)
@@ -73,6 +87,7 @@ void	list_to_command(t_list **head, t_com **com)
 {
 	if (*(char *)(*head)->content)
 	{
+		printf("here\n");
 		if (is_builtin((*head)->content))
 			(*com)->builtin = 1;
 		(*com)->args = list_to_array(*head);
@@ -124,7 +139,7 @@ t_com	*parse_args(char *line)
 			free(com);
 	}
 	/* Print to check commands */
-	/* com = *head;
+	com = *head;
 	while (com)
 	{
 		i = 0;
@@ -132,7 +147,7 @@ t_com	*parse_args(char *line)
 		while (com->args[i])
 			printf("%s\n", com->args[i++]);
 		com = com->next;
-	} */
+	}
 	// Space for parsing and expanding
 	com = *head;
 	free(head);
