@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 17:02:07 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:44:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define BI6 "env"
 # define BI7 "exit"
 
+int	status_code;
+
 typedef struct s_variables
 {
 	char	**new_env;
@@ -70,6 +72,7 @@ void		ft_cd(char *path);
 void		ft_echo(char **args);
 void		ft_pwd(void);
 void		ft_unset(char *name, char ***env);
+void		ft_exit(char *str);
 
 //Utils
 t_variables	*vars(void);

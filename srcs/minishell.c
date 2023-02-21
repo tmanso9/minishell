@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 17:48:41 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:55:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	wait_commands(void)
 		first = parse_args(new_line);
 		parser(&first);
 		execute(first);
-		free_commands(&first);
+		// free_commands(&first);
 		free(new_line);
 		if (vars()->fd_in)
 		{

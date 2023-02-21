@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/16 14:26:46 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:23:25 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ void	ft_cd(char *original_path)
 	if (path && path[0] == '~')
 		path = new_path(path);
 	chdir(path);
-	//if (chdir(path))
+	if (chdir(path))
+	{
+		status_code = 1;
 		//error_management(errno);
+	}
+	status_code = 0;
 	free(path);
 }

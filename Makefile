@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/20 16:39:55 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/21 12:44:14 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ BUILTIN_SRC = 	pwd.c \
 				echo.c \
 				unset.c \
 				export.c \
-				cd.c 
+				cd.c \
+				exit.c
 PARSING_SRC =	parse_args.c \
 				lexer.c \
 				parse_each.c \
