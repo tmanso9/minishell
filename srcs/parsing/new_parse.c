@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 10:54:30 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:55:38 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	count_back(char *str, int i)
 	c = 0;
 	while (str[i - 1] && str[--i] == '\\')
 		c++;
-	return (c);
+	return (c % 2);
 }
 
 char	*env_var(char *str, int *i)
@@ -190,11 +190,4 @@ void	parser(t_com **com)
 		current = current->next;
 	}
 	//printer(*com);
-}
-
-int	main()
-{
-	char *str = "\"\\\\$USER\"";
-	printf("%s\n", str);
-	printf("%c\n%d\n", str[3], count_back(str, 3));
 }
