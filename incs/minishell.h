@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/21 12:44:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:01:14 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <curses.h>
 # include <term.h> 
 # include <limits.h>
+# include <errno.h>
 # include "libft.h"
 
 # define BI1 "echo"
@@ -38,18 +39,21 @@
 # define BI5 "unset"
 # define BI6 "env"
 # define BI7 "exit"
+# define READING 0
+# define EXECUTING 1
 
 int	status_code;
 
 typedef struct s_variables
 {
 	char	**new_env;
-	char	*builtins[7];
+	// char	*builtins[7];
 	char	malloced;
 	char	*infile;
 	int		fd_in;
 	char	*outfile;
 	int		fd_out;
+	int		status;
 }	t_variables;
 
 typedef struct s_com
@@ -96,5 +100,6 @@ char		*find_path(char **env_path, char *cmd);
 void		parser(t_com **com);
 
 //Execute
+void		signals(void);
 void		execute(t_com *com);
 #endif

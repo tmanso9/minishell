@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/21 12:55:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:01:33 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,19 +128,26 @@ void	free_commands(t_com **command)
 
 void	wait_commands(void)
 {
-	char	*new_line;
-	char	*prompt;
-	t_com	*first;
+	char			*new_line;
+	char			*prompt;
+	t_com			*first;
 
 	while (1)
 	{
 		prompt = get_prompt();
+		vars()->status = READING;
 		new_line = readline(prompt);
+		vars()->status = EXECUTING;
 		if (!new_line)
 		{
 			printf("exit\n");
 			rl_clear_history();
 			free(prompt);
+			// free(vars()->new_env);
+			// if (vars()->fd_in)
+			// 	free(vars()->infile);
+			// if (vars()->fd_out)
+			// 	free(vars()->outfile);
 			return ;
 		}
 		add_history(new_line);
@@ -178,8 +185,8 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	(void)argv;
 	init_vars(env);
+	signals();
 	wait_commands();
-	
 	//free vars
 	exit (0);
 }
