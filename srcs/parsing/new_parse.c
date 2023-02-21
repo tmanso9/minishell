@@ -6,11 +6,11 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/21 14:19:35 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:09:41 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../incs/minishell.h"
 
 int	count_back(char *str, int i)
 {
@@ -19,7 +19,7 @@ int	count_back(char *str, int i)
 	c = 0;
 	while (str[i - 1] && str[--i] == '\\')
 		c++;
-	return (c);
+	return (c % 2);
 }
 
 char	*env_var(char *str, int *i)
@@ -80,12 +80,12 @@ char	*append_env_var(char *new, char *str, int *i)
 	char	*final;
 	if (new)
 	{
-		/* if (str[++(*i)] == '?')
+		if (str[++(*i)] == '?')
 		{
 			final = ft_strjoin(new, ft_itoa(status_code));
 			(*i)++;
-		} */
-		//else
+		}
+		else
 			final = ft_strjoin(new, env_var(str, i));
 		free(new);
 	}
@@ -103,14 +103,15 @@ char	*bar_treatment(char *str, int flag)
 	new = ft_calloc(ft_strlen(str) + 1, 1);
 	i = 0;
 	x = flag;
-	while (str[x] && str[x] != '"')
+	while (str[x] && (str[x] != '"' || str[x - 1] == '\\'))
 	{
 		if (str[x] == '\\' && (str[x + 1] == '\\' || str[x + 1] == '$' || str[x + 1] == '"'))
 		{
-			new[i++] = str[++x];
 			x++;
+			new[i++] = str[x++];
 		}
-		new[i++] = str[x++];
+		else
+			new[i++] = str[x++];
 	}
 	free(str);
 	return (new);
@@ -125,13 +126,13 @@ char	*no_quotes(char *str, int flag)
 	new = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && (i == 0 || count_back(str, i)))
+		if (str[i] == '$' && (i == 0 || !count_back(str, i)))
 			new = append_env_var(new, str, &i);
 		else
 			new = append_rest(new, str, &i);
 	}
-	new = bar_treatment(new, flag);
 	printf("%s\n", new);
+	new = bar_treatment(new, flag);
 	free(str);
 	return (new);
 }
@@ -152,7 +153,6 @@ char	*single_quotes(char *str)
 	}
 	i = 0;
 	free(str);
-	//new = escape_chars(new);
 	return (new);
 }
 
@@ -180,11 +180,4 @@ void	parser(t_com **com)
 		current = current->next;
 	}
 	//printer(*com);
-}
-
-int	main()
-{
-	char *str = "\"\\\\$USER\"";
-	printf("%s\n", str);
-	printf("%c\n%d\n", str[3], count_back(str, 3));
 }
