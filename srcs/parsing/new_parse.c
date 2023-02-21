@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/21 13:57:02 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:19:35 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ char	*append_env_var(char *new, char *str, int *i)
 	char	*final;
 	if (new)
 	{
-		if (str[++(*i)] == '?')
+		/* if (str[++(*i)] == '?')
 		{
 			final = ft_strjoin(new, ft_itoa(status_code));
 			(*i)++;
-		}
-		final = ft_strjoin(new, env_var(str, i));
+		} */
+		//else
+			final = ft_strjoin(new, env_var(str, i));
 		free(new);
 	}
 	else
