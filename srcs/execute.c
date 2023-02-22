@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:50:11 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:25:35 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute_builtin(t_com *com)
 	else if (!ft_strncmp(com->args[0], "exit", ft_strlen(com->args[0])))
 	{
 		if (!com->pip_after)
-			ft_exit(com->args[1]);
+			ft_exit(com->args);
 		free_commands(&com);
 		exit(vars()->status_code);
 	}

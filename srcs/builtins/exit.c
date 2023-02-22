@@ -6,34 +6,51 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:07:09 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 11:09:59 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:02:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(char *str)
+static int	arr_size(char **arr)
 {
 	int	i;
 
-	if (!str)
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+void	ft_exit(char **commands)
+{
+	int	i;
+
+	if (!commands[1])
 		vars()->status_code = 0;
+	else if (arr_size(commands) > 2)
+	{
+		vars()->status_code = 1;
+		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("bash: exit: ", 2);
+		ft_putstr_fd("too many arguments\n", 2);
+		return ;
+	}
 	else
 	{
-		i = (str[0] == '-' || str[0] == '+');
-		while (str[i])
+		i = (commands[1][0] == '-' || commands[1][0] == '+');
+		while (commands[1][i])
 		{
-			if (!ft_isdigit(str[i++]))
+			if (!ft_isdigit(commands[1][i++]))
 			{
-				//print error
 				ft_putstr_fd("bash: exit: ", 2);
-				ft_putstr_fd(str, 2);
+				ft_putstr_fd(commands[1], 2);
 				ft_putstr_fd(": numeric argument required\n", 2);
 				vars()->status_code = 2;
 				return ;
 			}
 		}
-		vars()->status_code = ft_atoi(str);
+		vars()->status_code = ft_atoi(commands[1]);
 		if (vars()->status_code > 255)
 			vars()->status_code -= 256;
 		else if (vars()->status_code < 0)

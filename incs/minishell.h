@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 11:09:27 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:53:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		ft_cd(char *path);
 void		ft_echo(char **args);
 void		ft_pwd(void);
 void		ft_unset(char *name, char ***env);
-void		ft_exit(char *str);
+void		ft_exit(char **commands);
 
 //Utils
 t_variables	*vars(void);
