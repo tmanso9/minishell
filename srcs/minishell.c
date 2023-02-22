@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 20:02:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:18:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,16 @@ char	*get_right_part(void)
 
 	wd = getcwd(NULL, 0);
 	home = ft_strdup(getenv("HOME"));
-	if (!ft_strncmp(home, wd, ft_strlen(wd)))
+	if (!ft_strncmp(wd, "/", ft_strlen(wd)))
+	{
+		free(wd);
+		free(home);
+		right_part = ft_calloc(4, sizeof(char));
+		right_part[0] = '/';
+		right_part[1] = '$';
+		right_part[2] = ' ';
+	}
+	else if (!ft_strncmp(home, wd, ft_strlen(wd)) && ft_strlen(home) == ft_strlen(wd))
 	{
 		free(wd);
 		free(home);
@@ -79,7 +88,14 @@ char	*get_right_part(void)
 			j++;
 		right_part = ft_calloc(j + 4, sizeof(char));
 		j = 0;
-		right_part[0] = '~';
+		printf("i is %d, home strlen %d\n", i, (int)ft_strlen(home));
+		if (i == (int)ft_strlen(home))
+			right_part[0] = '~';
+		else
+		{
+			right_part[0] = '/';
+			i = 1;
+		}
 		while (wd[i + j])
 		{
 			right_part[j + 1] = wd[i + j];
