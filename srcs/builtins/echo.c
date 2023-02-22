@@ -6,13 +6,13 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:20:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:59:47 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_combo(char c)
+/* int	is_combo(char c)
 {
 	if (c == 'a')
 		write(1, "\a", 1);
@@ -34,9 +34,9 @@ int	is_combo(char c)
 		return (0);
 	}
 	return (1);
-}
+} */
 
-void	put_str(char *str)
+/* void	put_str(char *str)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ void	put_str(char *str)
 			//i++;
 		i++;
 	}
-}
+} */
 
 void	ft_echo(char **args)
 {
@@ -65,9 +65,9 @@ void	ft_echo(char **args)
 	}
 	while (args[i])
 	{
-		put_str(args[i++]);
-		if (args[i])
-			write(1, " ", 1);
+		ft_putstr_fd(args[i++], 1);
+		/* if (args[i])
+			write(1, " ", 1); */
 	}
 	if (new_line)
 		printf("\n");

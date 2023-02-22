@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 12:02:35 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:02:04 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 {
 	int	token_size;
 
-	while (line && *i <= (int) ft_strlen(line) && line[*i] && line[*i] != '|' && \
-		line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
+	while (line && *i <= (int)ft_strlen(line) && line[*i] && \
+		line[*i] != '|' && line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
 	{
 		token_size = 0;
 		if (line[*i + token_size] == '\'')
@@ -70,8 +70,9 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 		else if (!ft_is_space(line[*i + token_size++]))
 		{
 			while (line[*i + token_size] && \
-				!ft_is_space(line[*i + token_size]) && \
-				line[*i + token_size] != '\'' && line[*i + token_size] != '\"')
+				/* !ft_is_space(line[*i + token_size]) && \ */
+				line[*i + token_size] != '\'' && line[*i + token_size] != '\"' && \
+				line[*i + token_size] != '<' && line[*i + token_size] != '>')
 				token_size++;
 			ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size)));
 			(*i) += token_size;

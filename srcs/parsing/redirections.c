@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 16:45:46 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:03:31 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	process_outfile(char *line, int *i)
 		(*i)++;
 	while (line[*i + name_size] && !ft_is_space(line[*i + name_size]))
 		name_size++;
+	printf("name size is %d\n", name size);
 	(vars())->outfile = ft_substr(line, *i, name_size);
 	if (append)
 		(vars())->fd_out = open(vars()->outfile, \
