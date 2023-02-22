@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/21 17:09:41 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:11:31 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,29 @@ char	*append_env_var(char *new, char *str, int *i)
 	{
 		if (str[++(*i)] == '?')
 		{
-			final = ft_strjoin(new, ft_itoa(status_code));
+			final = ft_strjoin(new, ft_itoa(vars()->status_code));
 			(*i)++;
 		}
 		else
+		{
+			--(*i);
 			final = ft_strjoin(new, env_var(str, i));
+		}
 		free(new);
 	}
 	else
-		final = env_var(str, i);
+	{
+		if (str[++(*i)] == '?')
+		{
+			final = ft_strjoin(new, ft_itoa(vars()->status_code));
+			(*i)++;
+		}
+		else
+		{
+			--(*i);
+			final = env_var(str, i);
+		}
+	}
 	return (final);
 }
 

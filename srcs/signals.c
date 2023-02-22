@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/21 18:07:27 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:09:53 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	handler(int num)
 	if (num == SIGINT)
 	{
 		write(2, "\n", 1);
-		status_code = 128 + num;
+		vars()->status_code = 128 + num;
 		if (vars()->status == EXECUTING)
 			return ;
 		rl_replace_line("", 0);

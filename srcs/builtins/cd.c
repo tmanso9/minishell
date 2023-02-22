@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/21 13:23:25 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:09:54 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	ft_cd(char *original_path)
 	chdir(path);
 	if (chdir(path))
 	{
-		status_code = 1;
+		vars()->status_code = 1;
 		//error_management(errno);
 	}
-	status_code = 0;
+	vars()->status_code = 0;
 	free(path);
 }

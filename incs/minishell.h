@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/21 18:01:14 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:09:27 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@
 # define READING 0
 # define EXECUTING 1
 
-int	status_code;
-
 typedef struct s_variables
 {
 	char	**new_env;
@@ -54,6 +52,7 @@ typedef struct s_variables
 	char	*outfile;
 	int		fd_out;
 	int		status;
+	int		status_code;
 }	t_variables;
 
 typedef struct s_com
