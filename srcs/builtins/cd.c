@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 21:00:23 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:41:55 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	ft_cd(char **commands)
 	if (chdir(path))
 	{
 		vars()->status_code = 1;
+		ft_putstr_fd("minishell: cd: ", 2);
+		perror(path);
 		//error_management(errno);
 	}
 	else
