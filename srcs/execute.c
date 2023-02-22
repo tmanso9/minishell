@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 18:35:05 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:07:18 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_builtin(t_com *com)
 	if (!ft_strncmp(com->args[0], "env", ft_strlen(com->args[0])))
 		/* exit_code =  */ft_env();
 	else if (!ft_strncmp(com->args[0], "cd", ft_strlen(com->args[0])))
-		/* exit_code =  */ft_cd(com->args[1]);
+		/* exit_code =  */ft_cd(com->args);
 	else if (!ft_strncmp(com->args[0], "echo", ft_strlen(com->args[0])))
 		/* exit_code =  */ft_echo(com->args);
 	else if (!ft_strncmp(com->args[0], "export", ft_strlen(com->args[0])))

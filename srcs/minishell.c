@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 19:10:38 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:02:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ char	*get_right_part(void)
 	{
 		free(wd);
 		free(home);
-		right_part = ft_calloc(3, sizeof(char));
+		right_part = ft_calloc(4, sizeof(char));
 		right_part[0] = '~';
 		right_part[1] = '$';
+		right_part[2] = ' ';
 	}
 	else
 	{

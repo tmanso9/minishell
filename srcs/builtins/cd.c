@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 19:00:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:00:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,39 @@ char	*new_path(char *path)
 	return (new_path);
 }
 
-void	ft_cd(char *original_path)
+void	ft_cd(char **commands)
 {
 	char	*path;
 	char	*path_to_export;
 	char	*curr_path;
+	char	**cmds;
 
-	path = ft_strdup(original_path);
+	cmds = ft_split(commands[1], ' ');
+	if (arr_size(commands) > 2 || arr_size(cmds) > 1)
+	{
+		ft_putendl_fd("minishell: cd: too many arguments", 2);
+		vars()->status_code = 1;
+		free(cmds);
+		return ;
+	}
+	free(cmds);
+	path = ft_strdup(commands[1]);
 	if (!ft_strlen(path))
 		path = ft_strdup(get_var("HOME"));
-	if (path && path[0] == '~')
+	else if (path && path[0] == '~')
 		path = new_path(path);
+	else if (path && ft_strlen(path) == 1 && path[0] == '-')
+	{
+		path = ft_strdup(get_var("OLDPWD"));
+		if (!ft_strlen(path))
+		{
+			free(path);
+			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+			vars()->status_code = 1;
+			return ;
+		}
+		ft_putendl_fd(path, 1);
+	}
 	curr_path = getcwd(NULL, 0);
 	if (chdir(path))
 	{
