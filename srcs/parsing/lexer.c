@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 14:02:04 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:06:54 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 				line[*i + token_size] != '\'' && line[*i + token_size] != '\"' && \
 				line[*i + token_size] != '<' && line[*i + token_size] != '>')
 				token_size++;
+			if (ft_is_space(line[*i + token_size - 1]))
+				token_size--;
 			ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size)));
 			(*i) += token_size;
 		}
