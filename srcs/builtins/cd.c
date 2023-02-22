@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:24:11 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:35:40 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,18 @@ char	*new_path(char *path)
 void	ft_cd(char *original_path)
 {
 	char	*path;
+	char	*old_path;
+	char	*curr_path;
 
 	path = ft_strdup(original_path);
 	if (!ft_strlen(path))
 		path = ft_strdup(getenv("HOME"));
 	if (path && path[0] == '~')
 		path = new_path(path);
+	curr_path = getcwd(NULL, 0);
+	old_path = ft_strjoin("OLDPWD=", curr_path);
+	free(curr_path);
+	ft_export(old_path);
 	chdir(path);
 	if (chdir(path))
 	{
@@ -46,6 +52,13 @@ void	ft_cd(char *original_path)
 		//error_management(errno);
 	}
 	else
+	{
 		vars()->status_code = 0;
+		curr_path = ft_strjoin("PWD=", path);
+		ft_export(old_path);
+		free(curr_path);
+	}
+	ft_env();
+	exit(0);
 	free(path);
 }

@@ -6,20 +6,21 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 15:49:34 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:31:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+void	ft_env(void)
 {
-	int	i;
+	t_list	*temp;
 
-	i = 0;
-	while (env[i++])
+	temp = *(vars()->env);
+	while (temp)
 	{
-		if (env && ft_strlen(env[i]))
-			printf("%s\n", env[i]);
+		if (ft_strlen(temp->content))
+			printf("%s\n", (char *)temp->content);
+		temp = temp->next;
 	}
 }

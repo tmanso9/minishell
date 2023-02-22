@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:25:30 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/15 12:25:50 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:39:16 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	var_exists(char *var)
+{
+	t_list	*temp;
+
+	temp = *(vars()->env);
+	while (temp)
+	{
+		if (!ft_strncmp(temp->content, var, ft_strlen(var)))
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
+}
 
 int	is_path_line(char **paths)
 {

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/21 18:01:33 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:18:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,17 @@ void	wait_commands(void)
 
 void	init_vars(char **env)
 {
+	/* t_list	*temp; */
+
+	(vars())->env = ft_calloc(1, sizeof(t_list *));
 	dup_env(env);
+	/* temp = *(vars()->env);
+	while (temp)
+	{
+		printf("%s\n", (char *)temp->content);
+		temp = temp->next;
+	} */
+	(vars()->new_env) = list_to_array(*(vars()->env));
 }
 
 int	main(int argc, char **argv, char **env)
