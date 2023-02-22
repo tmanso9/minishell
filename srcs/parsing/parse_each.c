@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:01:18 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 13:37:02 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:50:10 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char	*remove_quotes(char *str, int j, char c)
 	return (temp);
 }
 
-char	*treated_input(char *str)
+/* char	*treated_input(char *str)
 {
 	int		i;
 	int		j;
@@ -166,7 +166,7 @@ char	*treated_input(char *str)
 		i++;
 	}
 	return (ft_strdup(str));
-}
+} */
 
 char	**list_to_array(t_list *lst)
 {
@@ -179,11 +179,8 @@ char	**list_to_array(t_list *lst)
 		return (NULL);
 	while (lst)
 	{
-		if (lst->content && ft_strlen(lst->content))
-		{
-			args[i] = ft_strdup(lst->content);
-			i++;
-		}
+		args[i] = ft_strdup(lst->content);
+		i++;
 		lst = lst->next;
 	}
 	return (args);

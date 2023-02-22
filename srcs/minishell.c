@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 16:18:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:10:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	free_commands(t_com **command)
 	{
 		temp = (*command)->next;
 		free_arr((void *)(*command)->args);
+		free_arr((void *)(*command)->env);
 		free((*command)->path);
 		free(*command);
 		*command = temp;
@@ -186,7 +187,7 @@ void	init_vars(char **env)
 		printf("%s\n", (char *)temp->content);
 		temp = temp->next;
 	} */
-	(vars()->new_env) = list_to_array(*(vars()->env));
+	// (vars()->new_env) = list_to_array(*(vars()->env));
 }
 
 int	main(int argc, char **argv, char **env)
@@ -198,5 +199,7 @@ int	main(int argc, char **argv, char **env)
 	signals();
 	wait_commands();
 	//free vars
+	ft_lstclear(vars()->env, free);
+	free(vars()->env);
 	exit (0);
 }

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:24:49 by touteiro          #+#    #+#             */
-/*   Updated: 2023/01/19 19:36:20 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:17:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 		ft_lstdelone(*lst, del);
 		*lst = swap;
 	}
-	lst = NULL;
 }

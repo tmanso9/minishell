@@ -6,13 +6,13 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 16:39:00 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:58:08 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**append_var(char ***env, char *new_var)
+/* char	**append_var(char ***env, char *new_var)
 {
 	int		i;
 
@@ -45,7 +45,7 @@ char	*var_line(char **env, char *var)
 		i++;
 	}
 	return (NULL);
-}
+} */
 
 void	replace_var(char *variable, char *left_part)
 {
@@ -71,8 +71,14 @@ void	ft_export(char *variable)
 	if (!new_var)
 		return ;
 	if (var_exists(new_var[0]))
-		replace_var(variable, new_var[0]);
+		replace_var(ft_strdup(variable), new_var[0]);
 	else
-		ft_lstadd_back(vars()->env, ft_lstnew(variable));
+		ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(variable)));
+	/* t_list	*temp = *(vars()->env);
+	while (temp)
+	{
+		printf("%s\n", (char *)temp->content);
+		temp = temp->next;
+	} */
 	free_arr((void *)new_var);
 }

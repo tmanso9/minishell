@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 16:43:21 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:29:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 typedef struct s_variables
 {
-	char	**new_env;
+	// char	**new_env;
 	t_list	**env;
 	// char	*builtins[7];
 	char	malloced;
@@ -88,7 +88,7 @@ char		**list_to_array(t_list *lst);
 void		free_commands(t_com **command);
 t_com		*last_command(t_com *com);
 int			var_exists(char *var);
-
+char		*get_var(char *var);
 //Parsing
 t_com		*parse_args(char *command_line);
 char		*treated_input(char *str);
