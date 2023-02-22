@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 16:38:00 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:35:05 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	execute(t_com *com)
 		else
 			execute_builtin(com);
 		temp = com->next;
-		// free_arr((void *)com->args);
+		free_arr((void *)com->args);
+		free_arr((void *)com->env);
 		free(com->path);
 		free(com);
 		com = temp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 15:22:58 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:21:19 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*env_var(char *str, int *i)
 		env_var[y] = str[*i - j + y];
 		y++;
 	}
-	final = ft_strdup(getenv(env_var));
+	final = ft_strdup(get_var(env_var));
 	free(env_var);
 	return (final);
 }
@@ -106,9 +106,11 @@ char	*bar_treatment(char *str, int flag)
 	int		i;
 
 	new = ft_calloc(ft_strlen(str) + 1, 1);
+	if (!new)
+		return (NULL);
 	i = 0;
 	x = flag;
-	while (str[x] && (str[x] != '"' || str[x - 1] == '\\'))
+	while (str && str[x] && (str[x] != '"' || str[x - 1] == '\\'))
 	{
 		if (str[x] == '\\' && (str[x + 1] == '\\' || str[x + 1] == '$' || str[x + 1] == '"'))
 		{

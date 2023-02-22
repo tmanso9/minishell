@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 14:42:33 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:29:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	lexer(char *line, int *i, t_com **com)
 	head = ft_calloc(1, sizeof(t_list *));
 	if (!head)
 		return ;
-	(*com)->env = vars()->new_env;
+	(*com)->env = list_to_array(*(vars()->env));
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
 	while (line[*i] == '<' || line[*i] == '>')
