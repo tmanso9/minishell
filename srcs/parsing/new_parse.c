@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:11:31 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:24:00 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,33 +78,24 @@ char	*append_rest(char *new, char *str, int *i)
 char	*append_env_var(char *new, char *str, int *i)
 {
 	char	*final;
-	if (new)
+
+	if (str[++(*i)] == '?')
 	{
-		if (str[++(*i)] == '?')
-		{
+		if (new)
 			final = ft_strjoin(new, ft_itoa(vars()->status_code));
-			(*i)++;
-		}
 		else
-		{
-			--(*i);
-			final = ft_strjoin(new, env_var(str, i));
-		}
-		free(new);
+			final = ft_itoa(vars()->status_code);
+		(*i)++;
 	}
 	else
 	{
-		if (str[++(*i)] == '?')
-		{
-			final = ft_strjoin(new, ft_itoa(vars()->status_code));
-			(*i)++;
-		}
+		(*i)--;
+		if (new)
+			final = ft_strjoin(new, env_var(str, i));
 		else
-		{
-			--(*i);
 			final = env_var(str, i);
-		}
 	}
+	free(new);
 	return (final);
 }
 
@@ -145,7 +136,6 @@ char	*no_quotes(char *str, int flag)
 		else
 			new = append_rest(new, str, &i);
 	}
-	printf("%s\n", new);
 	new = bar_treatment(new, flag);
 	free(str);
 	return (new);

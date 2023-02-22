@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 17:39:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:02:35 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	token_until_char(char *line, int *i, t_list **head, char c)
 	if (line[*i + token_size] == c)
 	{
 		token_size++;
-		while (line[*i + token_size] && line[*i + token_size] != c)
+		while (line[*i + token_size] && (line[*i + token_size] != c || (c == '"' && line[*i + token_size - 1] == '\\')))
 			token_size++;
 		ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size + 1)));
 		(*i) += token_size + 1;
@@ -59,11 +59,10 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 {
 	int	token_size;
 
-	token_size = 0;
-	while (line && line[*i + token_size] && line[*i + token_size] != '|' && \
-		line[*i + token_size] != ';' && line[*i + token_size] != '<' && \
-		line[*i + token_size] != '>')
+	while (line && *i <= (int) ft_strlen(line) && line[*i] && line[*i] != '|' && \
+		line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
 	{
+		token_size = 0;
 		if (line[*i + token_size] == '\'')
 			token_until_char(line, i, head, '\'');
 		else if (line[*i + token_size] == '\"')
@@ -79,7 +78,6 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 		}
 		else
 			(*i)++;
-		token_size = 0;
 	}
 }
 
