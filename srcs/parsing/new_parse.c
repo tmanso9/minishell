@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:24:00 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:01:10 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,16 @@ char	*bar_treatment(char *str, int flag)
 			x++;
 			new[i++] = str[x++];
 		}
-		else
+		else if (str[x] != '\\' || flag)
 			new[i++] = str[x++];
+		else
+			x++;
 	}
 	free(str);
 	return (new);
 }
 
-char	*no_quotes(char *str, int flag)
+char	*expander(char *str, int flag)
 {
 	char	*new;
 	int		i;
@@ -176,9 +178,9 @@ void	parser(t_com **com)
 			if (current->args[i][0] == '\'')
 				current->args[i] = single_quotes(current->args[i]);
 			else if (current->args[i][0] == '"')
-				current->args[i] = no_quotes(current->args[i], 1);
+				current->args[i] = expander(current->args[i], 1);
 			else
-				current->args[i] = no_quotes(current->args[i], 0);
+				current->args[i] = expander(current->args[i], 0);
 			i++;
 		}
 		current = current->next;
