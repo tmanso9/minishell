@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 18:29:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 22:32:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,31 @@ void	first_token(char *line, int *i, t_list **head)
 
 void	rest_of_tokens(char *line, int *i, t_list **head)
 {
-	int	token_size;
+	int	size;
 
 	while (line && *i <= (int)ft_strlen(line) && line[*i] && \
 		line[*i] != '|' && line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
 	{
-		token_size = 0;
-		if (line[*i + token_size] == '\'')
+		size = 0;
+		if (line[*i + size] == '\'')
 			token_until_char(line, i, head, '\'');
-		else if (line[*i + token_size] == '\"')
+		else if (line[*i + size] == '\"')
 			token_until_char(line, i, head, '\"');
-		else if (!ft_is_space(line[*i + token_size++]))
+		else if (!ft_is_space(line[*i + size++]))
 		{
-			while (line[*i + token_size] && \
-				/* !ft_is_space(line[*i + token_size]) && \ */
-				(line[*i + token_size] != '\'' || count_back(line, *i + token_size)) && \
-				(line[*i + token_size] != '"' || count_back(line, *i + token_size)) && \
-				(line[*i + token_size] != '<' || count_back(line, *i + token_size)) && \
-				(line[*i + token_size] != '>' || count_back(line, *i + token_size)) && \
-				(line[*i + token_size] != '|' || count_back(line, *i + token_size)))
-				token_size++;
-			if (ft_is_space(line[*i + token_size - 1]) && (line[*i + token_size - 2] != '\\' || !count_back(line, *i + token_size - 1)))
-				token_size--;
-			ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size)));
-			(*i) += token_size;
+			while (line[*i + size] && \
+				/* !ft_is_space(line[*i + size]) && \ */
+				(line[*i + size] != '\'' || count_back(line, *i + size)) && \
+				(line[*i + size] != '"' || count_back(line, *i + size)) && \
+				(line[*i + size] != '<' || count_back(line, *i + size)) && \
+				(line[*i + size] != '>' || count_back(line, *i + size)) && \
+				(line[*i + size] != ';' || count_back(line, *i + size)) && \
+				(line[*i + size] != '|' || count_back(line, *i + size)))
+				size++;
+			if (ft_is_space(line[*i + size - 1]) && (line[*i + size - 2] != '\\' || !count_back(line, *i + size - 1)))
+				size--;
+			ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, size)));
+			(*i) += size;
 		}
 		else
 			(*i)++;
