@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/21 10:11:07 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:20:44 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,21 @@ void	put_str(char *str)
 void	ft_echo(char **args)
 {
 	int	i;
+	int	new_line;
 
-	i = 1 + (ft_strncmp(args[1], "-n", 3) == 0);
+	new_line = 1;
+	i = 1;
+	while (args[i] && !(ft_strncmp(args[i], "-n", 3)))
+	{
+		new_line = 0;
+		i++;
+	}
 	while (args[i])
 	{
 		put_str(args[i++]);
 		if (args[i])
 			write(1, " ", 1);
 	}
-	if (ft_strncmp(args[1], "-n", 3))
+	if (new_line)
 		printf("\n");
 }
