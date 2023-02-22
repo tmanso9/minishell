@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 14:18:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:43:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 typedef struct s_variables
 {
 	char	**new_env;
+	t_list	**env;
 	// char	*builtins[7];
 	char	malloced;
 	char	*infile;
@@ -69,12 +70,12 @@ typedef struct s_com
 }				t_com;
 
 //Built-ins
-void		ft_env(char **env);
-void		ft_export(char ***env, char *variable);
+void		ft_env(void);
+void		ft_export(char *variable);
 void		ft_cd(char *path);
 void		ft_echo(char **args);
 void		ft_pwd(void);
-void		ft_unset(char *name, char ***env);
+void		ft_unset(char *name);
 void		ft_exit(char **commands);
 
 //Utils
@@ -86,6 +87,7 @@ void		com_add_back(t_com **lst, t_com *new);
 char		**list_to_array(t_list *lst);
 void		free_commands(t_com **command);
 t_com		*last_command(t_com *com);
+int			var_exists(char *var);
 
 //Parsing
 t_com		*parse_args(char *command_line);
@@ -94,7 +96,6 @@ void		redirection(char *line, int *i);
 void		process_heredoc(char *line, int *i);
 int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
-void		ft_unset(char *name, char ***env);
 char		*find_path(char **env_path, char *cmd);
 void		parser(t_com **com);
 int			count_back(char *str, int i);

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 12:25:35 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:38:00 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	execute_builtin(t_com *com)
 
 	// exit_code = 0;
 	if (!ft_strncmp(com->args[0], "env", ft_strlen(com->args[0])))
-		/* exit_code =  */ft_env(com->env);
+		/* exit_code =  */ft_env();
 	else if (!ft_strncmp(com->args[0], "cd", ft_strlen(com->args[0])))
 		/* exit_code =  */ft_cd(com->args[1]);
 	else if (!ft_strncmp(com->args[0], "echo", ft_strlen(com->args[0])))
 		/* exit_code =  */ft_echo(com->args);
 	else if (!ft_strncmp(com->args[0], "export", ft_strlen(com->args[0])))
-		/* exit_code =  */ft_export(&(com->env), com->args[1]);
+		/* exit_code =  */ft_export(com->args[1]);
 	else if (!ft_strncmp(com->args[0], "pwd", ft_strlen(com->args[0])))
 		/* exit_code =  */ft_pwd();
 	else if (!ft_strncmp(com->args[0], "unset", ft_strlen(com->args[0])))
-		/* exit_code =  */ft_unset(com->args[1], &(com->env));
+		/* exit_code =  */ft_unset(com->args[1]);
 	else if (!ft_strncmp(com->args[0], "exit", ft_strlen(com->args[0])))
 	{
 		if (!com->pip_after)
@@ -100,7 +100,7 @@ void	execute(t_com *com)
 		else
 			execute_builtin(com);
 		temp = com->next;
-		free_arr((void *)com->args);
+		// free_arr((void *)com->args);
 		free(com->path);
 		free(com);
 		com = temp;

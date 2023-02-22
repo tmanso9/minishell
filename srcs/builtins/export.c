@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/13 16:27:48 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:39:00 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,46 @@ char	**append_var(char ***env, char *new_var)
 	return (vars()->new_env);
 }
 
-void	ft_export(char ***env, char *variable)
+char	*var_line(char **env, char *var)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], var, ft_strlen(var)))
+			return (env[i]);
+		i++;
+	}
+	return (NULL);
+}
+
+void	replace_var(char *variable, char *left_part)
+{
+	t_list	*temp;
+
+	temp = *(vars()->env);
+	while (temp)
+	{
+		if (!ft_strncmp(temp->content, left_part, ft_strlen(left_part)))
+		{
+			free(temp->content);
+			temp->content = variable;
+		}
+		temp = temp->next;
+	}
+}
+
+void	ft_export(char *variable)
 {
 	char	**new_var;
-	char	*old_var;
-	int		i;
 
 	new_var = ft_split(variable, '=');
 	if (!new_var)
 		return ;
-	old_var = getenv(new_var[0]);
-	if (!old_var)
-	{
-		*env = append_var(env, variable);
-	}
+	if (var_exists(new_var[0]))
+		replace_var(variable, new_var[0]);
 	else
-	{
-		ft_bzero(old_var, ft_strlen(new_var[1]));
-		i = 0;
-		while (new_var[1][i])
-		{
-			old_var[i] = new_var[1][i];
-			i++;
-		}
-		old_var[i] = 0;
-	}
-	i = 0;
+		ft_lstadd_back(vars()->env, ft_lstnew(variable));
 	free_arr((void *)new_var);
 }

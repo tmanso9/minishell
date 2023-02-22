@@ -6,13 +6,13 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:15:02 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 12:06:41 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:10:19 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	dup_env(char **env)
+/* void	dup_env(char **env)
 {
 	int	i;
 
@@ -26,6 +26,18 @@ void	dup_env(char **env)
 	while (env[i])
 	{
 		vars()->new_env[i] = ft_strdup(env[i]);
+		i++;
+	}
+} */
+
+void	dup_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(env[i])));
 		i++;
 	}
 }
