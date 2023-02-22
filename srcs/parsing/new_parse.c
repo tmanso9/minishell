@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 14:01:10 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:22:58 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,18 @@ char	*bar_treatment(char *str, int flag)
 	return (new);
 }
 
+char	*open_slash(char *str)
+{
+	char	*temp;
+	char	*final;
+
+	temp = readline("> ");
+	final = ft_strjoin(str, temp);
+	free(temp);
+	free(str);
+	return (final);
+}
+
 char	*expander(char *str, int flag)
 {
 	char	*new;
@@ -138,6 +150,8 @@ char	*expander(char *str, int flag)
 		else
 			new = append_rest(new, str, &i);
 	}
+	if (!flag && count_back(new, ft_strlen(new)))
+		new = open_slash(new);
 	new = bar_treatment(new, flag);
 	free(str);
 	return (new);
