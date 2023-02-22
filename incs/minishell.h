@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 11:53:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:18:55 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 void		ft_unset(char *name, char ***env);
 char		*find_path(char **env_path, char *cmd);
 void		parser(t_com **com);
-
+int			count_back(char *str, int i);
 //Execute
 void		signals(void);
 void		execute(t_com *com);
