@@ -75,7 +75,7 @@ void		ft_export(char **commands);
 void		ft_cd(char **commands);
 void		ft_echo(char **args);
 void		ft_pwd(void);
-void		ft_unset(char *name);
+void    	ft_unset(char **commands);
 void		ft_exit(char **commands);
 
 //Utils

@@ -28,7 +28,7 @@ void	execute_builtin(t_com *com)
 	else if (!ft_strncmp(com->args[0], "pwd", ft_strlen(com->args[0])))
 		/* exit_code =  */ft_pwd();
 	else if (!ft_strncmp(com->args[0], "unset", ft_strlen(com->args[0])))
-		/* exit_code =  */ft_unset(com->args[1]);
+		/* exit_code =  */ft_unset(com->args);
 	else if (!ft_strncmp(com->args[0], "exit", ft_strlen(com->args[0])))
 	{
 		if (!com->pip_after)
