@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 13:59:47 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:53:53 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	ft_echo(char **args)
 	while (args[i])
 	{
 		ft_putstr_fd(args[i++], 1);
-		/* if (args[i])
-			write(1, " ", 1); */
+		if (args[i])
+			write(1, " ", 1);
 	}
 	if (new_line)
 		printf("\n");

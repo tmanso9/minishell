@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 21:41:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:54:34 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*new_path(char *path)
 {
 	char	*new_path;
 
+	new_path = NULL;
 	if (var_exists("HOME"))
 		new_path = ft_strjoin(get_var("HOME"), path + 1);
 	free(path);

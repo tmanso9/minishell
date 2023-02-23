@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   new_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 19:21:19 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:27:18 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include "minishell.h"
 
 int	count_back(char *str, int i)
 {
@@ -30,7 +30,7 @@ char	*env_var(char *str, int *i)
 	int		y;
 
 	j = 0;
-	while (ft_isalnum(str[++(*i)]))
+	while (str[(*i) + 1] && ft_isalnum(str[++(*i)]))
 		j++;
 	env_var = ft_calloc(j + 1, 1);
 	y = 0;
@@ -178,6 +178,65 @@ char	*single_quotes(char *str)
 	return (new);
 }
 
+char	*first_token_spliter(char *str, int *i)
+{
+	char	c;
+	int		size;
+	char	*temp;
+	int		j;
+
+	c = str[*i];
+	size = 0;
+	while (str[*i + size] && (!size || \
+	!(((c == '"' || c == '\'') && count_back(str, *i + size) && str[*i + size] == c) || \
+	(((str[*i + size] == '"' && c != '\'') || (str[*i + size] == '\'' && c != '"')) && !count_back(str, *i + size)))))
+		size++;
+	size += ((c == '"' || c == '\'') && str[*i + size] == c);
+	temp = ft_calloc(size + 1, 1);
+	j = 0;
+	while (j < size)
+		temp[j++] = str[(*i)++];
+	if (c == '"')
+		return (expander(temp, 1));
+	if (c == '\'')
+		return (single_quotes(temp));
+	return (expander(temp, 0));
+}
+
+char	*first_token_treatment(char *str)
+{
+	char	*temp1;
+	char	*temp2;
+	char	*final;
+	int		i;
+
+	i = 0;
+	final = NULL;
+	while (str[i])
+	{
+		temp2 = final;
+		temp1 = first_token_spliter(str, &i);
+		final = ft_strjoin(temp2, temp1);
+		free(temp1);
+		free(temp2);
+	}
+	free(str);
+	return (final);
+}
+
+void	printer(t_com *com)
+{
+	int	i;
+
+	while (com)
+	{
+		i = 0;
+		while (com->args[i])
+			printf("%s\n", com->args[i++]);
+		com = com->next;
+	}
+}
+
 void	parser(t_com **com)
 {
 	t_com	*current;
@@ -191,15 +250,19 @@ void	parser(t_com **com)
 		i = 0;
 		while (current->args[i])
 		{
-			if (current->args[i][0] == '\'')
+			/* if (i == 0)
+				current->args[i] = first_token_treatment(current->args[i]);
+			else if (current->args[i][0] == '\'')
 				current->args[i] = single_quotes(current->args[i]);
 			else if (current->args[i][0] == '"')
 				current->args[i] = expander(current->args[i], 1);
 			else
 				current->args[i] = expander(current->args[i], 0);
+			i++; */
+			current->args[i] = first_token_treatment(current->args[i]);
 			i++;
 		}
 		current = current->next;
 	}
-	//printer(*com);
+	printer(*com);
 }

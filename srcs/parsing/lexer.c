@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 22:32:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:56:57 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 		{
 			while (line[*i + size] && \
 				/* !ft_is_space(line[*i + size]) && \ */
-				(line[*i + size] != '\'' || count_back(line, *i + size)) && \
-				(line[*i + size] != '"' || count_back(line, *i + size)) && \
+				/* (line[*i + size] != '\'' || count_back(line, *i + size)) && \
+				(line[*i + size] != '"' || count_back(line, *i + size)) && \ */
+				(!ft_is_space(line[*i + size])) && \
 				(line[*i + size] != '<' || count_back(line, *i + size)) && \
 				(line[*i + size] != '>' || count_back(line, *i + size)) && \
 				(line[*i + size] != ';' || count_back(line, *i + size)) && \
@@ -113,7 +114,7 @@ void	lexer(char *line, int *i, t_com **com)
 		(*i)++;
 	while (line[*i] == '<' || line[*i] == '>')
 		redirection(line, i);
-	first_token(line, i, head);
+	//first_token(line, i, head);
 	rest_of_tokens(line, i, head);
 	if (line[*i] == '|')
 		(*com)->pip_after = 1;
