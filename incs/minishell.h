@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 13:10:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:20:19 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ t_com		*last_command(t_com *com);
 int			var_exists(char *var);
 char		*get_var(char *var);
 int			arr_size(char **arr);
+void    	replace_var(char *variable, char *left_part);
+
 //Parsing
 t_com		*parse_args(char *command_line);
 char		*treated_input(char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 13:12:08 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:24:06 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	ft_cd(char **commands)
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", 2);
 		vars()->status_code = 1;
-		free(cmds);
+		free_arr((void *)cmds);
 		return ;
 	}
-	free(cmds);
+    free_arr((void *)cmds);
 	path = ft_strdup(commands[1]);
 	if (!ft_strlen(path))
 		path = ft_strdup(get_var("HOME"));
@@ -76,18 +76,23 @@ void	ft_cd(char **commands)
 		vars()->status_code = 1;
 		ft_putstr_fd("minishell: cd: ", 2);
 		perror(path);
-		//error_management(errno);
 	}
 	else
 	{
 		vars()->status_code = 0;
 		path_to_export = ft_strjoin("OLDPWD=", curr_path);
 		free(curr_path);
-		ft_export(&path_to_export);
+        if (var_exists("OLDPWD"))
+            replace_var(ft_strdup(path_to_export), "OLDPWD");
+        else
+            ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(path_to_export)));
 		free(path_to_export);
 		curr_path = getcwd(NULL, 0);
 		path_to_export = ft_strjoin("PWD=", curr_path);
-		ft_export(&path_to_export);
+        if (var_exists("PWD"))
+            replace_var(ft_strdup(path_to_export), "PWD");
+        else
+            ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(path_to_export)));
 		free(path_to_export);
 	}
 	free(curr_path);
