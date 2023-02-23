@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 09:54:34 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:12:08 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ void	ft_cd(char **commands)
 		vars()->status_code = 0;
 		path_to_export = ft_strjoin("OLDPWD=", curr_path);
 		free(curr_path);
-		ft_export(path_to_export);
+		ft_export(&path_to_export);
 		free(path_to_export);
 		curr_path = getcwd(NULL, 0);
 		path_to_export = ft_strjoin("PWD=", curr_path);
-		ft_export(path_to_export);
+		ft_export(&path_to_export);
 		free(path_to_export);
 	}
 	free(curr_path);
