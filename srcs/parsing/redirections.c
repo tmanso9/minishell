@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 14:05:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:35:05 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	process_infile(char *line, int *i)
 	if (line[*i + 1] && line[*i + 1] == '<')
 		process_heredoc(line, i);
 	else
-		(vars())->infile = filename(line, i);
+		(vars())->infile = token_treatment(filename(line, i));
 	(vars())->fd_in = open(vars()->infile, O_RDONLY);
 	// if (vars()->fd_in < 0)
 		// error_handle(BLA);
@@ -65,6 +65,7 @@ void	process_outfile(char *line, int *i)
 	while (line[*i + name_size] && !ft_is_space(line[*i + name_size]))
 		name_size++;
 	(vars())->outfile = ft_substr(line, *i, name_size);
+	vars()->outfile = token_treatment(vars()->outfile);
 	if (append)
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);

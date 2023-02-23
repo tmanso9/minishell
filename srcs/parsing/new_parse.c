@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 15:49:07 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:32:40 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ char	*first_token_spliter(char *str, int *i)
 	return (expander(temp, 0));
 }
 
-char	*first_token_treatment(char *str)
+char	*token_treatment(char *str)
 {
 	char	*temp1;
 	char	*temp2;
@@ -243,8 +243,8 @@ void	parser(t_com **com)
 	int		i;
 	
 	current = *com;
-	printer(*com);
-	printf("------------\n");
+	/* printer(*com);
+	printf("------------\n"); */
 	while (current)
 	{
 		i = 0;
@@ -259,10 +259,10 @@ void	parser(t_com **com)
 			else
 				current->args[i] = expander(current->args[i], 0);
 			i++; */
-			current->args[i] = first_token_treatment(current->args[i]);
+			current->args[i] = token_treatment(current->args[i]);
 			i++;
 		}
 		current = current->next;
 	}
-	printer(*com);
+	// printer(*com);
 }

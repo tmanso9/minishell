@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 13:10:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:31:42 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 char		*find_path(char **env_path, char *cmd);
 void		parser(t_com **com);
 int			count_back(char *str, int i);
+char		*token_treatment(char *str);
 //Execute
 void		signals(void);
 void		execute(t_com *com);
