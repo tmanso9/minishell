@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 15:18:18 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:49:07 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*append_rest(char *new, char *str, int *i)
 char	*append_env_var(char *new, char *str, int *i)
 {
 	char	*final;
+	char	*temp;
 
 	if (str[++(*i)] == '?')
 	{
@@ -86,7 +87,11 @@ char	*append_env_var(char *new, char *str, int *i)
 	{
 		(*i)--;
 		if (new)
-			final = ft_strjoin(new, env_var(str, i));
+		{
+			temp = env_var(str, i);
+			final = ft_strjoin(new, temp);
+			free(temp);
+		}
 		else
 			final = env_var(str, i);
 	}
@@ -160,10 +165,10 @@ char	*single_quotes(char *str)
 	int		i;
 
 	i = 0;
-	new = ft_calloc(ft_strlen(str) - 1, 1);
+	new = ft_calloc(ft_strlen(str), 1);
 	if (!new)
 		return (NULL);
-	while (str[i + 1] != '\'')
+	while (str[i + 1] && str[i + 1] != '\'')
 	{
 		new[i] = str[i + 1];
 		i++;
@@ -238,8 +243,8 @@ void	parser(t_com **com)
 	int		i;
 	
 	current = *com;
-	//printer(*com);
-	//printf("------------\n");
+	printer(*com);
+	printf("------------\n");
 	while (current)
 	{
 		i = 0;
@@ -259,5 +264,5 @@ void	parser(t_com **com)
 		}
 		current = current->next;
 	}
-	// printer(*com);
+	printer(*com);
 }

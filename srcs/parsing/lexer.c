@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 13:56:57 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:30:27 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 		line[*i] != '|' && line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
 	{
 		size = 0;
-		if (line[*i + size] == '\'')
+		/* if (line[*i + size] == '\'')
 			token_until_char(line, i, head, '\'');
 		else if (line[*i + size] == '\"')
 			token_until_char(line, i, head, '\"');
-		else if (!ft_is_space(line[*i + size++]))
+		else */ if (!ft_is_space(line[*i + size++]))
 		{
 			while (line[*i + size] && \
 				/* !ft_is_space(line[*i + size]) && \ */
