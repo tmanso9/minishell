@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 14:27:18 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:18:18 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,13 @@ char	*env_var(char *str, int *i)
 	char	*env_var;
 	char	*final;
 	int		j;
-	int		y;
 
 	j = 0;
-	while (str[(*i) + 1] && ft_isalnum(str[++(*i)]))
+	(*i)++;
+	while (str[(*i) + j] && ft_isalnum(str[(*i) + j]))
 		j++;
-	env_var = ft_calloc(j + 1, 1);
-	y = 0;
-	while (y < j)
-	{
-		env_var[y] = str[*i - j + y];
-		y++;
-	}
+	env_var = ft_substr(str, *i, j);
+	(*i) += j;
 	final = ft_strdup(get_var(env_var));
 	free(env_var);
 	return (final);
@@ -264,5 +259,5 @@ void	parser(t_com **com)
 		}
 		current = current->next;
 	}
-	printer(*com);
+	// printer(*com);
 }
