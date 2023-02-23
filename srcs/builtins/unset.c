@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:55:09 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/22 22:36:19 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:02:34 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@ void	ft_unset(char **commands)
     int     i;
 
     i = 1;
+    vars()->status_code = 0;
     if (arr_size(commands) < 2)
-    {
-        vars()->status_code = 0;
 		return ;
-    }
     while (commands[i])
     {
         if (!var_exists(commands[i]) || (!commands[i] || !ft_strlen(commands[i])))
-        {
-            vars()->status_code = 0;
             return ;
-        }
         temp = *(vars()->env);
         if (!ft_strncmp(commands[i], temp->content, ft_strlen(commands[i])))
         {
