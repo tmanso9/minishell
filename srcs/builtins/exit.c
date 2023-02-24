@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:07:09 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 15:58:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:53:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	ft_exit(char **commands)
 	char	**cmds;
 
 	if (!commands[1])
-    {
-    	ft_putstr_fd("exit\n", 2);
-        return ;
-    }
+	{
+		ft_putstr_fd("exit\n", 2);
+		return ;
+	}
 	cmds = ft_split(commands[1], ' ');
 	if (arr_size(commands) > 2 || arr_size(cmds) > 1)
 	{

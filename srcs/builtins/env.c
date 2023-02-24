@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:00:33 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 16:10:19 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:52:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	ft_env(void)
 			printf("%s\n", (char *)temp->content);
 		temp = temp->next;
 	}
-    vars()->status_code = 0;
+	vars()->status_code = 0;
 }

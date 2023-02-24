@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 14:01:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:40:19 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	sort_list_and_print(t_list *lst)
 		swapped = 0;
 		while (node && node->next)
 		{
-			if (ft_strncmp(node->content, node->next->content, biggest_str_len(node->content, node->next->content)) > 0)
+			if (ft_strncmp(node->content, node->next->content, \
+				biggest_str_len(node->content, node->next->content)) > 0)
 			{
 				temp = node->content;
 				node->content = node->next->content;
@@ -87,73 +88,74 @@ void	sort_list_and_print(t_list *lst)
 	node = *head;
 	while (node)
 	{
-        temp = ft_strjoin("declare -x ", node->content);
+		temp = ft_strjoin("declare -x ", node->content);
+		//parsing para acrescentar "" 
+		char **arr_declare;
+
+		arr_declare = ft_split(temp);
+		char *temp2
 		printf("%s\n", temp);
-        free(temp);
+		free(temp);
 		node = node->next;
 	}
-    ft_lstclear(head, free);
-    free(head);
+	ft_lstclear(head, free);
+	free(head);
 }
 
-int parse_var(char *var_name)
+int	parse_var(char *var_name)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!ft_isalpha(var_name[i]))
-        return (1);
-    while (var_name[i])
-    {
-        if (!ft_isalnum(var_name[i]) && var_name[i] != '_')
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	if (!ft_isalpha(var_name[i]))
+		return (1);
+	while (var_name[i])
+	{
+		if (!ft_isalnum(var_name[i]) && var_name[i] != '_')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 void	ft_export(char **commands)
 {
 	char	*new_var;
-    char    **split_com;
-    int     i;
+	char	**split_com;
+	int		i;
 
 	if (arr_size(commands) < 2)
 		sort_list_and_print(*vars()->env);
-    i = 1;
-    while (commands[i])
-    {
-        split_com = ft_split(commands[i], '=');
-        if (!split_com)
-            return ;
-        new_var = split_com[0];
-        if (parse_var(new_var))
-        {
-            vars()->status_code = 1;
-            ft_putstr_fd("minishel: export: `", 2);
-            ft_putstr_fd(commands[i], 2);
-            ft_putendl_fd("\': not a valid identifier", 2);
-            free_arr((void *)split_com);
-            i++;
-            continue ;
-        }
-        if (!new_var || !split_com[1])
-        {
-            free_arr((void *)split_com);
-            i++;
-            continue ;
-        }
-        if (var_exists(new_var))
-            replace_var(ft_strdup(commands[i]), new_var);
-        else
-            ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(commands[i])));
-        free_arr((void *)split_com);
-        i++;
-    }
-	/* t_list	*temp = *(vars()->env);
-	while (temp)
+	i = 1;
+	while (commands[i])
 	{
-		printf("%s\n", (char *)temp->content);
-		temp = temp->next;
-	}  */
+		split_com = ft_split(commands[i], '=');
+		if (!split_com)
+		{
+			return ;
+		}
+		new_var = split_com[0];
+		if (!ft_strlen(new_var) || parse_var(new_var))
+		{
+			vars()->status_code = 1;
+			ft_putstr_fd("minishel: export: `", 2);
+			ft_putstr_fd(commands[i], 2);
+			ft_putendl_fd("\': not a valid identifier", 2);
+			free_arr((void *)split_com);
+			i++;
+			continue ;
+		}
+		if (!new_var || !split_com[1])
+		{
+			free_arr((void *)split_com);
+			i++;
+			continue ;
+		}
+		if (var_exists(new_var))
+			replace_var(ft_strdup(commands[i]), new_var);
+		else
+			ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(commands[i])));
+		free_arr((void *)split_com);
+		i++;
+	}
 }

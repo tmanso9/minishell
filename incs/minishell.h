@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 12:19:29 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:50:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		ft_export(char **commands);
 void		ft_cd(char **commands);
 void		ft_echo(char **args);
 void		ft_pwd(void);
-void    	ft_unset(char **commands);
+void		ft_unset(char **commands);
 void		ft_exit(char **commands);
 
 //Utils
@@ -90,7 +90,7 @@ t_com		*last_command(t_com *com);
 int			var_exists(char *var);
 char		*get_var(char *var);
 int			arr_size(char **arr);
-void    	replace_var(char *variable, char *left_part);
+void		replace_var(char *variable, char *left_part);
 
 //Parsing
 t_com		*parser(char *line);

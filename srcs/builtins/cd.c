@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 16:24:06 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:51:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_cd(char **commands)
 		free_arr((void *)cmds);
 		return ;
 	}
-    free_arr((void *)cmds);
+	free_arr((void *)cmds);
 	path = ft_strdup(commands[1]);
 	if (!ft_strlen(path))
 		path = ft_strdup(get_var("HOME"));
@@ -82,17 +82,17 @@ void	ft_cd(char **commands)
 		vars()->status_code = 0;
 		path_to_export = ft_strjoin("OLDPWD=", curr_path);
 		free(curr_path);
-        if (var_exists("OLDPWD"))
-            replace_var(ft_strdup(path_to_export), "OLDPWD");
-        else
-            ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(path_to_export)));
+		if (var_exists("OLDPWD"))
+			replace_var(ft_strdup(path_to_export), "OLDPWD");
+		else
+			ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(path_to_export)));
 		free(path_to_export);
 		curr_path = getcwd(NULL, 0);
 		path_to_export = ft_strjoin("PWD=", curr_path);
-        if (var_exists("PWD"))
-            replace_var(ft_strdup(path_to_export), "PWD");
-        else
-            ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(path_to_export)));
+		if (var_exists("PWD"))
+			replace_var(ft_strdup(path_to_export), "PWD");
+		else
+			ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(path_to_export)));
 		free(path_to_export);
 	}
 	free(curr_path);

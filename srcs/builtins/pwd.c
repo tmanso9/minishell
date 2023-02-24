@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:54:31 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 16:13:27 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:57:03 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	ft_pwd(void)
 	char	*wd;
 
 	wd = getcwd(NULL, 0);
-    if (wd)
-    {
-	    printf("%s\n", wd);
-	    free(wd);
-    }
-    else
-        vars()->status_code = 128 + errno;
+	vars()->status_code = 0;
+	if (wd)
+	{
+		printf("%s\n", wd);
+		free(wd);
+	}
+	else
+		vars()->status_code = 128 + errno;
 }
