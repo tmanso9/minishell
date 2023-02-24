@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_parse.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/24 11:08:52 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:32:41 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ char	*append_env_var(char *new, char *str, int *i)
 	if (str[++(*i)] == '?')
 	{
 		if (new)
-			final = ft_strjoin(new, ft_itoa(vars()->status_code));
+		{
+			temp = ft_itoa(vars()->status_code);
+			final = ft_strjoin(new, temp);
+			free(temp);
+		}
 		else
 			final = ft_itoa(vars()->status_code);
 		(*i)++;
@@ -183,7 +187,7 @@ char	*single_quotes(char *str)
 	return (new);
 }
 
-char	*first_token_spliter(char *str, int *i)
+char	*token_spliter(char *str, int *i)
 {
 	char	c;
 	int		size;
@@ -220,7 +224,7 @@ char	*token_treatment(char *str)
 	while (str[i])
 	{
 		temp2 = final;
-		temp1 = first_token_spliter(str, &i);
+		temp1 = token_spliter(str, &i);
 		final = ft_strjoin(temp2, temp1);
 		free(temp1);
 		free(temp2);
