@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 11:15:06 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:29:10 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	token_identifier(char *line, int *i, t_list **head)
 {
 	int	size;
 
-	while (line && *i <= (int)ft_strlen(line) && line[*i] && \
+	while (line && line[*i] && \
 		line[*i] != '|' && line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
 	{
 		size = 0;

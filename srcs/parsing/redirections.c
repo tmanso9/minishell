@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 20:35:05 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:40:17 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	process_outfile(char *line, int *i)
 		(*i)++;
 	while (line[*i + name_size] && !ft_is_space(line[*i + name_size]))
 		name_size++;
-	(vars())->outfile = ft_substr(line, *i, name_size);
-	vars()->outfile = token_treatment(vars()->outfile);
+	(vars())->outfile = token_treatment(ft_substr(line, *i, name_size));
+	// vars()->outfile = token_treatment(vars()->outfile);
 	if (append)
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
