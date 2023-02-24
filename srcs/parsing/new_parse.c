@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 20:32:40 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:30:08 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ char	*env_var(char *str, int *i)
 		j++;
 	env_var = ft_substr(str, *i, j);
 	(*i) += j;
+	if (!env_var[0])
+	{
+		free(env_var);
+		return (ft_strdup("$"));
+	}
 	final = ft_strdup(get_var(env_var));
 	free(env_var);
 	return (final);
@@ -250,15 +255,6 @@ void	parser(t_com **com)
 		i = 0;
 		while (current->args[i])
 		{
-			/* if (i == 0)
-				current->args[i] = first_token_treatment(current->args[i]);
-			else if (current->args[i][0] == '\'')
-				current->args[i] = single_quotes(current->args[i]);
-			else if (current->args[i][0] == '"')
-				current->args[i] = expander(current->args[i], 1);
-			else
-				current->args[i] = expander(current->args[i], 0);
-			i++; */
 			current->args[i] = token_treatment(current->args[i]);
 			i++;
 		}

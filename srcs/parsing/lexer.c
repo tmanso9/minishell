@@ -6,11 +6,32 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 15:30:27 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:29:32 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_in_quotes(char *str, int i)
+{
+	int		j;
+	char	c;
+
+	j = 0;
+	c = 0;
+	while (j < i)
+	{
+		if ((j == 0 || str[j - 1] != '\\') && (str[j] == '"' || str[j] == '\''))
+		{
+			if (c == str[j])
+				c = 0;
+			else if (c == 0)
+				c = str[j];
+		}
+		j++;
+	}
+	return (c);
+}
 
 void	token_until_char(char *line, int *i, t_list **head, char c)
 {
@@ -63,21 +84,12 @@ void	rest_of_tokens(char *line, int *i, t_list **head)
 		line[*i] != '|' && line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
 	{
 		size = 0;
-		/* if (line[*i + size] == '\'')
-			token_until_char(line, i, head, '\'');
-		else if (line[*i + size] == '\"')
-			token_until_char(line, i, head, '\"');
-		else */ if (!ft_is_space(line[*i + size++]))
+		if (!ft_is_space(line[*i + size++]))
 		{
-			while (line[*i + size] && \
-				/* !ft_is_space(line[*i + size]) && \ */
-				/* (line[*i + size] != '\'' || count_back(line, *i + size)) && \
-				(line[*i + size] != '"' || count_back(line, *i + size)) && \ */
-				(!ft_is_space(line[*i + size])) && \
-				(line[*i + size] != '<' || count_back(line, *i + size)) && \
-				(line[*i + size] != '>' || count_back(line, *i + size)) && \
-				(line[*i + size] != ';' || count_back(line, *i + size)) && \
-				(line[*i + size] != '|' || count_back(line, *i + size)))
+			while (line[*i + size] && (((!ft_is_space(line[*i + size])) && \
+				((line[*i + size] != '<' && line[*i + size] != '>' && \
+				line[*i + size] != ';' && line[*i + size] != '|') \
+				|| count_back(line, *i + size))) || is_in_quotes(line, *i + size)))
 				size++;
 			if (ft_is_space(line[*i + size - 1]) && (line[*i + size - 2] != '\\' || !count_back(line, *i + size - 1)))
 				size--;
