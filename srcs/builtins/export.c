@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 15:40:19 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:44:58 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,33 @@ void	sort_list_and_print(t_list *lst)
 	{
 		temp = ft_strjoin("declare -x ", node->content);
 		//parsing para acrescentar "" 
-		char **arr_declare;
+		// char **arr_declare;
 
-		arr_declare = ft_split(temp);
-		char *temp2
-		printf("%s\n", temp);
+		// arr_declare = ft_split(temp, '=');
+		char *temp2 = ft_calloc(ft_strlen(temp) + 4, 1);
+		int	i = 0;
+		int	j = 0;
+		while (temp[i])
+		{
+			if (temp[i] == '=')
+			{
+				temp2[i] = temp[i];
+				temp2[i + (++j)] = '"';
+				i++;
+				break ;
+			}
+			temp2[i + j] = temp[i];
+			i++;
+		}
+		while (temp[i])
+		{
+			temp2[i + j] = temp[i];
+			i++;
+		}
+		temp2[i + j] = '"';
+		printf("%s\n", temp2);
 		free(temp);
+		free(temp2);
 		node = node->next;
 	}
 	ft_lstclear(head, free);
@@ -125,7 +146,11 @@ void	ft_export(char **commands)
 	int		i;
 
 	if (arr_size(commands) < 2)
+	{
 		sort_list_and_print(*vars()->env);
+		vars()->status_code = 0;
+		return ;
+	}
 	i = 1;
 	while (commands[i])
 	{

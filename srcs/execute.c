@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 11:04:34 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:01:48 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	execute_builtin(t_com *com)
 	if (com->in || com->out || com->pip_after)
 	{
 		free_commands(&com);
+		// printf("exit code is %d\n", vars()->status_code);
 		exit(vars()->status_code);
 	}
 }
@@ -72,13 +73,14 @@ void	execute_command(t_com **com)
 		// ft_putstr_fd("Error executing ", 2);
 		// ft_putendl_fd((*com)->args[0], 2);
 		perror("");
+		vars()->status_code = 1;
 		exit(errno);
 	}
 	else
 	{
 		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			vars()->status_code = WEXITSTATUS(status);
+		// if (WIFEXITED(status))
+		// 	vars()->status_code = WEXITSTATUS(status);
 		close((*com)->pip[1]);
 		if ((*com)->next && (*com)->pip_after)
 		{

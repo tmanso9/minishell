@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 11:09:53 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:11:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	handler(int num)
 		write(2, "\n", 1);
 		vars()->status_code = 128 + num;
 		if (vars()->status == EXECUTING)
+		{
+			// printf("hi\n");
+			// kill(0, SIGINT);
 			return ;
+		}
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
