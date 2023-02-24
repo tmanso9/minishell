@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 11:12:45 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:15:06 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,6 @@ int	is_in_quotes(char *str, int i)
 		j++;
 	}
 	return (c);
-}
-
-void	token_until_char(char *line, int *i, t_list **head, char c)
-{
-	int	token_size;
-
-	token_size = 0;
-	if (line[*i + token_size] == c)
-	{
-		token_size++;
-		while (line[*i + token_size] && (line[*i + token_size] != c || (c == '"' && line[*i + token_size - 1] == '\\')))
-			token_size++;
-		ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size + 1)));
-		(*i) += token_size + 1;
-	}
 }
 
 void	token_identifier(char *line, int *i, t_list **head)
