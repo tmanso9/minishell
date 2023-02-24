@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/22 22:40:24 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:10:56 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,7 @@ void	wait_commands(void)
 			return ;
 		}
 		add_history(new_line);
-		first = parse_args(new_line);
-		parser(&first);
+		first = parser(new_line);
 		execute(first);
 		// free_commands(&first);
 		free(new_line);

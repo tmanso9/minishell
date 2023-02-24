@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 10:29:32 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:12:45 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,7 @@ void	token_until_char(char *line, int *i, t_list **head, char c)
 	}
 }
 
-void	first_token(char *line, int *i, t_list **head)
-{
-	int	token_size;
-
-	token_size = 0;
-	while (line[*i] && ft_is_space(line[*i]))
-		(*i)++;
-	if (line[*i + token_size] && line[*i + token_size] == '\'')
-	{
-		token_size++;
-		while (line[*i + token_size] && line[*i + token_size] != '\'')
-			token_size++;
-		token_size++;
-	}
-	else if (line[*i + token_size] && line[*i + token_size] == '\"')
-	{
-		token_size++;
-		while (line[*i + token_size] && line[*i + token_size] != '\"')
-			token_size++;
-		token_size++;
-	}
-	else
-		while (line[(*i) + token_size] && !ft_is_space(line[(*i) + token_size]))
-			token_size++;
-	ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, token_size)));
-	(*i) += token_size;
-}
-
-void	rest_of_tokens(char *line, int *i, t_list **head)
+void	token_identifier(char *line, int *i, t_list **head)
 {
 	int	size;
 
@@ -126,8 +98,7 @@ void	lexer(char *line, int *i, t_com **com)
 		(*i)++;
 	while (line[*i] == '<' || line[*i] == '>')
 		redirection(line, i);
-	//first_token(line, i, head);
-	rest_of_tokens(line, i, head);
+	token_identifier(line, i, head);
 	if (line[*i] == '|')
 		(*com)->pip_after = 1;
 	else if (line[*i] == '<' || line[*i] == '>')
@@ -140,7 +111,7 @@ void	lexer(char *line, int *i, t_com **com)
 	list_to_command(head, com);
 }
 
-t_com	*parse_args(char *line)
+t_com	*parser(char *line)
 {
 	int		i;
 	t_com	**head;
@@ -176,5 +147,6 @@ t_com	*parse_args(char *line)
 		com->in = vars()->fd_in;
 	if (com && vars()->fd_out)
 		last_command(com)->out = vars()->fd_out;
+	commands_treatment(&com);
 	return (com);
 }

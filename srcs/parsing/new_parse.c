@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/24 10:30:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:08:52 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void	printer(t_com *com)
 	}
 }
 
-void	parser(t_com **com)
+void	commands_treatment(t_com **com)
 {
 	t_com	*current;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/23 20:31:42 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:11:13 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ int			var_exists(char *var);
 char		*get_var(char *var);
 int			arr_size(char **arr);
 //Parsing
-t_com		*parse_args(char *command_line);
+t_com		*parser(char *line);
 char		*treated_input(char *str);
 void		redirection(char *line, int *i);
 void		process_heredoc(char *line, int *i);
 int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 char		*find_path(char **env_path, char *cmd);
-void		parser(t_com **com);
+void		commands_treatment(t_com **com);
 int			count_back(char *str, int i);
 char		*token_treatment(char *str);
 //Execute
