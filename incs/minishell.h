@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 17:09:25 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:35:43 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_com
 	struct s_com	*next;
 }				t_com;
 
-//Built-ins
+//Builtins
 void		ft_env(void);
 void		ft_export(char **commands);
 void		ft_cd(char **commands);
@@ -77,6 +77,10 @@ void		ft_echo(char **args);
 void		ft_pwd(void);
 void		ft_unset(char **commands);
 void		ft_exit(char **commands);
+
+//Builtins utils
+void		sort_list_and_print(t_list *lst);
+int			biggest_str_len(char *str1, char *str2);
 
 //Utils
 t_variables	*vars(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:56:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 11:42:53 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:36:19 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,26 @@ char	**list_to_array(t_list *lst)
 		lst = lst->next;
 	}
 	return (args);
+}
+
+int	arr_size(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+int	biggest_str_len(char *str1, char *str2)
+{
+	int	i;
+	int	j;
+
+	i = (int)ft_strlen(str1);
+	j = (int)ft_strlen(str2);
+	if (i > j)
+		return (i);
+	return (j);
 }

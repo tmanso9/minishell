@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 19:28:38 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 12:05:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:14:07 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static unsigned int	process_num(const char *str, unsigned int res)
 	{
 		if (count_digits(res) < i)
 		{
-			if ((str - count)[-1] == '-')
+			if (!ft_strncmp("-9223372036854775808", str - count - 1, 21))
 				return (0);
 			else
 				return (-1);

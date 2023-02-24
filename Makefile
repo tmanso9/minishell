@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/24 11:43:58 by amorais-         ###   ########.fr        #
+#    Updated: 2023/02/24 18:34:40 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ BUILTIN_SRC = 	pwd.c \
 				echo.c \
 				unset.c \
 				export.c \
+				export_utils.c \
 				cd.c \
 				exit.c
 PARSING_SRC =	lexer.c \
