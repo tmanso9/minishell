@@ -6,7 +6,11 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/24 16:11:23 by touteiro         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/25 00:20:57 by touteiro         ###   ########.fr       */
+>>>>>>> trying something different with sigint
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +22,11 @@ void	handler(int num)
 	{
 		write(2, "\n", 1);
 		vars()->status_code = 128 + num;
-		if (vars()->status == EXECUTING)
-		{
-			// printf("hi\n");
-			// kill(0, SIGINT);
-			return ;
-		}
+		// if (vars()->status == EXECUTING)
+			// return ;
+		if (rl_on_new_line() == -1)
+			exit(1);
 		rl_replace_line("", 0);
-		rl_on_new_line();
 		rl_redisplay();
 	}
 	if (num == SIGQUIT)
