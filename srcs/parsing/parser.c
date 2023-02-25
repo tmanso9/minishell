@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/24 15:32:41 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/25 02:32:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_back(char *str, int i)
 	int	c;
 
 	c = 0;
-	while (str[i - 1] && str[--i] == '\\')
+	while (str && i > 0 && str[--i] == '\\')
 		c++;
 	return (c % 2);
 }
@@ -262,6 +262,7 @@ void	commands_treatment(t_com **com)
 			current->args[i] = token_treatment(current->args[i]);
 			i++;
 		}
+		current->path = find_path(current->env, current->args[0]);
 		current = current->next;
 	}
 	// printer(*com);

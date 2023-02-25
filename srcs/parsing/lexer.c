@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 14:29:10 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/25 02:31:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	list_to_command(t_list **head, t_com **com)
 		if (is_builtin((*head)->content))
 			(*com)->builtin = 1;
 		(*com)->args = list_to_array(*head);
-		(*com)->path = find_path((*com)->env, (*com)->args[0]);
 	}
 	ft_lstclear(head, free);
 	free(head);

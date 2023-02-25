@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 18:35:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:32:10 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define BI7 "exit"
 # define READING 0
 # define EXECUTING 1
+# define PIPE 3
 
 typedef struct s_variables
 {

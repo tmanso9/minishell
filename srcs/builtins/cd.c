@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/24 17:05:03 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:58:45 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_cd(char **commands)
 		path = new_path(path);
 	else if (path && ft_strlen(path) == 1 && path[0] == '-')
 	{
+		free(path);
 		path = ft_strdup(get_var("OLDPWD"));
 		if (!ft_strlen(path))
 		{
