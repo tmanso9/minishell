@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 11:34:03 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:55:14 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,11 @@ void	execute_command(t_com **com)
 			exit(2);
 		}
 		execve((*com)->path, (*com)->args, (*com)->env);
-		// status = errno;
-		// printf("%d\n", status);
 		perror((*com)->args[0]);
 		exit(errno);
 	}
 	else
 	{
-		/* if (errno)
-		{
-			 if (errno != 2)
-				vars()->status_code = 1;
-			else 
-				vars()->status_code = 128 - errno;
-		} */
-		// if (WIFEXITED(status))
-			// vars()->status_code = WEXITSTATUS(status);
 		if ((*com)->next && (*com)->pip_after)
 			(*com)->next->in = dup((*com)->pip[0]);
 		close((*com)->pip[0]);
@@ -114,7 +103,7 @@ void	execute(t_com *com)
 	*head = com;
 	while (com)
 	{
-		printf("Com: %s\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
+		// printf("Com: %s\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 		{
 			vars()->status = PIPE;
@@ -128,21 +117,16 @@ void	execute(t_com *com)
 		// waitpid(-1, NULL, 0);
 	if (vars()->status == PIPE)
 	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			vars()->status_code = 128 - WEXITSTATUS(status);
+		com = *head;
+		while (com)
+		{
+			waitpid(-1, &status, 0);
+			if (WIFEXITED(status) && WEXITSTATUS(status))
+				vars()->status_code = 1;
+			com = com->next;
+		}
 		// printf("exit code is %d\n", vars()->status_code);
 	}
 	free_commands(head);
-	/* com = *head;
-	while (com)
-	{
-		temp = com->next;
-		free_arr((void *)com->args);
-		free_arr((void *)com->env);
-		free(com->path);
-		free(com);
-		com = temp;
-	} */
 	free(head);
 }
