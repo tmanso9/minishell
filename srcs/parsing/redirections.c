@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 15:29:55 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:18:42 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ void	process_infile(char *line, int *i)
 	else
 		(vars())->infile = token_treatment(filename(line, i));
 	(vars())->fd_in = open(vars()->infile, O_RDONLY);
-	if (vars()->fd_in < 0)
+	if (vars()->fd_in < 0 && !vars()->invalid_infile)
+	{
 		perror((vars())->infile);
+		vars()->invalid_infile = 1;
+	}
 }
 
 void	process_outfile(char *line, int *i)
 {
 	int	append;
-	int	name_size;
 
 	if (vars()->fd_out)
 	{
@@ -58,22 +60,16 @@ void	process_outfile(char *line, int *i)
 		free(vars()->outfile);
 	}
 	append = line[*i + 1] == '>';
-	(*i) += append + 1;
-	name_size = 0;
-	while (line[*i] && ft_is_space(line[*i]))
-		(*i)++;
-	while (line[*i + name_size] && !ft_is_space(line[*i + name_size]))
-		name_size++;
-	(vars())->outfile = token_treatment(ft_substr(line, *i, name_size));
+	(*i) += append;
+	(vars())->outfile = token_treatment(filename(line, i));
 	if (append)
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	else
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
-	// if (vars()->fd_in < 0)
-		// error_handle(BLA);
-	(*i) += name_size;
+	if (vars()->fd_in < 0)
+		perror((vars())->outfile);
 }
 
 void	redirection(char *line, int *i)
