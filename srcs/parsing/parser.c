@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/25 02:32:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:00:07 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,7 @@ void	commands_treatment(t_com **com)
 	while (current)
 	{
 		i = 0;
+		current->env = list_to_array(*(vars()->env));
 		while (current->args[i])
 		{
 			current->args[i] = token_treatment(current->args[i]);

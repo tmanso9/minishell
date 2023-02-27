@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 15:02:00 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:59:48 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	token_identifier(char *line, int *i, t_list **head)
 
 void	list_to_command(t_list **head, t_com **com)
 {
-	if (*(char *)(*head)->content)
+	if (*head && (*head)->content && *(char *)(*head)->content)
 	{
 		if (is_builtin((*head)->content))
 			(*com)->builtin = 1;
@@ -77,17 +77,11 @@ void	lexer(char *line, int *i, t_com **com)
 	head = ft_calloc(1, sizeof(t_list *));
 	if (!head)
 		return ;
-	(*com)->env = list_to_array(*(vars()->env));
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
-	/* while (line[*i] == '<' || line[*i] == '>')
-		redirection(line, i); */
 	token_identifier(line, i, head);
 	if (line[*i] == '|')
 		(*com)->pip_after = 1;
-	/* else if (line[*i] == '<' || line[*i] == '>')
-		while (line[*i] == '<' || line[*i] == '>')
-			redirection(line, i); */
 	while (ft_is_space(line[*i]))
 		(*i)++;
 	if (line[*i] == '|')

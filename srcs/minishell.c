@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 12:48:20 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:08:29 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,18 +192,10 @@ void	wait_commands(void)
 
 void	init_vars(char **env)
 {
-	/* t_list	*temp; */
 
 	(vars())->env = ft_calloc(1, sizeof(t_list *));
 	dup_env(env);
 	(vars())->status_code = 0;
-	/* temp = *(vars()->env);
-	while (temp)
-	{
-		printf("%s\n", (char *)temp->content);
-		temp = temp->next;
-	} */
-	// (vars()->new_env) = list_to_array(*(vars()->env));
 }
 
 int	main(int argc, char **argv, char **env)
