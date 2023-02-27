@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/25 00:58:45 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:47:54 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_var(char *var)
 	t_list	*temp;
 
 	temp = *(vars()->env);
-	while (temp)
+	while (temp && ft_strncmp(var, "EMPTY", 5))
 	{
 		if (!ft_strncmp(temp->content, var, ft_strlen(var)))
 			return (temp->content + ft_strlen(var) + 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/23 13:53:53 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:35:43 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void	ft_echo(char **args)
 	}
 	if (new_line)
 		printf("\n");
+	vars()->status_code = 0;
 }

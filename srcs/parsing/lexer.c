@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 15:59:48 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:10:41 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,13 @@ t_com	*parser(char *line)
 			free(com);
 	}
 	/* Print to check commands */
+	// Space for parsing and expanding
+	com = *head;
+	if (com && vars()->fd_in)
+		com->in = vars()->fd_in;
+	if (com && vars()->fd_out)
+		last_command(com)->out = vars()->fd_out;
+	commands_treatment(&com);
 	/* com = *head;
 	while (com)
 	{
@@ -121,14 +128,7 @@ t_com	*parser(char *line)
 			printf("%s\n", com->args[i++]);
 		com = com->next;
 	} */
-	// Space for parsing and expanding
-	com = *head;
 	free(head);
-	if (com && vars()->fd_in)
-		com->in = vars()->fd_in;
-	if (com && vars()->fd_out)
-		last_command(com)->out = vars()->fd_out;
-	commands_treatment(&com);
 	free(line);
 	return (com);
 }

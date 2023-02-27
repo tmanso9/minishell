@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 16:00:07 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:10:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,8 @@ void	commands_treatment(t_com **com)
 {
 	t_com	*current;
 	int		i;
-	
+	int		moved;
+
 	current = *com;
 	/* printer(*com);
 	printf("------------\n"); */
@@ -262,6 +263,28 @@ void	commands_treatment(t_com **com)
 		{
 			current->args[i] = token_treatment(current->args[i]);
 			i++;
+		}
+		i = 0;
+		moved = 1;
+		while (moved)
+		{
+			moved = 0;
+			while (current->args[i])
+			{
+				if (!ft_strlen(current->args[i]))
+				{
+					moved = 1;
+					free(current->args[i]);
+					while (current->args[i + 1])
+					{
+						current->args[i] = current->args[i + 1];
+						i++;
+					}
+					current->args[i] = NULL;
+				}
+				else
+					i++;
+			}
 		}
 		current->path = find_path(current->env, current->args[0]);
 		current = current->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 15:45:19 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:48:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,5 @@ int			is_in_quotes(char *str, int i);
 //Execute
 void		signals(void);
 void		execute(t_com *com);
+void		wait_all_finished(t_com *com);
 #endif

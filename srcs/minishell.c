@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 16:08:29 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:48:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,7 @@ void	wait_commands(void)
 		add_history(new_line);
 		first = parser(new_line);
 		execute(first);
-		// free_commands(&first);
-		// free(new_line);
+		wait_all_finished(first);
 		if (vars()->fd_in)
 		{
 			if (!ft_strncmp(vars()->infile, ".heredoc", 9))

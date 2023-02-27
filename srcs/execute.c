@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 15:53:37 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 20:48:46 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,22 @@ void	output_decider(t_com **com)
 
 void	execute_command(t_com **com)
 {
-	int	id;
+	int			id;
 	struct stat	st;
 
-	pipe((*com)->pip);
+	if (pipe((*com)->pip) == -1)
+		perror("");
 	id = fork();
 	if (id == 0)
 	{
+		if ((*com)->in && (vars())->invalid_infile)
+		{
+			(*com) = (*com)->next;
+			(vars())->invalid_infile = 0;
+			exit(1);
+		}
+		if (!(*com)->args || !(*com)->args[0])
+			exit(0);
 		if ((*com)->in)
 			dup2((*com)->in, STDIN_FILENO);
 		output_decider(com);
@@ -68,24 +77,38 @@ void	execute_command(t_com **com)
 		close((*com)->pip[1]);
 		if ((*com)->builtin)
 			execute_builtin(*com);
-		if (lstat((*com)->path, &st) == -1)
+		if (lstat((*com)->path, &st) && \
+			ft_strncmp("./", (*com)->path, 2 && (*com)->path[0] != '/'))
 		{
-			perror((*com)->args[0]);
-			exit(1);
+			ft_putstr_fd((*com)->args[0], 2);
+			ft_putendl_fd(": command not found", 2);
+			exit(127);
 		}
-		if (S_ISDIR(st.st_mode))
+		if (S_ISDIR(st.st_mode) && ((*com)->path[0] == '/' || \
+			!ft_strncmp("./", (*com)->path, 2)) && !access((*com)->path, F_OK))
 		{
-			ft_putendl_fd(" Is a directory", 2);
-			exit(2);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd((*com)->path, 2);
+			ft_putendl_fd(": Is a directory", 2);
+			exit(126);
 		}
 		if (fstat((*com)->in, &st) == -1)
-		{
-			// perror((*com)->args[0]);
 			exit(1);
-		}
 		execve((*com)->path, (*com)->args, (*com)->env);
+		if (errno == EACCES)
+		{
+			if (access((*com)->args[0], X_OK) && \
+				!ft_strncmp("./", (*com)->args[0], 2))
+			{
+				perror((*com)->args[0]);
+				exit(126);
+			}
+			ft_putstr_fd((*com)->args[0], 2);
+			ft_putendl_fd(": command not found", 2);
+			exit(127);
+		}
 		perror((*com)->args[0]);
-		exit(errno);
+		exit(127);
 	}
 	(*com)->pid = id;
 	if ((*com)->next && (*com)->pip_after)
@@ -96,21 +119,9 @@ void	execute_command(t_com **com)
 
 void	execute(t_com *com)
 {
-	t_com	**head;
-	int		status;
-
-	head = ft_calloc(1, sizeof(t_com *));
-	*head = com;
 	while (com)
 	{
-		if (com->in && (vars())->invalid_infile)
-		{
-			com = com->next;
-			(vars())->invalid_infile = 0;
-			(vars())->status_code = 1;
-			continue ;
-		}
-		// printf("Com: %s\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
+		// printf("Com: '%s'\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 		{
 			vars()->status = PIPE;
@@ -120,14 +131,22 @@ void	execute(t_com *com)
 			execute_builtin(com);
 		com = com->next;
 	}
+}
+
+void	wait_all_finished(t_com *com)
+{
+	int		status;
+	t_com	**head;
+
+	head = ft_calloc(1, sizeof(t_com *));
+	*head = com;
 	if (vars()->status == PIPE)
 	{
-		com = *head;
 		while (com)
 		{
 			waitpid(-1, &status, 0);
-			if (WIFEXITED(status) && WEXITSTATUS(status))
-				vars()->status_code = 1;
+			if (WIFEXITED(status))
+				vars()->status_code = WEXITSTATUS(status);
 			com = com->next;
 		}
 	}
