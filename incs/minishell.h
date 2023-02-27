@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/25 01:32:10 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:51:57 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ char		*find_path(char **env_path, char *cmd);
 void		commands_treatment(t_com **com);
 int			count_back(char *str, int i);
 char		*token_treatment(char *str);
+char		*redirection_treatment(char *line);
+int			is_in_quotes(char *str, int i);
 //Execute
 void		signals(void);
 void		execute(t_com *com);
