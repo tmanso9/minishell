@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/25 03:01:16 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:34:03 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ void	execute_command(t_com **com)
 		if ((*com)->builtin)
 			execute_builtin(*com);
 		struct stat	st;
-		if (lstat((*com)->args[0], &st) == -1)
+		// if (lstat((*com)->args[0], &st) == -1)
+		if (lstat((*com)->path, &st) == -1)
 		{
-			perror(" ");
+			perror((*com)->args[0]);
 			exit(1);
 		}
 		if (S_ISDIR(st.st_mode))
@@ -113,7 +114,7 @@ void	execute(t_com *com)
 	*head = com;
 	while (com)
 	{
-		// printf("Com: %s\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
+		printf("Com: %s\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 		{
 			vars()->status = PIPE;
