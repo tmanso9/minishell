@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:56:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 18:36:19 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:11:57 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ t_com	*com_new(void)
 
 int	is_builtin(char *command)
 {
-	if (!ft_strncmp(command, BI1, ft_strlen(command)) || \
-		!ft_strncmp(command, BI2, ft_strlen(command)) || \
-		!ft_strncmp(command, BI3, ft_strlen(command)) || \
-		!ft_strncmp(command, BI4, ft_strlen(command)) || \
-		!ft_strncmp(command, BI5, ft_strlen(command)) || \
-		!ft_strncmp(command, BI6, ft_strlen(command)) || \
-		!ft_strncmp(command, BI7, ft_strlen(command)))
+	if (!ft_strncmp(command, BI1, ft_strlen(BI1)) || \
+		!ft_strncmp(command, BI2, ft_strlen(BI2)) || \
+		!ft_strncmp(command, BI3, ft_strlen(BI3)) || \
+		!ft_strncmp(command, BI4, ft_strlen(BI4)) || \
+		!ft_strncmp(command, BI5, ft_strlen(BI5)) || \
+		!ft_strncmp(command, BI6, ft_strlen(BI6)) || \
+		!ft_strncmp(command, BI7, ft_strlen(BI7)))
 		return (1);
 	return (0);
 }

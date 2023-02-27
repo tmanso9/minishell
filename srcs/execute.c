@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 12:55:14 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:28:32 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	execute_builtin(t_com *com)
 	// int	exit_code;
 
 	// exit_code = 0;
-	if (!ft_strncmp(com->args[0], "env", ft_strlen(com->args[0])))
+	if (!ft_strncmp(com->args[0], "env", ft_strlen("env")))
 		/* exit_code =  */ft_env();
-	else if (!ft_strncmp(com->args[0], "cd", ft_strlen(com->args[0])))
+	else if (!ft_strncmp(com->args[0], "cd", ft_strlen("cd")))
 		/* exit_code =  */ft_cd(com->args);
-	else if (!ft_strncmp(com->args[0], "echo", ft_strlen(com->args[0])))
+	else if (!ft_strncmp(com->args[0], "echo", ft_strlen("echo")))
 		/* exit_code =  */ft_echo(com->args);
-	else if (!ft_strncmp(com->args[0], "export", ft_strlen(com->args[0])))
+	else if (!ft_strncmp(com->args[0], "export", ft_strlen("export")))
 		/* exit_code =  */ft_export(com->args);
-	else if (!ft_strncmp(com->args[0], "pwd", ft_strlen(com->args[0])))
+	else if (!ft_strncmp(com->args[0], "pwd", ft_strlen("pwd")))
 		/* exit_code =  */ft_pwd();
-	else if (!ft_strncmp(com->args[0], "unset", ft_strlen(com->args[0])))
+	else if (!ft_strncmp(com->args[0], "unset", ft_strlen("unset")))
 		/* exit_code =  */ft_unset(com->args);
-	else if (!ft_strncmp(com->args[0], "exit", ft_strlen(com->args[0])))
+	else if (!ft_strncmp(com->args[0], "exit", ft_strlen("exit")))
 	{
 		if (!com->pip_after)
 			ft_exit(com->args);
@@ -55,7 +55,7 @@ void	output_decider(t_com **com)
 void	execute_command(t_com **com)
 {
 	int	id;
-	// int	status;
+	struct stat	st;
 
 	pipe((*com)->pip);
 	id = fork();
@@ -68,8 +68,6 @@ void	execute_command(t_com **com)
 		close((*com)->pip[1]);
 		if ((*com)->builtin)
 			execute_builtin(*com);
-		struct stat	st;
-		// if (lstat((*com)->args[0], &st) == -1)
 		if (lstat((*com)->path, &st) == -1)
 		{
 			perror((*com)->args[0]);
@@ -80,22 +78,24 @@ void	execute_command(t_com **com)
 			ft_putendl_fd(" Is a directory", 2);
 			exit(2);
 		}
+		if (fstat((*com)->in, &st) == -1)
+		{
+			// perror((*com)->args[0]);
+			exit(1);
+		}
 		execve((*com)->path, (*com)->args, (*com)->env);
 		perror((*com)->args[0]);
 		exit(errno);
 	}
-	else
-	{
-		if ((*com)->next && (*com)->pip_after)
-			(*com)->next->in = dup((*com)->pip[0]);
-		close((*com)->pip[0]);
-		close((*com)->pip[1]);
-	}
+	(*com)->pid = id;
+	if ((*com)->next && (*com)->pip_after)
+		(*com)->next->in = dup((*com)->pip[0]);
+	close((*com)->pip[1]);
+	close((*com)->pip[0]);
 }
 
 void	execute(t_com *com)
 {
-	// t_com	*temp;
 	t_com	**head;
 	int		status;
 
@@ -113,8 +113,6 @@ void	execute(t_com *com)
 			execute_builtin(com);
 		com = com->next;
 	}
-	// printf("%d\n", vars()->status);
-		// waitpid(-1, NULL, 0);
 	if (vars()->status == PIPE)
 	{
 		com = *head;
@@ -125,7 +123,6 @@ void	execute(t_com *com)
 				vars()->status_code = 1;
 			com = com->next;
 		}
-		// printf("exit code is %d\n", vars()->status_code);
 	}
 	free_commands(head);
 	free(head);
