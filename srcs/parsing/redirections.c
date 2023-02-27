@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 14:40:17 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:58:01 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	process_outfile(char *line, int *i)
 	while (line[*i + name_size] && !ft_is_space(line[*i + name_size]))
 		name_size++;
 	(vars())->outfile = token_treatment(ft_substr(line, *i, name_size));
-	// vars()->outfile = token_treatment(vars()->outfile);
 	if (append)
 		(vars())->fd_out = open(vars()->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
@@ -83,4 +82,25 @@ void	redirection(char *line, int *i)
 		process_infile(line, i);
 	else
 		process_outfile(line, i);
+	(*i)++;
+}
+
+char	*redirection_treatment(char *line)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	new = ft_calloc(ft_strlen(line) + 1, 1);
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if ((line[i] == '<' || line[i] == '>') && !count_back(line, i) && !is_in_quotes(line, i))
+			redirection(line, &i);
+		else
+			new[j++] = line[i++];
+	}
+	free(line);
+	return (new);
 }

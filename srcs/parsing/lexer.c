@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/25 02:31:39 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:51:27 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	token_identifier(char *line, int *i, t_list **head)
 	int	size;
 
 	while (line && line[*i] && \
-		line[*i] != '|' && line[*i] != ';' && line[*i] != '<' && line[*i] != '>')
+		line[*i] != '|' && line[*i] != ';'/*  && line[*i] != '<' && line[*i] != '>' */)
 	{
 		size = 0;
 		if (!ft_is_space(line[*i + size++]))
 		{
 			while (line[*i + size] && (((!ft_is_space(line[*i + size])) && \
-				((line[*i + size] != '<' && line[*i + size] != '>' && \
+				((/* line[*i + size] != '<' && line[*i + size] != '>' && */ \
 				line[*i + size] != ';' && line[*i + size] != '|') \
 				|| count_back(line, *i + size))) || is_in_quotes(line, *i + size)))
 				size++;
@@ -80,14 +80,14 @@ void	lexer(char *line, int *i, t_com **com)
 	(*com)->env = list_to_array(*(vars()->env));
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
-	while (line[*i] == '<' || line[*i] == '>')
-		redirection(line, i);
+	/* while (line[*i] == '<' || line[*i] == '>')
+		redirection(line, i); */
 	token_identifier(line, i, head);
 	if (line[*i] == '|')
 		(*com)->pip_after = 1;
-	else if (line[*i] == '<' || line[*i] == '>')
+	/* else if (line[*i] == '<' || line[*i] == '>')
 		while (line[*i] == '<' || line[*i] == '>')
-			redirection(line, i);
+			redirection(line, i); */
 	while (ft_is_space(line[*i]))
 		(*i)++;
 	if (line[*i] == '|')
@@ -102,6 +102,9 @@ t_com	*parser(char *line)
 	t_com	*com;
 
 	i = 0;
+	// printf("%s\n", line);
+	line = redirection_treatment(line);
+	// printf("%s\n", line);
 	head = ft_calloc(1, sizeof(t_com *));
 	if (!head)
 		return (NULL);
@@ -132,5 +135,6 @@ t_com	*parser(char *line)
 	if (com && vars()->fd_out)
 		last_command(com)->out = vars()->fd_out;
 	commands_treatment(&com);
+	free(line);
 	return (com);
 }

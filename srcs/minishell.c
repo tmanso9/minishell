@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 11:10:56 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:48:20 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	wait_commands(void)
 		first = parser(new_line);
 		execute(first);
 		// free_commands(&first);
-		free(new_line);
+		// free(new_line);
 		if (vars()->fd_in)
 		{
 			if (!ft_strncmp(vars()->infile, ".heredoc", 9))
