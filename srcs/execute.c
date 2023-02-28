@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/28 14:31:30 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:23:26 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	execute_command(t_com **com)
 	id = fork();
 	if (id == 0)
 	{
-		if ((*com)->in && (*com)->invalid_infile)
+		if (((*com)->in && (*com)->invalid_infile))
 		{
 			(*com) = (*com)->next;
 			exit(1);

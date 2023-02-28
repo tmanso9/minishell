@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 13:28:18 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:41:10 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	lexer(char *line, int *i, t_com **com)
 		(*i)++;
 	redirection_treatment(com, *i, &line);
 	token_identifier(line, i, head);
-	if (line[*i] == '|')
-		(*com)->pip_after = 1;
 	while (ft_is_space(line[*i]))
 		(*i)++;
 	if (line[*i] == '|')
