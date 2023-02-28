@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 11:01:05 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:23:27 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@
 
 typedef struct s_variables
 {
-	// char	**new_env;
 	t_list	**env;
-	// char	*builtins[7];
 	char	malloced;
 	char	*infile;
 	int		fd_in;
@@ -105,7 +103,6 @@ void		replace_var(char *variable, char *left_part);
 //Parsing
 t_com		*parser(char *line);
 char		*treated_input(char *str);
-// void		redirection(char *line, int *i);
 void		process_heredoc(char *line, int *i);
 int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);

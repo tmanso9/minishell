@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/02/24 18:34:40 by touteiro         ###   ########.fr        #
+#    Updated: 2023/02/28 13:19:13 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ PARSING_SRC =	lexer.c \
 
 GENERAL_SRC = 	minishell.c \
 				utils.c \
+				utils2.c \
 				signals.c \
 				execute.c
 

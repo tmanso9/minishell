@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 18:10:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:54:23 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,15 @@ char	*append_rest(char *new, char *str, int *i)
 	int		y;
 
 	j = 0;
-	y = 0;
+	y = -1;
 	while (str[(*i)] && (str[(*i)] != '$' || count_back(str, *i)))
 	{
 		j++;
 		(*i)++;
 	}
 	temp = ft_calloc(j + 1, 1);
-	while (y < j)
-	{
+	while (++y < j)
 		temp[y] = str[*i - j + y];
-		y++;
-	}
 	if (new)
 	{
 		final = ft_strjoin(new, temp);
@@ -82,28 +79,19 @@ char	*append_env_var(char *new, char *str, int *i)
 
 	if (str[++(*i)] == '?')
 	{
-		if (new)
-		{
-			temp = ft_itoa(vars()->status_code);
-			final = ft_strjoin(new, temp);
-			free(temp);
-		}
-		else
-			final = ft_itoa(vars()->status_code);
+		temp = ft_itoa(vars()->status_code);
 		(*i)++;
 	}
 	else
 	{
 		(*i)--;
-		if (new)
-		{
-			temp = env_var(str, i);
-			final = ft_strjoin(new, temp);
-			free(temp);
-		}
-		else
-			final = env_var(str, i);
+		temp = env_var(str, i);
 	}
+	if (new)
+		final = ft_strjoin(new, temp);
+	else
+		final = ft_strdup(temp);
+	free(temp);
 	free(new);
 	return (final);
 }
@@ -121,7 +109,8 @@ char	*bar_treatment(char *str, int flag)
 	x = flag;
 	while (str && str[x] && (str[x] != '"' || str[x - 1] == '\\'))
 	{
-		if (str[x] == '\\' && (str[x + 1] == '\\' || str[x + 1] == '$' || str[x + 1] == '"'))
+		if (str[x] == '\\' && (str[x + 1] == '\\' || \
+		str[x + 1] == '$' || str[x + 1] == '"'))
 		{
 			x++;
 			new[i++] = str[x++];
@@ -197,8 +186,9 @@ char	*token_spliter(char *str, int *i)
 	c = str[*i];
 	size = 0;
 	while (str[*i + size] && (!size || \
-	!(((c == '"' || c == '\'') && count_back(str, *i + size) && str[*i + size] == c) || \
-	(((str[*i + size] == '"' && c != '\'') || (str[*i + size] == '\'' && c != '"')) && !count_back(str, *i + size)))))
+	!(((c == '"' || c == '\'') && count_back(str, *i + size) \
+	&& str[*i + size] == c) || (((str[*i + size] == '"' && c != '\'') || \
+	(str[*i + size] == '\'' && c != '"')) && !count_back(str, *i + size)))))
 		size++;
 	size += ((c == '"' || c == '\'') && str[*i + size] == c);
 	temp = ft_calloc(size + 1, 1);
@@ -253,8 +243,6 @@ void	commands_treatment(t_com **com)
 	int		moved;
 
 	current = *com;
-	/* printer(*com);
-	printf("------------\n"); */
 	while (current)
 	{
 		i = 0;
@@ -289,5 +277,4 @@ void	commands_treatment(t_com **com)
 		current->path = find_path(current->env, current->args[0]);
 		current = current->next;
 	}
-	// printer(*com);
 }

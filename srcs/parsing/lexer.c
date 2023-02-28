@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 12:10:23 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:28:18 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	is_in_quotes(char *str, int i)
 	c = 0;
 	while (j < i)
 	{
-		if ((j == 0 || str[j - 1] != '\\') && (str[j] == '"' || str[j] == '\''))
+		if ((j == 0 || str[j - 1] != '\\') && \
+		(str[j] == '"' || str[j] == '\''))
 		{
 			if (c == str[j])
 				c = 0;
@@ -38,17 +39,18 @@ void	token_identifier(char *line, int *i, t_list **head)
 	int	size;
 
 	while (line && line[*i] && \
-		line[*i] != '|' && line[*i] != ';'/*  && line[*i] != '<' && line[*i] != '>' */)
+		line[*i] != '|' && line[*i] != ';')
 	{
 		size = 0;
 		if (!ft_is_space(line[*i + size++]))
 		{
 			while (line[*i + size] && (((!ft_is_space(line[*i + size])) && \
-				((/* line[*i + size] != '<' && line[*i + size] != '>' && */ \
-				line[*i + size] != ';' && line[*i + size] != '|') \
-				|| count_back(line, *i + size))) || is_in_quotes(line, *i + size)))
+				((line[*i + size] != ';' && line[*i + size] != '|') \
+				|| count_back(line, *i + size))) || \
+				is_in_quotes(line, *i + size)))
 				size++;
-			if (ft_is_space(line[*i + size - 1]) && (line[*i + size - 2] != '\\' || !count_back(line, *i + size - 1)))
+			if (ft_is_space(line[*i + size - 1]) && \
+			(line[*i + size - 2] != '\\' || !count_back(line, *i + size - 1)))
 				size--;
 			ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, size)));
 			(*i) += size;
@@ -97,39 +99,20 @@ t_com	*parser(char *line)
 	t_com	*com;
 
 	i = 0;
-	// printf("%s\n", line);
-	// line = redirection_treatment(line);
-	// printf("%s\n", line);
 	head = ft_calloc(1, sizeof(t_com *));
 	if (!head)
 		return (NULL);
 	while (line && line[i])
 	{
 		com = com_new();
-		// redirection_treatment(&com, i, &line);
 		lexer(line, &i, &com);
 		if (com->args)
 			com_add_back(head, com);
 		else
 			free(com);
 	}
-	/* Print to check commands */
-	// Space for parsing and expanding
 	com = *head;
-	/* if (com && vars()->fd_in)
-		com->in = vars()->fd_in;
-	if (com && vars()->fd_out)
-		last_command(com)->out = vars()->fd_out; */
 	commands_treatment(&com);
-	/* com = *head;
-	while (com)
-	{
-		i = 0;
-		printf("Command args:\n");
-		while (com->args[i])
-			printf("%s\n", com->args[i++]);
-		com = com->next;
-	} */
 	free(head);
 	free(line);
 	return (com);

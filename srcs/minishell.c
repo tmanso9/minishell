@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 19:48:38 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:15:21 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	free_commands(t_com **command)
 		free_arr((void *)(*command)->args);
 		free_arr((void *)(*command)->env);
 		free((*command)->path);
+		free((*command)->outfile);
+		free((*command)->infile);
 		free(*command);
 		*command = temp;
 	}
