@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:59:41 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:48:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,8 @@ void	wait_commands(void)
 			// 	free(vars()->outfile);
 			return ;
 		}
-		add_history(new_line);
+		if (ft_strlen(new_line))
+			add_history(new_line);
 		first = parser(new_line);
 		execute(first);
 		wait_all_finished(first);
