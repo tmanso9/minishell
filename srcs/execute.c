@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/28 16:21:35 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:55:44 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	execute_builtin(t_com *com)
 	}
 	if (vars()->status == PIPE)
 	{
-		close(1);
+		if (com->pip_after)
+			close(1);
 		close(0);
 		close(com->in);
 		close(com->out);
@@ -51,7 +52,7 @@ void	execute_builtin(t_com *com)
 		free(vars()->env);
 		free(vars()->prompt);
 		// printf("exit code is %d\n", vars()->status_code);
-		// exit(vars()->status_code);
+		exit(vars()->status_code);
 	}
 }
 
@@ -75,6 +76,7 @@ void	execute_command(t_com **com)
 	id = fork();
 	if (id == 0)
 	{
+		// printf("com out: %d, pip after: %d\n", (*com)->out, (*com)->pip_after);
 		if (!(*com)->args || !(*com)->args[0])
 			exit(0);
 		if ((*com)->in)
@@ -121,6 +123,7 @@ void	execute_command(t_com **com)
 	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
 	{
 		(*com)->next->in = dup((*com)->pip[0]);
+		close((*com)->pip[0]);
 	}
 	if ((*com)->in)
 	{
@@ -129,7 +132,6 @@ void	execute_command(t_com **com)
 			unlink((*com)->infile);
 	}
 	close((*com)->pip[1]);
-	close((*com)->pip[0]);
 }
 
 void	execute(t_com *com)
@@ -162,10 +164,7 @@ void	execute(t_com *com)
 void	wait_all_finished(t_com *com)
 {
 	int		status;
-	t_com	**head;
 
-	head = ft_calloc(1, sizeof(t_com *));
-	*head = com;
 	status = 0;
 	if (vars()->status == PIPE && com)
 	{
@@ -177,6 +176,5 @@ void	wait_all_finished(t_com *com)
 			com = com->next;
 		}
 	}
-	free_commands(head);
-	free(head);
+	free_commands(vars()->cmds);
 }

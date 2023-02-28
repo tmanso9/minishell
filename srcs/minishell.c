@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:14:14 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:59:41 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ void	free_commands(t_com **command)
 		free_arr((void *)(*command)->args);
 		free_arr((void *)(*command)->env);
 		free((*command)->path);
-		if ((*command)->out > 0)
-			close((*command)->out);
+		// if ((*command)->out > 0)
+		// 	close((*command)->out);
 		free((*command)->outfile);
 		free((*command)->infile);
 		free(*command);
@@ -174,20 +174,6 @@ void	wait_commands(void)
 		first = parser(new_line);
 		execute(first);
 		wait_all_finished(first);
-		if (vars()->fd_in)
-		{
-			if (!ft_strncmp(vars()->infile, ".heredoc", 9))
-				unlink(vars()->infile);
-			close(vars()->fd_in);
-			vars()->fd_in = 0;
-			free(vars()->infile);
-		}
-		if (vars()->fd_out)
-		{
-			close(vars()->fd_out);
-			vars()->fd_out = 0;
-			free(vars()->outfile);
-		}
 		free(vars()->prompt);
 	}
 }
