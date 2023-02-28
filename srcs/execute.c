@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/28 16:55:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:31:15 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ void	execute_command(t_com **com)
 		output_decider(com);
 		close((*com)->pip[0]);
 		close((*com)->pip[1]);
+
+		struct sigaction	sa;
+
+		sigemptyset(&sa.sa_mask);
+		sa.sa_handler = cmd_handler;
+		sa.sa_flags = 0;
+		// rl_catch_signals = 0;
+		sigaction(SIGINT, &sa, NULL);
 		if ((*com)->builtin)
 			execute_builtin(*com);
 		if (lstat((*com)->path, &st) && \
@@ -123,7 +131,6 @@ void	execute_command(t_com **com)
 	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
 	{
 		(*com)->next->in = dup((*com)->pip[0]);
-		close((*com)->pip[0]);
 	}
 	if ((*com)->in)
 	{
@@ -131,6 +138,7 @@ void	execute_command(t_com **com)
 		if (!ft_strncmp((*com)->infile, ".heredoc", 9))
 			unlink((*com)->infile);
 	}
+	close((*com)->pip[0]);
 	close((*com)->pip[1]);
 }
 
@@ -141,13 +149,13 @@ void	execute(t_com *com)
 		// printf("Com: '%s'\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 		{
-			if ((com->in && com->invalid_infile) || com->out < 0)
+			/* if ((com->in && com->invalid_infile) || com->out < 0)
 			{
 				// close(com->pip[0]);
 				// close(com->pip[1]);
 				com = com->next;
 				// exit(1);
-			}
+			} */
 			vars()->status = PIPE;
 			execute_command(&com);
 		}

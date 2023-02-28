@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:07:09 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 18:24:07 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:18:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	check_if_numeric(char **commands, int i)
 		(!i && ft_strlen(commands[1]) == 19 && \
 		ft_strncmp("9223372036854775807", commands[1], 19) < 0))
 	{
+		ft_putendl_fd("exit: ", 2);
 		ft_putstr_fd("bash: exit: ", 2);
 		ft_putstr_fd(commands[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
@@ -30,6 +31,7 @@ static int	check_if_numeric(char **commands, int i)
 	{
 		if (!ft_isdigit(commands[1][i++]))
 		{
+			ft_putendl_fd("exit: ", 2);
 			ft_putstr_fd("bash: exit: ", 2);
 			ft_putstr_fd(commands[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
