@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 16:18:42 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:02:54 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,75 +29,73 @@ char	*filename(char *line, int *i)
 	return (name);
 }
 
-void	process_infile(char *line, int *i)
+void	process_infile(char *line, int *i, t_com **com)
 {
-	if (vars()->fd_in)
+	if ((*com)->in)
 	{
-		if (!ft_strncmp(vars()->infile, ".heredoc", 9))
-			unlink(vars()->infile);
-		close(vars()->fd_in);
-		free(vars()->infile);
+		if (!ft_strncmp((*com)->infile, ".heredoc", 9))
+			unlink((*com)->infile);
+		close((*com)->in);
+		free((*com)->infile);
 	}
 	if (line[*i + 1] && line[*i + 1] == '<')
 		process_heredoc(line, i);
 	else
-		(vars())->infile = token_treatment(filename(line, i));
-	(vars())->fd_in = open(vars()->infile, O_RDONLY);
-	if (vars()->fd_in < 0 && !vars()->invalid_infile)
+		((*com))->infile = token_treatment(filename(line, i));
+	((*com))->in = open((*com)->infile, O_RDONLY);
+	if ((*com)->in < 0 && !(*com)->invalid_infile)
 	{
-		perror((vars())->infile);
-		vars()->invalid_infile = 1;
+		perror(((*com))->infile);
+		(*com)->invalid_infile = 1;
 	}
 }
 
-void	process_outfile(char *line, int *i)
+void	process_outfile(char *line, int *i, t_com **com)
 {
 	int	append;
 
-	if (vars()->fd_out)
+	if ((*com)->out)
 	{
-		close(vars()->fd_out);
-		free(vars()->outfile);
+		close((*com)->out);
+		free((*com)->outfile);
 	}
 	append = line[*i + 1] == '>';
 	(*i) += append;
-	(vars())->outfile = token_treatment(filename(line, i));
+	(*com)->outfile = token_treatment(filename(line, i));
 	if (append)
-		(vars())->fd_out = open(vars()->outfile, \
+		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	else
-		(vars())->fd_out = open(vars()->outfile, \
+		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
-	if (vars()->fd_in < 0)
-		perror((vars())->outfile);
+	if ((*com)->in < 0)
+		perror((*com)->outfile);
 }
 
-void	redirection(char *line, int *i)
+void	redirection(char *line, int *i, t_com **com)
 {
 	if (line[*i] == '<')
-		process_infile(line, i);
+		process_infile(line, i, com);
 	else
-		process_outfile(line, i);
+		process_outfile(line, i, com);
 	if (line[*i])
 		(*i)++;
 }
 
-char	*redirection_treatment(char *line)
+void	redirection_treatment(t_com **com, int i, char **line)
 {
-	int		i;
-	int		j;
-	char	*new;
-
-	new = ft_calloc(ft_strlen(line) + 1, 1);
-	i = 0;
-	j = 0;
-	while (line[i])
+	int	j;
+	
+	j = i;
+	while ((*line)[i] && (*line)[i] != '|')
 	{
-		if ((line[i] == '<' || line[i] == '>') && !count_back(line, i) && !is_in_quotes(line, i))
-			redirection(line, &i);
+		if (((*line)[i] == '<' || (*line)[i] == '>') && !is_in_quotes(*line, i))
+			redirection(*line, &i, com);
 		else
-			new[j++] = line[i++];
+			(*line)[j++] = (*line)[i++];
 	}
-	free(line);
-	return (new);
+	while (i != j && (*line)[i])
+		(*line)[j++] = (*line)[i++];
+	while (j < i)
+		(*line)[j++] = 0;
 }

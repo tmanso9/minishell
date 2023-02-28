@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 18:10:41 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:10:23 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	lexer(char *line, int *i, t_com **com)
 		return ;
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
+	redirection_treatment(com, *i, &line);
 	token_identifier(line, i, head);
 	if (line[*i] == '|')
 		(*com)->pip_after = 1;
@@ -97,7 +98,7 @@ t_com	*parser(char *line)
 
 	i = 0;
 	// printf("%s\n", line);
-	line = redirection_treatment(line);
+	// line = redirection_treatment(line);
 	// printf("%s\n", line);
 	head = ft_calloc(1, sizeof(t_com *));
 	if (!head)
@@ -105,6 +106,7 @@ t_com	*parser(char *line)
 	while (line && line[i])
 	{
 		com = com_new();
+		// redirection_treatment(&com, i, &line);
 		lexer(line, &i, &com);
 		if (com->args)
 			com_add_back(head, com);
@@ -114,10 +116,10 @@ t_com	*parser(char *line)
 	/* Print to check commands */
 	// Space for parsing and expanding
 	com = *head;
-	if (com && vars()->fd_in)
+	/* if (com && vars()->fd_in)
 		com->in = vars()->fd_in;
 	if (com && vars()->fd_out)
-		last_command(com)->out = vars()->fd_out;
+		last_command(com)->out = vars()->fd_out; */
 	commands_treatment(&com);
 	/* com = *head;
 	while (com)

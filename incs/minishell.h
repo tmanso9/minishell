@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/27 19:48:21 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 11:01:05 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_com
 	int				pip_after;
 	int				builtin;
 	char			**env;
+	char			*infile;
+	int				invalid_infile;
+	char			*outfile;
 	struct s_com	*next;
 }				t_com;
 
@@ -102,7 +105,7 @@ void		replace_var(char *variable, char *left_part);
 //Parsing
 t_com		*parser(char *line);
 char		*treated_input(char *str);
-void		redirection(char *line, int *i);
+// void		redirection(char *line, int *i);
 void		process_heredoc(char *line, int *i);
 int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
@@ -110,7 +113,7 @@ char		*find_path(char **env_path, char *cmd);
 void		commands_treatment(t_com **com);
 int			count_back(char *str, int i);
 char		*token_treatment(char *str);
-char		*redirection_treatment(char *line);
+void		redirection_treatment(t_com **com, int i, char **line);
 int			is_in_quotes(char *str, int i);
 //Execute
 void		signals(void);

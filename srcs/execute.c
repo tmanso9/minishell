@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 20:48:46 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:52:28 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	execute_builtin(t_com *com)
 
 void	output_decider(t_com **com)
 {
-	if ((*com)->out > 1)
+	if ((*com)->out)
 		dup2((*com)->out, STDOUT_FILENO);
 	else if ((*com)->pip_after)
 		dup2((*com)->pip[1], STDOUT_FILENO);
@@ -62,10 +62,9 @@ void	execute_command(t_com **com)
 	id = fork();
 	if (id == 0)
 	{
-		if ((*com)->in && (vars())->invalid_infile)
+		if ((*com)->in && (*com)->invalid_infile)
 		{
 			(*com) = (*com)->next;
-			(vars())->invalid_infile = 0;
 			exit(1);
 		}
 		if (!(*com)->args || !(*com)->args[0])
@@ -111,7 +110,7 @@ void	execute_command(t_com **com)
 		exit(127);
 	}
 	(*com)->pid = id;
-	if ((*com)->next && (*com)->pip_after)
+	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
 		(*com)->next->in = dup((*com)->pip[0]);
 	close((*com)->pip[1]);
 	close((*com)->pip[0]);
