@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/28 12:52:28 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:31:30 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	execute_command(t_com **com)
 	(*com)->pid = id;
 	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
 		(*com)->next->in = dup((*com)->pip[0]);
+	if ((*com)->in)
+		close((*com)->in);
 	close((*com)->pip[1]);
 	close((*com)->pip[0]);
 }
