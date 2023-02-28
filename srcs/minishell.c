@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 13:15:21 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:14:14 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,31 +137,32 @@ void	free_commands(t_com **command)
 		free_arr((void *)(*command)->args);
 		free_arr((void *)(*command)->env);
 		free((*command)->path);
+		if ((*command)->out > 0)
+			close((*command)->out);
 		free((*command)->outfile);
 		free((*command)->infile);
 		free(*command);
 		*command = temp;
 	}
-	command = NULL;
+	// command = NULL;
 }
 
 void	wait_commands(void)
 {
 	char			*new_line;
-	char			*prompt;
 	t_com			*first;
 
 	while (1)
 	{
-		prompt = get_prompt();
+		vars()->prompt = get_prompt();
 		vars()->status = READING;
-		new_line = readline(prompt);
+		new_line = readline(vars()->prompt);
 		vars()->status = EXECUTING;
 		if (!new_line)
 		{
 			printf("exit\n");
 			rl_clear_history();
-			free(prompt);
+			free(vars()->prompt);
 			// free(vars()->new_env);
 			// if (vars()->fd_in)
 			// 	free(vars()->infile);
@@ -187,7 +188,7 @@ void	wait_commands(void)
 			vars()->fd_out = 0;
 			free(vars()->outfile);
 		}
-		free(prompt);
+		free(vars()->prompt);
 	}
 }
 
@@ -195,6 +196,7 @@ void	init_vars(char **env)
 {
 
 	(vars())->env = ft_calloc(1, sizeof(t_list *));
+	vars()->cmds = ft_calloc(1, sizeof(t_com *));
 	dup_env(env);
 	(vars())->status_code = 0;
 }
@@ -210,5 +212,6 @@ int	main(int argc, char **argv, char **env)
 	//free vars
 	ft_lstclear(vars()->env, free);
 	free(vars()->env);
+	free(vars()->cmds);
 	exit (0);
 }

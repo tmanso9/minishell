@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/28 14:31:30 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:15:40 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,24 @@ void	execute_builtin(t_com *com)
 		if (!com->pip_after)
 			ft_exit(com->args);
 		free_commands(&com);
+		ft_lstclear(vars()->env, free);
+		free(vars()->env);
+		free(vars()->prompt);
 		exit(vars()->status_code);
 	}
-	if (com->in || com->out || com->pip_after)
+	if (vars()->status == PIPE)
 	{
-		free_commands(&com);
+		close(1);
+		close(0);
+		close(com->in);
+		close(com->out);
+		free_commands(vars()->cmds);
+		free(vars()->cmds);
+		ft_lstclear(vars()->env, free);
+		free(vars()->env);
+		free(vars()->prompt);
 		// printf("exit code is %d\n", vars()->status_code);
-		exit(vars()->status_code);
+		// exit(vars()->status_code);
 	}
 }
 
@@ -57,16 +68,13 @@ void	execute_command(t_com **com)
 	int			id;
 	struct stat	st;
 
+	if (!(*com))
+		return ;
 	if (pipe((*com)->pip) == -1)
 		perror("");
 	id = fork();
 	if (id == 0)
 	{
-		if ((*com)->in && (*com)->invalid_infile)
-		{
-			(*com) = (*com)->next;
-			exit(1);
-		}
 		if (!(*com)->args || !(*com)->args[0])
 			exit(0);
 		if ((*com)->in)
@@ -111,9 +119,15 @@ void	execute_command(t_com **com)
 	}
 	(*com)->pid = id;
 	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
+	{
 		(*com)->next->in = dup((*com)->pip[0]);
+	}
 	if ((*com)->in)
+	{
 		close((*com)->in);
+		if (!ft_strncmp((*com)->infile, ".heredoc", 9))
+			unlink((*com)->infile);
+	}
 	close((*com)->pip[1]);
 	close((*com)->pip[0]);
 }
@@ -125,12 +139,23 @@ void	execute(t_com *com)
 		// printf("Com: '%s'\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 		{
+			if ((com->in && com->invalid_infile) || com->out < 0)
+			{
+				// close(com->pip[0]);
+				// close(com->pip[1]);
+				com = com->next;
+				// exit(1);
+			}
 			vars()->status = PIPE;
 			execute_command(&com);
 		}
 		else
+		{
+			vars()->status = EXECUTING;
 			execute_builtin(com);
-		com = com->next;
+		}
+		if (com)
+			com = com->next;
 	}
 }
 
@@ -141,12 +166,13 @@ void	wait_all_finished(t_com *com)
 
 	head = ft_calloc(1, sizeof(t_com *));
 	*head = com;
-	if (vars()->status == PIPE)
+	status = 0;
+	if (vars()->status == PIPE && com)
 	{
 		while (com)
 		{
 			waitpid(-1, &status, 0);
-			if (WIFEXITED(status))
+			if (WIFEXITED(status) && WEXITSTATUS(status))
 				vars()->status_code = WEXITSTATUS(status);
 			com = com->next;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 13:23:27 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:53:11 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,6 @@
 # define EXECUTING 1
 # define PIPE 3
 
-typedef struct s_variables
-{
-	t_list	**env;
-	char	malloced;
-	char	*infile;
-	int		fd_in;
-	char	*outfile;
-	int		fd_out;
-	int		status;
-	int		status_code;
-	int		invalid_infile;
-}	t_variables;
-
 typedef struct s_com
 {
 	char			*path;
@@ -72,6 +59,22 @@ typedef struct s_com
 	char			*outfile;
 	struct s_com	*next;
 }				t_com;
+
+typedef struct s_variables
+{
+	t_list	**env;
+	char	malloced;
+	char	*infile;
+	int		fd_in;
+	char	*outfile;
+	int		fd_out;
+	int		status;
+	int		status_code;
+	int		invalid_infile;
+	char	*prompt;
+	t_com	**cmds;
+}	t_variables;
+
 
 //Builtins
 void		ft_env(void);
