@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:07:15 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:00:07 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	process_infile(char *line, int *i, t_com **com)
 		free((*com)->infile);
 	}
 	if (line[*i + 1] && line[*i + 1] == '<')
-		process_heredoc(line, i);
+		process_heredoc(line, i, com);
 	else
 		((*com))->infile = token_treatment(filename(line, i));
 	((*com))->in = open((*com)->infile, O_RDONLY);

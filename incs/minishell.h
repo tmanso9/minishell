@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 15:53:11 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:41:15 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void		replace_var(char *variable, char *left_part);
 //Parsing
 t_com		*parser(char *line);
 char		*treated_input(char *str);
-void		process_heredoc(char *line, int *i);
+void		process_heredoc(char *line, int *i, t_com **com);
 int			is_builtin(char *command);
 void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 char		*find_path(char **env_path, char *cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/20 16:44:27 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:44:57 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ char	*get_limiter(char *line, int *i, char *lim)
 	return (lim);
 }
 
-void	process_heredoc(char *line, int *i)
+void	process_heredoc(char *line, int *i, t_com **com)
 {
 	char	*str;
 	char	*lim;
 
 	(*i) += 2;
-	vars()->infile = ft_strdup(".heredoc");
-	(vars())->fd_in = open(vars()->infile, O_RDWR | O_CREAT, 0666);
+	(*com)->infile = ft_strdup(".heredoc");
+	((*com))->in = open((*com)->infile, O_RDWR | O_CREAT, 0666);
 	lim = NULL;
 	lim = get_limiter(line, i, lim);
 	write(1, "> ", 2);
@@ -45,7 +45,7 @@ void	process_heredoc(char *line, int *i)
 	{
 		if (!ft_strncmp(str, lim, ft_strlen(lim)))
 			break ;
-		ft_putstr_fd(str, vars()->fd_in);
+		ft_putstr_fd(str, (*com)->in);
 		free(str);
 		write(1, "> ", 2);
 		str = get_next_line(0);
@@ -53,5 +53,5 @@ void	process_heredoc(char *line, int *i)
 	if (str)
 		free(str);
 	free(lim);
-	close(vars()->fd_in);
+	close((*com)->in);
 }
