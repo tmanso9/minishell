@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:41:15 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:18:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ char		*token_treatment(char *str);
 void		redirection_treatment(t_com **com, int i, char **line);
 int			is_in_quotes(char *str, int i);
 //Execute
+void		cmd_handler(int num);
 void		signals(void);
 void		execute(t_com *com);
 void		wait_all_finished(t_com *com);
