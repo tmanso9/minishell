@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 13:34:23 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:05:58 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	replace_var(char *variable, char *left_part)
-{
-	t_list	*temp;
-
-	temp = *(vars()->env);
-	while (temp)
-	{
-		if (!ft_strncmp(temp->content, left_part, ft_strlen(left_part)))
-		{
-			free(temp->content);
-			temp->content = variable;
-		}
-		temp = temp->next;
-	}
-}
 
 int	parse_var(char *var_name)
 {

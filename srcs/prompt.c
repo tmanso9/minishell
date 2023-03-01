@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:40:01 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:47:16 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:02:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*right_part_creator(char *wd, char *home, char c, int flag)
 
 	i = 0;
 	j = 0;
-	while (home[i] == wd[i])
+	while (home[i] && wd[i] && home[i] == wd[i])
 		i++;
 	while (wd[i + j])
 		j++;
