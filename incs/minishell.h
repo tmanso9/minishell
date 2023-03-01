@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 14:42:31 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:21:22 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define READING 0
 # define EXECUTING 1
 # define PIPE 3
+# define HD 4
 
 typedef struct s_com
 {
@@ -73,6 +74,7 @@ typedef struct s_variables
 	int		invalid_infile;
 	char	*prompt;
 	t_com	**cmds;
+	int		hd_int;
 }	t_variables;
 
 //Builtins
@@ -122,6 +124,9 @@ char		*append_env_var(char *new, char *str, int *i);
 char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
 //Execute
+void		handler(int num);
+void		heredoc_handler(int num);
+void		cmd_handler(int num);
 void		signals(void);
 void		execute(t_com *com);
 void		wait_all_finished(t_com *com);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:44:57 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:01:42 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,24 @@ void	process_heredoc(char *line, int *i, t_com **com)
 	((*com))->in = open((*com)->infile, O_RDWR | O_CREAT, 0666);
 	lim = NULL;
 	lim = get_limiter(line, i, lim);
-	write(1, "> ", 2);
-	str = get_next_line(0);
-	while (str)
+	// write(1, "> ", 2);
+	vars()->status = HD;
+	while (vars()->status == HD)
 	{
-		if (!ft_strncmp(str, lim, ft_strlen(lim)))
+		str = readline("> ");
+		// printf("str is '%s'\n", str);
+		if (!ft_strncmp(str, lim, ft_strlen(lim) - 1))
 			break ;
-		ft_putstr_fd(str, (*com)->in);
-		free(str);
-		write(1, "> ", 2);
-		str = get_next_line(0);
+		if (str)
+		{
+			ft_putendl_fd(str, (*com)->in);
+			free(str);
+		}
+		// write(1, "> ", 2);
 	}
-	if (str)
-		free(str);
+	vars()->status = READING;
+	// if (str)
+	// 	free(str);
 	free(lim);
 	close((*com)->in);
 }

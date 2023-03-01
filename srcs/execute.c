@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:47:56 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:21:42 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	execute_builtin(t_com *com)
 	}
 	if (vars()->status == PIPE)
 	{
-		// if (com->pip_after)
-		// 	close(1);
+		if (com->pip_after) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
+			close(1);
 		close(0);
 		close(com->in);
 		close(com->out);
@@ -123,7 +123,6 @@ void	execute_command(t_com **com)
 	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
 	{
 		(*com)->next->in = dup((*com)->pip[0]);
-		close((*com)->pip[0]);
 	}
 	if ((*com)->in)
 	{
@@ -131,6 +130,7 @@ void	execute_command(t_com **com)
 		if (!ft_strncmp((*com)->infile, ".heredoc", 9))
 			unlink((*com)->infile);
 	}
+	close((*com)->pip[0]);
 	close((*com)->pip[1]);
 }
 
