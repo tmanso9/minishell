@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:41:15 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:24:35 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct s_variables
 	t_com	**cmds;
 }	t_variables;
 
-
 //Builtins
 void		ft_env(void);
 void		ft_export(char **commands);
@@ -115,6 +114,12 @@ int			count_back(char *str, int i);
 char		*token_treatment(char *str);
 void		redirection_treatment(t_com **com, int i, char **line);
 int			is_in_quotes(char *str, int i);
+void		empty_args(t_com **current);
+char		*open_slash(char *str);
+char		*append_rest(char *new, char *str, int *i);
+char		*append_env_var(char *new, char *str, int *i);
+char		*bar_treatment(char *str, int flag);
+char		*env_var(char *str, int *i);
 //Execute
 void		signals(void);
 void		execute(t_com *com);

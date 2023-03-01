@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 18:48:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:33:40 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char	*get_right_part(void)
 		right_part[1] = '$';
 		right_part[2] = ' ';
 	}
-	else if (!ft_strncmp(home, wd, ft_strlen(wd)) && ft_strlen(home) == ft_strlen(wd))
+	else if (!ft_strncmp(home, wd, ft_strlen(wd)) && \
+	ft_strlen(home) == ft_strlen(wd))
 	{
 		free(wd);
 		free(home);
@@ -164,10 +165,6 @@ void	wait_commands(void)
 			rl_clear_history();
 			free(vars()->prompt);
 			// free(vars()->new_env);
-			// if (vars()->fd_in)
-			// 	free(vars()->infile);
-			// if (vars()->fd_out)
-			// 	free(vars()->outfile);
 			return ;
 		}
 		if (ft_strlen(new_line))
@@ -181,9 +178,8 @@ void	wait_commands(void)
 
 void	init_vars(char **env)
 {
-
 	(vars())->env = ft_calloc(1, sizeof(t_list *));
-	vars()->cmds = ft_calloc(1, sizeof(t_com *));
+	(vars())->cmds = ft_calloc(1, sizeof(t_com *));
 	dup_env(env);
 	(vars())->status_code = 0;
 }

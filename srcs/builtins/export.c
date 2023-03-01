@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 18:37:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:28:11 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ void	ft_export(char **commands)
 	int		i;
 
 	if (arr_size(commands) < 2)
-	{
-		export_no_args();
-		return ;
-	}
+		return (export_no_args());
 	i = 1;
 	while (commands[i])
 	{

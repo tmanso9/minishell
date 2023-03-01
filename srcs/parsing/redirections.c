@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 17:00:07 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:26:43 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ char	*filename(char *line, int *i)
 	file = 0;
 	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
-	while (line[*i + file] && (!ft_is_space(line[*i + file]) || is_in_quotes(line, *i + file)) && \
-		line[*i + file] != '<' && line[*i + file] != '|' && line[*i + file] != ';' && \
-		line[*i + file] != '>')
+	while (line[*i + file] && (!ft_is_space(line[*i + file]) || \
+	is_in_quotes(line, *i + file)) && line[*i + file] != '<' && \
+	line[*i + file] != '|' && line[*i + file] != ';' \
+	&& line[*i + file] != '>')
 		file++;
 	name = ft_substr(line, *i, file);
-	(*i) += file - (line[*i + file] == '|' || line[*i + file] == ';' || line[*i + file] == '>' || line[*i + file] == '<');
+	(*i) += file - (line[*i + file] == '|' || line[*i + file] == ';' || \
+	line[*i + file] == '>' || line[*i + file] == '<');
 	return (name);
 }
 
@@ -86,7 +88,7 @@ void	redirection(char *line, int *i, t_com **com)
 void	redirection_treatment(t_com **com, int i, char **line)
 {
 	int	j;
-	
+
 	j = i;
 	while ((*line)[i] && (*line)[i] != '|' && (*line)[i] != ';')
 	{
