@@ -3,31 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 13:18:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:07:45 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handler(int num)
+/* void	heredoc_handler(int num)
 {
-	if (num == SIGINT)
+	if (num == SIGINT && vars()->status == HD)
 	{
 		write(2, "\n", 1);
 		vars()->status_code = 128 + num;
-		// if (vars()->status == DO_PIPE) //check for leaks here
-			// exit(1);
-		if (vars()->status == EXECUTING || vars()->status == PIPE)
-			return ;
+		// close(vars()->fd_in);
+		// unlink(".heredoc");
+		vars()->hd_int = 1;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	if (num == SIGQUIT)
-		SIG_IGN;
+} */
+
+void	handler(int num)
+{
+	if (num == SIGINT)
+	{
+		vars()->status_code = 128 + num;
+		if (vars()->status == EXECUTING || vars()->status == PIPE)
+		{
+			write(2, "\n", 1);
+			return ;
+		}
+		write(2, "^C\n", 3);
+		if (vars()->status == HD)
+		{
+			vars()->status = READING;
+			vars()->hd_int = 1;
+			rl_replace_line("", 0);
+			return ;
+		}
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	if (num == SIGQUIT && (vars()->status == EXECUTING || vars()->status == PIPE))
+	{
+		ft_putendl_fd("Quit (core dumped)", 2);
+		vars()->status_code = 128 + num;
+		return ;
+	}
+	else if (num == SIGQUIT && !(vars()->status == EXECUTING || vars()->status == PIPE))
+		SIG_IGN ;
 }
 /* Need to improve history when command^C */
 void	signals(void)

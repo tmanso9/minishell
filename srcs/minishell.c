@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 11:33:40 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:04:57 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ void	wait_commands(void)
 	{
 		vars()->prompt = get_prompt();
 		vars()->status = READING;
+		signal(SIGINT, handler);
+		signal(SIGQUIT, handler);
 		new_line = readline(vars()->prompt);
 		vars()->status = EXECUTING;
 		if (!new_line)
@@ -170,8 +172,19 @@ void	wait_commands(void)
 		if (ft_strlen(new_line))
 			add_history(new_line);
 		first = parser(new_line);
-		execute(first);
-		wait_all_finished(first);
+		if (vars()->hd_int)
+		{
+			free_commands(&first);
+			free(vars()->prompt);
+			vars()->hd_int = 0;
+			unlink(".heredoc");
+			continue ;
+		}
+		if (first)
+		{
+			execute(first);
+			wait_all_finished(first);
+		}
 		free(vars()->prompt);
 	}
 }
@@ -190,7 +203,10 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	(void)argv;
 	init_vars(env);
-	signals();
+	// signals();
+	signal(SIGINT, SIG_IGN);
+	// signal(SIGQUIT, SIG_IGN);
+	rl_catch_signals = 0;
 	wait_commands();
 	//free vars
 	ft_lstclear(vars()->env, free);
