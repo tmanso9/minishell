@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/28 13:18:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:35:21 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handler(int num)
 		rl_redisplay();
 	}
 	if (num == SIGQUIT)
-		SIG_IGN;
+		SIG_IGN ;
 }
 /* Need to improve history when command^C */
 void	signals(void)

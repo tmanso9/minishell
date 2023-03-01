@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/28 16:55:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:47:56 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	execute_builtin(t_com *com)
 	}
 	if (vars()->status == PIPE)
 	{
-		if (com->pip_after)
-			close(1);
+		// if (com->pip_after)
+		// 	close(1);
 		close(0);
 		close(com->in);
 		close(com->out);

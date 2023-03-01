@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:46:51 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 11:28:11 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:34:23 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ void	export_no_args(void)
 	vars()->status_code = 0;
 }
 
+void	export_error(char **commands, int i)
+{
+	vars()->status_code = 1;
+	ft_putstr_fd("minishel: export: `", 2);
+	ft_putstr_fd(commands[i], 2);
+	ft_putendl_fd("\': not a valid identifier", 2);
+}
+
 void	ft_export(char **commands)
 {
 	char	*new_var;
@@ -66,22 +74,10 @@ void	ft_export(char **commands)
 			return ;
 		new_var = split_com[0];
 		if (!ft_strlen(new_var) || parse_var(new_var))
-		{
-			vars()->status_code = 1;
-			ft_putstr_fd("minishel: export: `", 2);
-			ft_putstr_fd(commands[i], 2);
-			ft_putendl_fd("\': not a valid identifier", 2);
-			free_arr((void *)split_com);
-			i++;
-			continue ;
-		}
-		if (!new_var || !split_com[1])
-		{
-			free_arr((void *)split_com);
-			i++;
-			continue ;
-		}
-		if (var_exists(new_var))
+			export_error(commands, i);
+		else if (!new_var || !split_com[1])
+			;
+		else if (var_exists(new_var))
 			replace_var(ft_strdup(commands[i]), new_var);
 		else
 			ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup(commands[i])));

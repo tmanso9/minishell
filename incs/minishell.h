@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 11:24:35 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:42:31 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int			var_exists(char *var);
 char		*get_var(char *var);
 int			arr_size(char **arr);
 void		replace_var(char *variable, char *left_part);
+char		*get_prompt(void);
 
 //Parsing
 t_com		*parser(char *line);

@@ -6,7 +6,7 @@
 #    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/01 11:04:26 by amorais-         ###   ########.fr        #
+#    Updated: 2023/03/01 14:43:44 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,13 @@ PARSING_SRC =	lexer.c \
 				utils_parser.c
 
 GENERAL_SRC = 	minishell.c \
+				cmd_utils.c \
 				utils.c \
 				utils2.c \
 				utils3.c \
 				signals.c \
-				execute.c
+				execute.c \
+				prompt.c
 
 BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
 PARSING_OBJ = $(addprefix srcs/parsing/, $(PARSING_SRC:.c=.o))
