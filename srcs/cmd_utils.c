@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:41:27 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:41:49 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:46:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	free_commands(t_com **command)
 		free_arr((void *)(*command)->args);
 		free_arr((void *)(*command)->env);
 		free((*command)->path);
-		// if ((*command)->out > 0)
-		// 	close((*command)->out);
+		if ((*command)->out > 0)
+			close((*command)->out);
 		free((*command)->outfile);
 		free((*command)->infile);
 		free(*command);

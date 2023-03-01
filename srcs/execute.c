@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 16:23:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:45:50 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	execute_builtin(t_com *com)
 	}
 	if (vars()->status == PIPE)
 	{
-		// if (com->pip_after) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
-		// 	close(1);
+		if (com->pip_after || com->out) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
+			close(1);
 		close(0);
 		close(com->in);
 		close(com->out);
@@ -59,7 +59,10 @@ void	execute_builtin(t_com *com)
 void	output_decider(t_com **com)
 {
 	if ((*com)->out)
+	{
 		dup2((*com)->out, STDOUT_FILENO);
+		close((*com)->out);
+	}
 	else if ((*com)->pip_after)
 		dup2((*com)->pip[1], STDOUT_FILENO);
 }

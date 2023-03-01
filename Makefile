@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/01 17:06:16 by touteiro         ###   ########.fr        #
+#    Updated: 2023/03/01 17:33:50 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,10 @@ PARSING_SRC =	lexer.c \
 				parser.c \
 				utils_parser.c
 
+PROMPT_SRC =	prompt.c \
+				prompt_left.c \
+				prompt_right.c
+
 GENERAL_SRC = 	minishell.c \
 				cmd_utils.c \
 				env_utils.c \
@@ -40,13 +44,14 @@ GENERAL_SRC = 	minishell.c \
 				utils2.c \
 				utils3.c \
 				signals.c \
-				execute.c \
-				prompt.c
+				execute.c
+				
 
 BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
 PARSING_OBJ = $(addprefix srcs/parsing/, $(PARSING_SRC:.c=.o))
+PROMPT_OBJ = $(addprefix srcs/prompt/, $(PROMPT_SRC:.c=.o))
 GENERAL_OBJ = $(addprefix srcs/, $(GENERAL_SRC:.c=.o))
-OBJ = $(BUILTIN_OBJ) $(PARSING_OBJ) $(GENERAL_OBJ)
+OBJ = $(BUILTIN_OBJ) $(PARSING_OBJ) $(PROMPT_OBJ) $(GENERAL_OBJ)
 LIBFT = libft/libft.a
 
 %.o: %.c incs/minishell.h

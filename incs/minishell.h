@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 16:21:22 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:47:44 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,33 +77,10 @@ typedef struct s_variables
 	int		hd_int;
 }	t_variables;
 
-//Builtins
-void		ft_env(void);
-void		ft_export(char **commands);
-void		ft_cd(char **commands);
-void		ft_echo(char **args);
-void		ft_pwd(void);
-void		ft_unset(char **commands);
-void		ft_exit(char **commands);
-
-//Builtins utils
-void		sort_list_and_print(t_list *lst);
-int			biggest_str_len(char *str1, char *str2);
-
-//Utils
-t_variables	*vars(void);
-void		dup_env(char **env);
-void		free_arr(void **arr);
-t_com		*com_new(void);
-void		com_add_back(t_com **lst, t_com *new);
-char		**list_to_array(t_list *lst);
-void		free_commands(t_com **command);
-t_com		*last_command(t_com *com);
-int			var_exists(char *var);
-char		*get_var(char *var);
-int			arr_size(char **arr);
-void		replace_var(char *variable, char *left_part);
+//Prompt
 char		*get_prompt(void);
+char		*get_left_part(void);
+char		*get_right_part(void);
 
 //Parsing
 t_com		*parser(char *line);
@@ -123,11 +100,40 @@ char		*append_rest(char *new, char *str, int *i);
 char		*append_env_var(char *new, char *str, int *i);
 char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
+
+//Builtins
+void		ft_env(void);
+void		ft_export(char **commands);
+void		ft_cd(char **commands);
+void		ft_echo(char **args);
+void		ft_pwd(void);
+void		ft_unset(char **commands);
+void		ft_exit(char **commands);
+
+//Builtins utils
+void		sort_list_and_print(t_list *lst);
+int			biggest_str_len(char *str1, char *str2);
+
 //Execute
 void		handler(int num);
 void		heredoc_handler(int num);
 void		cmd_handler(int num);
-void		signals(void);
+// void		signals(void);
 void		execute(t_com *com);
 void		wait_all_finished(t_com *com);
+
+//Utils
+t_variables	*vars(void);
+void		dup_env(char **env);
+void		free_arr(void **arr);
+t_com		*com_new(void);
+void		com_add_back(t_com **lst, t_com *new);
+char		**list_to_array(t_list *lst);
+void		free_commands(t_com **command);
+t_com		*last_command(t_com *com);
+int			var_exists(char *var);
+char		*get_var(char *var);
+int			arr_size(char **arr);
+void		replace_var(char *variable, char *left_part);
+
 #endif

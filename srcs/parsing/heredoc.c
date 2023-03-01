@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 16:01:42 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 18:03:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ void	process_heredoc(char *line, int *i, t_com **com)
 	((*com))->in = open((*com)->infile, O_RDWR | O_CREAT, 0666);
 	lim = NULL;
 	lim = get_limiter(line, i, lim);
-	// write(1, "> ", 2);
 	vars()->status = HD;
 	while (vars()->status == HD)
 	{
 		str = readline("> ");
-		// printf("str is '%s'\n", str);
 		if (!ft_strncmp(str, lim, ft_strlen(lim) - 1))
 			break ;
 		if (str)
@@ -52,11 +50,8 @@ void	process_heredoc(char *line, int *i, t_com **com)
 			ft_putendl_fd(str, (*com)->in);
 			free(str);
 		}
-		// write(1, "> ", 2);
 	}
 	vars()->status = READING;
-	// if (str)
-	// 	free(str);
 	free(lim);
 	close((*com)->in);
 }

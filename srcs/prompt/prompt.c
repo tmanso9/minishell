@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 15:44:29 by touteiro          #+#    #+#             */
-/*   Updated: 2023/01/19 19:18:46 by touteiro         ###   ########.fr       */
+/*   Created: 2023/03/01 14:40:01 by amorais-          #+#    #+#             */
+/*   Updated: 2023/03/01 17:36:27 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include "minishell.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <stdio.h>
+char	*get_prompt(void)
+{
+	char	*prompt;
+	char	*left_part;
+	char	*middle_part;
+	char	*right_part;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 9
-# endif
-
-char	*get_next_line(int fd);
-char	*ft_join(char *temp, char *buffer);
-int		ft_check(char *buffer);
-
-#endif
+	left_part = get_left_part();
+	middle_part = ft_strjoin(left_part, ":");
+	right_part = get_right_part();
+	free(left_part);
+	prompt = ft_strjoin(middle_part, right_part);
+	free(middle_part);
+	free(right_part);
+	return (prompt);
+}

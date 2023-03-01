@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 16:30:06 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:11:53 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void	lexer(char *line, int *i, t_com **com)
 	head = ft_calloc(1, sizeof(t_list *));
 	if (!head)
 		return ;
-	if (!line[*i])
-		ft_putendl_fd("minishell: syntax error", 2);
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
+	if (!line[*i])
+		ft_putendl_fd("minishell: syntax error", 2);
 	redirection_treatment(com, *i, &line);
 	token_identifier(line, i, head);
 	while (ft_is_space(line[*i]))
@@ -109,11 +109,7 @@ t_com	*parser(char *line)
 		if (com->args)
 			com_add_back(head, com);
 		else
-		{
-			if (com->pip_after || com->in || com->out)
-				ft_putendl_fd("minishell: syntax error", 2);
 			free(com);
-		}
 	}
 	com = *head;
 	commands_treatment(&com);
