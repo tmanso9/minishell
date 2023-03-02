@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 13:02:25 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:55:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,8 @@ int			biggest_str_len(char *str1, char *str2);
 
 //Execute
 void		handler(int num);
-void		heredoc_handler(int num);
-void		cmd_handler(int num);
-// void		signals(void);
+void		execute_builtin(t_com *com);
+void		execute_command(t_com **com);
 void		execute(t_com *com);
 void		wait_all_finished(t_com *com);
 
@@ -131,6 +130,7 @@ void		free_arr(void **arr);
 t_com		*com_new(void);
 void		com_add_back(t_com **lst, t_com *new);
 char		**list_to_array(t_list *lst);
+void		free_vars(void);
 void		free_commands(t_com **command);
 t_com		*last_command(t_com *com);
 int			var_exists(char *var);

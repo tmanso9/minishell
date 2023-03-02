@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/01 17:33:50 by touteiro         ###   ########.fr        #
+#    Updated: 2023/03/02 14:49:32 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,17 @@ ifeq ($(DEBUG), 1)
 	CFLAGS += -fsanitize=address
 endif
 
+PROMPT_SRC =	prompt.c \
+				prompt_left.c \
+				prompt_right.c
+
+PARSING_SRC =	lexer.c \
+				path_finder.c \
+				redirections.c \
+				heredoc.c \
+				parser.c \
+				utils_parser.c
+
 BUILTIN_SRC = 	pwd.c \
 				env.c \
 				echo.c \
@@ -26,32 +37,27 @@ BUILTIN_SRC = 	pwd.c \
 				export_utils.c \
 				cd.c \
 				exit.c
-PARSING_SRC =	lexer.c \
-				path_finder.c \
-				redirections.c \
-				heredoc.c \
-				parser.c \
-				utils_parser.c
 
-PROMPT_SRC =	prompt.c \
-				prompt_left.c \
-				prompt_right.c
+EXECUTE_SRC =	execute.c \
+				builtin_execute.c \
+				pipe_execute.c \
+				signals.c
 
-GENERAL_SRC = 	minishell.c \
-				cmd_utils.c \
-				env_utils.c \
-				utils.c \
+UTILS_SRC =		utils.c \
 				utils2.c \
 				utils3.c \
-				signals.c \
-				execute.c
-				
+				env_utils.c \
+				free_utils.c
 
-BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
-PARSING_OBJ = $(addprefix srcs/parsing/, $(PARSING_SRC:.c=.o))
+GENERAL_SRC = 	minishell.c
+				
 PROMPT_OBJ = $(addprefix srcs/prompt/, $(PROMPT_SRC:.c=.o))
+PARSING_OBJ = $(addprefix srcs/parsing/, $(PARSING_SRC:.c=.o))
+BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
+EXECUTE_OBJ = $(addprefix srcs/execute/, $(EXECUTE_SRC:.c=.o))
+UTILS_OBJ = $(addprefix srcs/utils/, $(UTILS_SRC:.c=.o))
 GENERAL_OBJ = $(addprefix srcs/, $(GENERAL_SRC:.c=.o))
-OBJ = $(BUILTIN_OBJ) $(PARSING_OBJ) $(PROMPT_OBJ) $(GENERAL_OBJ)
+OBJ = $(PROMPT_OBJ) $(PARSING_OBJ) $(BUILTIN_OBJ) $(EXECUTE_OBJ) $(UTILS_OBJ) $(GENERAL_OBJ)
 LIBFT = libft/libft.a
 
 %.o: %.c incs/minishell.h

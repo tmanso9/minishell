@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_utils.c                                        :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:41:27 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 17:46:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:51:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ void	free_commands(t_com **command)
 		free(*command);
 		*command = temp;
 	}
+}
+
+void	free_vars(void)
+{
+	ft_lstclear(vars()->env, free);
+	free(vars()->env);
+	free(vars()->prompt);
+	free(vars()->cmds);
 }

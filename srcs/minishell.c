@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 13:14:58 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:00:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	is_new_line_there(char *new_line)
 	{
 		printf("exit\n");
 		rl_clear_history();
-		free(vars()->prompt);
 		return (0);
 	}
 	return (1);
@@ -36,7 +35,7 @@ int	interrupt(t_com *first)
 	}
 	if (vars()->syntax_error)
 		flag = 1;
-	if (flag)	
+	if (flag)
 	{
 		vars()->hd_int = 0;
 		vars()->syntax_error = 0;
@@ -88,8 +87,6 @@ int	main(int argc, char **argv, char **env)
 	init_vars(env);
 	rl_catch_signals = 0;
 	wait_commands();
-	ft_lstclear(vars()->env, free);
-	free(vars()->env);
-	free(vars()->cmds);
+	free_vars();
 	exit (0);
 }
