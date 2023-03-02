@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:21:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 17:20:47 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:20:34 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stddef.h>
+# include "get_next_line_bonus.h"
 
 typedef struct s_list
 {

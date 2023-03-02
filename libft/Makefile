@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/27 17:29:50 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/01 17:21:11 by touteiro         ###   ########.fr        #
+#    Updated: 2023/03/02 16:18:46 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,11 @@ LIBFT_SRCS = ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 			ft_strlcpy ft_strlen ft_strmapi ft_strncmp ft_strnstr ft_strrchr \
 			ft_strtrim ft_substr ft_tolower ft_toupper
 			
+GNL_SRCS = get_next_line_bonus get_next_line_utils_bonus
+			
 LIBFT_OBJS = $(addprefix srcs/libft/, ${LIBFT_SRCS:=.o})
-OBJS = ${LIBFT_OBJS}
+GNL_OBJS = $(addprefix srcs/get_next_line/, ${GNL_SRCS:=.o})
+OBJS = ${LIBFT_OBJS} ${GNL_OBJS}
 
 ${NAME}:	${OBJS}
 			@${LIBC} ${NAME} ${OBJS}
