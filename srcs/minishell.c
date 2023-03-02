@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 13:14:58 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:37:36 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	interrupt(t_com *first)
 	}
 	if (vars()->syntax_error)
 		flag = 1;
-	if (flag)	
+	if (flag)
 	{
 		vars()->hd_int = 0;
 		vars()->syntax_error = 0;

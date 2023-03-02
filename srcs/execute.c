@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/02 13:24:56 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:54:58 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	wait_all_finished(t_com *com)
 		while (com)
 		{
 			waitpid(-1, &status, 0);
-			if (WIFEXITED(status) && WEXITSTATUS(status))
+			if (WIFEXITED(status)/*  && WEXITSTATUS(status) */)
 				vars()->status_code = WEXITSTATUS(status);
 			com = com->next;
 		}
