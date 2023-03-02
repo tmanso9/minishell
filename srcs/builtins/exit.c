@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:07:09 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 12:36:25 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:38:21 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,13 @@ static void	process_number_arg(char **commands)
 		vars()->status_code -= 256;
 	else if (vars()->status_code < 0)
 		vars()->status_code += 256;
-	printf("%d\n", vars()->status);
+	if (vars()->status != PIPE)
+		ft_putstr_fd("exit\n", 1);
+}
+
+static void	no_arguments(void)
+{
+	vars()->status_code = 0;
 	if (vars()->status != PIPE)
 		ft_putstr_fd("exit\n", 1);
 }
@@ -58,12 +64,7 @@ void	ft_exit(char **commands)
 	char	**cmds;
 
 	if (!commands[1])
-	{
-		vars()->status_code = 0;
-		if (vars()->status != PIPE)
-			ft_putstr_fd("exit\n", 1);
-		return ;
-	}
+		return (no_arguments());
 	cmds = ft_split(commands[1], ' ');
 	if (arr_size(commands) > 2 || arr_size(cmds) > 1)
 	{
