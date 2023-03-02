@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 13:05:05 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:25:38 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_com	*parser(char *line)
 	if (!head)
 		return (NULL);
 	check_pipe(line);
+	unclosed_quotes(line);
 	while (line && line[i])
 	{
 		com = com_new();
