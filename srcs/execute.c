@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 17:45:50 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:24:56 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 
 void	execute_builtin(t_com *com)
 {
-	// int	exit_code;
-
-	// exit_code = 0;
 	if (!ft_strncmp(com->args[0], "env", ft_strlen("env")))
-		/* exit_code =  */ft_env();
+		ft_env();
 	else if (!ft_strncmp(com->args[0], "cd", ft_strlen("cd")))
-		/* exit_code =  */ft_cd(com->args);
+		ft_cd(com->args);
 	else if (!ft_strncmp(com->args[0], "echo", ft_strlen("echo")))
-		/* exit_code =  */ft_echo(com->args);
+		ft_echo(com->args);
 	else if (!ft_strncmp(com->args[0], "export", ft_strlen("export")))
-		/* exit_code =  */ft_export(com->args);
+		ft_export(com->args);
 	else if (!ft_strncmp(com->args[0], "pwd", ft_strlen("pwd")))
-		/* exit_code =  */ft_pwd();
+		ft_pwd();
 	else if (!ft_strncmp(com->args[0], "unset", ft_strlen("unset")))
-		/* exit_code =  */ft_unset(com->args);
+		ft_unset(com->args);
 	else if (!ft_strncmp(com->args[0], "exit", ft_strlen("exit")))
 	{
 		if (!com->pip_after)
@@ -41,8 +38,8 @@ void	execute_builtin(t_com *com)
 	}
 	if (vars()->status == PIPE)
 	{
-		if (com->pip_after || com->out) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
-			close(1);
+		// if (com->pip_after || com->out) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
+		// 	close(1);
 		close(0);
 		close(com->in);
 		close(com->out);

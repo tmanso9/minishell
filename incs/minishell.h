@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 17:47:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:02:25 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_variables
 	char	*prompt;
 	t_com	**cmds;
 	int		hd_int;
+	int		syntax_error;
 }	t_variables;
 
 //Prompt
@@ -100,6 +101,7 @@ char		*append_rest(char *new, char *str, int *i);
 char		*append_env_var(char *new, char *str, int *i);
 char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
+void		check_pipe(char *str);
 
 //Builtins
 void		ft_env(void);

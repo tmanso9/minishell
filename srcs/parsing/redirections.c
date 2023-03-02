@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 11:41:43 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:28:43 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ char	*filename(char *line, int *i)
 	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
 	if (!line[*i] || line[*i] == '<' || line[*i] == '>' | line[*i] == '|')
+	{
 		ft_putendl_fd("minishell: syntax error", 2);
+		vars()->syntax_error = 1;
+		return (NULL);
+	}
 	while (line[*i + file] && (!ft_is_space(line[*i + file]) || \
 	is_in_quotes(line, *i + file)) && line[*i + file] != '<' && \
 	line[*i + file] != '|' && line[*i + file] != ';' \
@@ -46,7 +50,9 @@ void	process_infile(char *line, int *i, t_com **com)
 	if (line[*i + 1] && line[*i + 1] == '<')
 		process_heredoc(line, i, com);
 	else
-		((*com))->infile = token_treatment(filename(line, i));
+		(*com)->infile = token_treatment(filename(line, i));
+	if (!(*com)->infile)
+		return ;
 	((*com))->in = open((*com)->infile, O_RDONLY);
 	if ((*com)->in < 0 && !(*com)->invalid_infile)
 	{
@@ -68,13 +74,15 @@ void	process_outfile(char *line, int *i, t_com **com)
 	append = line[*i + 1] == '>';
 	(*i) += append;
 	(*com)->outfile = token_treatment(filename(line, i));
+	if (!(*com)->outfile)
+		return ;
 	if (append)
 		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	else
 		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
-	if ((*com)->in < 0)
+	if ((*com)->out < 0)
 		perror((*com)->outfile);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 18:08:46 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:14:58 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,26 @@ int	is_new_line_there(char *new_line)
 	return (1);
 }
 
-int	heredoc_interrupted(t_com *first)
+int	interrupt(t_com *first)
 {
+	int	flag;
+
+	flag = 0;
 	if (vars()->hd_int)
 	{
+		unlink(".heredoc");
+		flag = 1;
+	}
+	if (vars()->syntax_error)
+		flag = 1;
+	if (flag)	
+	{
+		vars()->hd_int = 0;
+		vars()->syntax_error = 0;
 		free_commands(&first);
 		free(vars()->prompt);
-		vars()->hd_int = 0;
-		unlink(".heredoc");
-		return (1);
 	}
-	return (0);
+	return (flag);
 }
 
 void	wait_commands(void)
@@ -55,7 +64,7 @@ void	wait_commands(void)
 		if (ft_strlen(new_line))
 			add_history(new_line);
 		first = parser(new_line);
-		if (heredoc_interrupted(first))
+		if (interrupt(first))
 			continue ;
 		execute(first);
 		wait_all_finished(first);

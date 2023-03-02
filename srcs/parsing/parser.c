@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 11:07:44 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:15:13 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*token_treatment(char *str)
 
 	i = 0;
 	final = NULL;
-	while (str[i])
+	while (str && str[i])
 	{
 		temp2 = final;
 		temp1 = token_spliter(str, &i);

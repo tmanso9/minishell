@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 17:11:53 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:05:05 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void	lexer(char *line, int *i, t_com **com)
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
 	if (!line[*i])
+	{
 		ft_putendl_fd("minishell: syntax error", 2);
+		vars()->syntax_error = 1;
+	}
 	redirection_treatment(com, *i, &line);
 	token_identifier(line, i, head);
 	while (ft_is_space(line[*i]))
@@ -102,6 +105,7 @@ t_com	*parser(char *line)
 	head = ft_calloc(1, sizeof(t_com *));
 	if (!head)
 		return (NULL);
+	check_pipe(line);
 	while (line && line[i])
 	{
 		com = com_new();

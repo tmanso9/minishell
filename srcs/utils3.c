@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:39:14 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:04:56 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,18 @@ char	*env_var(char *str, int *i)
 	final = ft_strdup(get_var(env_var));
 	free(env_var);
 	return (final);
+}
+
+void	check_pipe(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_is_space(str[i]))
+		i++;
+	if (str[i] == '|' || str[i] == ';')
+	{
+		vars()->syntax_error = 1;
+		ft_putendl_fd("minishell: syntax error", 2);
+	}
 }
