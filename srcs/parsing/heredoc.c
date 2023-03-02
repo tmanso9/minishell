@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 18:13:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:56:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	handle_hd(int num)
 	if (num == SIGINT)
 	{
 		ft_putstr_fd("\n", 2);
+		free_commands(vars()->cmds);
+		free_vars();
 		exit(1);
 	}
 }
@@ -86,6 +88,8 @@ void	process_heredoc(char *line, int *i, t_com **com)
 			}
 		}
 		free(lim);
+		free_commands(vars()->cmds);
+		free_vars();
 		exit(0);
 
 	}
