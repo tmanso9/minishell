@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:07:09 by touteiro          #+#    #+#             */
-/*   Updated: 2023/02/24 18:24:07 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:36:25 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static void	process_number_arg(char **commands)
 		vars()->status_code -= 256;
 	else if (vars()->status_code < 0)
 		vars()->status_code += 256;
-	ft_putstr_fd("exit\n", 1);
+	printf("%d\n", vars()->status);
+	if (vars()->status != PIPE)
+		ft_putstr_fd("exit\n", 1);
 }
 
 void	ft_exit(char **commands)
@@ -57,7 +59,9 @@ void	ft_exit(char **commands)
 
 	if (!commands[1])
 	{
-		ft_putstr_fd("exit\n", 1);
+		vars()->status_code = 0;
+		if (vars()->status != PIPE)
+			ft_putstr_fd("exit\n", 1);
 		return ;
 	}
 	cmds = ft_split(commands[1], ' ');
