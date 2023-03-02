@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 17:57:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/01 22:57:53 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	handler(int num)
 			write(2, "\n", 1);
 			return ;
 		}
-		write(2, "^C\n", 3);
 		if (vars()->status == HD)
 		{
 			vars()->status = READING;
@@ -44,6 +43,7 @@ void	handler(int num)
 			rl_replace_line("", 0);
 			return ;
 		}
+		write(2, "^C\n", 3);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
