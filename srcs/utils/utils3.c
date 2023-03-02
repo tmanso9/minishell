@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/02 15:11:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:26:15 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,25 @@ void	check_pipe(char *str)
 	{
 		vars()->syntax_error = 1;
 		ft_putendl_fd("minishell: syntax error", 2);
+	}
+}
+
+void	unclosed_quotes(char *str)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (!count_back(str, i) && ((str[i] == '"' && c != '\'') || (str[i] == '\'' && c != '"')))
+			c = str[i] * (c != str[i]);
+		i++;
+	}
+	if (c)
+	{
+		(vars())->syntax_error = 1;
+		ft_putendl_fd("Minishell error: unclosed quotes.", 2);
 	}
 }
