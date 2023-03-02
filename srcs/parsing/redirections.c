@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 14:57:31 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:41:43 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*filename(char *line, int *i)
 	file = 0;
 	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
+	if (!line[*i] || line[*i] == '<' || line[*i] == '>' | line[*i] == '|')
+		ft_putendl_fd("minishell: syntax error", 2);
 	while (line[*i + file] && (!ft_is_space(line[*i + file]) || \
 	is_in_quotes(line, *i + file)) && line[*i + file] != '<' && \
 	line[*i + file] != '|' && line[*i + file] != ';' \
@@ -50,6 +52,7 @@ void	process_infile(char *line, int *i, t_com **com)
 	{
 		perror(((*com))->infile);
 		(*com)->invalid_infile = 1;
+		(vars())->status_code = 1;
 	}
 }
 

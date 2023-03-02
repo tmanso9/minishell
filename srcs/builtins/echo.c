@@ -3,53 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:12:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/02/27 16:35:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:22:21 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* int	is_combo(char c)
-{
-	if (c == 'a')
-		write(1, "\a", 1);
-	else if (c == 'b')
-		write(1, "\b", 1);
-	else if (c == 't')
-		write(1, "\t", 1);
-	else if (c == 'n')
-		write(1, "\n", 1);
-	else if (c == 'v')
-		write(1, "\v", 1);
-	else if (c == 'f')
-		write(1, "\f", 1);
-	else if (c == 'r')
-		write(1, "\r", 1);
-	else
-	{
-		write(1, "\\", 1);
-		return (0);
-	}
-	return (1);
-} */
-
-/* void	put_str(char *str)
+int	is_option(char *str)
 {
 	int	i;
 
-	i = 0;
+	i = 2;
+	if (str[0] != '-' || str[1] != 'n')
+		return (0);
 	while (str[i])
-	{
-		//if (str[i] != 92)
-		write(1, &str[i], 1);
-		//else if (!(str[i - 1] && str[i - 1] == '\\') && is_combo(str[i + 1]))
-			//i++;
-		i++;
-	}
-} */
+		if (str[i++] != 'n')
+			return (0);
+	return (1);
+}
 
 void	ft_echo(char **args)
 {
@@ -58,7 +32,7 @@ void	ft_echo(char **args)
 
 	new_line = 1;
 	i = 1;
-	while (args[i] && !(ft_strncmp(args[i], "-n", 3)))
+	while (args[i] && is_option(args[i]))
 	{
 		new_line = 0;
 		i++;
