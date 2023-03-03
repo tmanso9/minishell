@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 15:08:28 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:40:56 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int			arr_size(char **arr);
 void		term_change(void);
 void		free_arr(void **arr);
 void		free_vars(void);
+void		free_failed_command(t_com *com);
 void		free_commands(t_com **command);
 
 #endif

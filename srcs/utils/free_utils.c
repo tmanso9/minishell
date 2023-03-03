@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:41:27 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 16:33:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:42:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,26 @@ void	free_vars(void)
 	free(vars()->env);
 	free(vars()->prompt);
 	free(vars()->cmds);
+}
+
+void	free_failed_command(t_com *com)
+{
+	if (com->env)
+		free_arr((void *)com->env);
+	if (com->path)
+		free(com->path);
+	if (com->out)
+		close(com->out);
+	if (com->in)
+		close(com->in);
+	if (com->outfile)
+		free(com->outfile);
+	if (com->infile)
+	{
+		if (!ft_strncmp(com->infile, ".heredoc", 9) || \
+			!ft_strncmp(com->infile, ".no_infile", 11))
+			unlink(com->infile);
+		free(com->infile);
+	}
+	free(com);
 }
