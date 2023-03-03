@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:40:01 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 17:36:27 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:29:40 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*get_prompt(void)
 	char	*middle_part;
 	char	*right_part;
 
+	if (!getenv("HOME") || !getenv("SESSION_MANAGER") || !getenv("USER"))
+		return (ft_strdup("minishell$ "));
 	left_part = get_left_part();
 	middle_part = ft_strjoin(left_part, ":");
 	right_part = get_right_part();
