@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 12:45:18 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:34:16 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,18 @@ void	hd_parent(t_com **com, char *lim)
 	int	status;
 
 	waitpid(0, &status, 0);
+	free(lim);
+	close((*com)->in);
 	if (WEXITSTATUS(status) == 1)
 	{
 		vars()->hd_int = 1;
 		vars()->status_code = 130;
 	}
+	else
+		parse_heredoc(com);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	vars()->status = READING;
-	free(lim);
-	close((*com)->in);
 }
 
 void	process_heredoc(char *line, int *i, t_com **com)
