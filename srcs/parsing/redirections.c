@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 22:53:06 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:40:50 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	process_outfile(char *line, int *i, t_com **com)
 	if (append && !(vars())->syntax_error)
 		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
-	else
+	else if (!(vars())->syntax_error)
 		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if ((*com)->out < 0)

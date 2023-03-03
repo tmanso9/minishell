@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 16:25:38 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:40:12 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_in_quotes(char *str, int i)
 	c = 0;
 	while (j < i)
 	{
-		if ((j == 0 || str[j - 1] != '\\') && \
+		if ((j == 0 || !count_back(str, j)) && \
 		(str[j] == '"' || str[j] == '\''))
 		{
 			if (c == str[j])
@@ -81,11 +81,6 @@ void	lexer(char *line, int *i, t_com **com)
 		return ;
 	while (line[*i] == '|' || line[*i] == ';' || ft_is_space(line[*i]))
 		(*i)++;
-	if (!line[*i])
-	{
-		ft_putendl_fd("minishell: syntax error", 2);
-		vars()->syntax_error = 1;
-	}
 	redirection_treatment(com, *i, &line);
 	token_identifier(line, i, head);
 	while (ft_is_space(line[*i]))
@@ -105,8 +100,7 @@ t_com	*parser(char *line)
 	head = ft_calloc(1, sizeof(t_com *));
 	if (!head)
 		return (NULL);
-	check_pipe(line);
-	unclosed_quotes(line);
+	check_syntax(line);
 	while (line && line[i])
 	{
 		com = com_new();

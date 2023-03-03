@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 16:25:21 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:38:58 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ char		*append_rest(char *new, char *str, int *i);
 char		*append_env_var(char *new, char *str, int *i);
 char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
-void		check_pipe(char *str);
-void		unclosed_quotes(char *str);
+void		check_syntax(char *str);
 
 //Builtins
 void		ft_env(void);

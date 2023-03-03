@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/02 16:26:15 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:44:28 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,43 @@ char	*env_var(char *str, int *i)
 	return (final);
 }
 
-void	check_pipe(char *str)
+int	check_pipe(char *str)
 {
 	int	i;
+	int	flag;
 
 	i = 0;
+	flag = 1;
 	while (ft_is_space(str[i]))
 		i++;
-	if (str[i] == '|' || str[i] == ';')
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		vars()->syntax_error = 1;
-		ft_putendl_fd("minishell: syntax error", 2);
+		if (!is_in_quotes(str, i) && (str[i] == '|' || str[i] == ';') && flag)
+			return (1);
+		if (!is_in_quotes(str, i) && (str[i] == '|' || str[i] == ';') && !flag)
+			flag = 1;
+		else if (!ft_is_space(str[i]))
+			flag = 0;
+		i++;
 	}
+	return (flag);
 }
 
-void	unclosed_quotes(char *str)
+void	check_syntax(char *str)
 {
 	int		i;
 	char	c;
 
 	i = 0;
 	c = 0;
+	if (check_pipe(str))
+	{
+		vars()->syntax_error = 1;
+		ft_putendl_fd("minishell: syntax error", 2);
+		return ;
+	}
 	while (str[i])
 	{
 		if (!count_back(str, i) && ((str[i] == '"' && c != '\'') || (str[i] == '\'' && c != '"')))
