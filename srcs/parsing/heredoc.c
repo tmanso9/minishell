@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/02 20:56:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:45:18 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,53 @@ static int	here_ctrld(char *lim)
 	return (1);
 }
 
-void	handle_hd(int num)
+void	hd_child(t_com **com, char *lim)
 {
-	if (num == SIGINT)
+	char	*str;
+
+	term_change();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, handle_hd);
+	signal(SIGQUIT, handle_hd);
+	while (1)
 	{
-		ft_putstr_fd("\n", 2);
-		free_commands(vars()->cmds);
-		free_vars();
-		exit(1);
+		ft_putstr_fd("> ", 2);
+		str = get_next_line(0);
+		if (!str && here_ctrld(lim))
+			break ;
+		if (!ft_strncmp(str, lim, ft_strlen(lim)))
+			break ;
+		if (str)
+		{
+			ft_putstr_fd(str, (*com)->in);
+			free(str);
+		}
 	}
+	free(lim);
+	free_commands(vars()->cmds);
+	free_vars();
+	exit(0);
+}
+
+void	hd_parent(t_com **com, char *lim)
+{
+	int	status;
+
+	waitpid(0, &status, 0);
+	if (WEXITSTATUS(status) == 1)
+	{
+		vars()->hd_int = 1;
+		vars()->status_code = 130;
+	}
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
+	vars()->status = READING;
+	free(lim);
+	close((*com)->in);
 }
 
 void	process_heredoc(char *line, int *i, t_com **com)
 {
-	char	*str;
 	char	*lim;
 	int		id;
 
@@ -69,39 +102,7 @@ void	process_heredoc(char *line, int *i, t_com **com)
 	if (id < 0)
 		perror("");
 	else if (id == 0)
-	{
-		rl_catch_signals = 0;
-		signal(SIGINT, SIG_IGN);
-		signal(SIGINT, handle_hd);
-		while (1)
-		{
-			ft_putstr_fd("> ", 2);
-			str = get_next_line(0);
-			if (!str && here_ctrld(lim))
-				break ;
-			if (!ft_strncmp(str, lim, ft_strlen(lim)))
-				break ;
-			if (str)
-			{
-				ft_putstr_fd(str, (*com)->in);
-				free(str);
-			}
-		}
-		free(lim);
-		free_commands(vars()->cmds);
-		free_vars();
-		exit(0);
-
-	}
-	int	status;
-	waitpid(0, &status, 0);
-	if (WEXITSTATUS(status) == 1)
-	{
-		vars()->hd_int = 1;
-		signal(SIGINT, handler);
-		signal(SIGQUIT, handler);
-	}
-	vars()->status = READING;
-	free(lim);
-	close((*com)->in);
+		hd_child(com, lim);
+	else
+		hd_parent(com, lim);
 }

@@ -6,11 +6,24 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/01 22:57:53 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:18:17 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	handle_hd(int num)
+{
+	if (num == SIGINT)
+	{
+		ft_putstr_fd("^C\n", 2);
+		free_commands(vars()->cmds);
+		free_vars();
+		exit(1);
+	}
+	if (num == SIGQUIT)
+		SIG_IGN ;
+}
 
 static void	handle_sigquit(int num)
 {

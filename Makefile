@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/02 15:56:48 by touteiro         ###   ########.fr        #
+#    Updated: 2023/03/03 12:02:48 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ UTILS_SRC =		utils.c \
 				utils2.c \
 				utils3.c \
 				env_utils.c \
+				term_utils.c \
 				free_utils.c
 
 GENERAL_SRC = 	minishell.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 10:38:58 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:05:03 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,20 @@ typedef struct s_com
 
 typedef struct s_variables
 {
-	t_list	**env;
-	char	malloced;
-	char	*infile;
-	int		fd_in;
-	char	*outfile;
-	int		fd_out;
-	int		status;
-	int		status_code;
-	int		invalid_infile;
-	char	*prompt;
-	t_com	**cmds;
-	int		hd_int;
-	int		syntax_error;
+	t_list			**env;
+	char			malloced;
+	char			*infile;
+	int				fd_in;
+	char			*outfile;
+	int				fd_out;
+	int				status;
+	int				status_code;
+	int				invalid_infile;
+	char			*prompt;
+	t_com			**cmds;
+	int				hd_int;
+	int				syntax_error;
+	struct termios	termios_save;
 }	t_variables;
 
 //Prompt
@@ -115,8 +116,12 @@ void		ft_exit(char **commands);
 //Builtins utils
 void		sort_list_and_print(t_list *lst);
 int			biggest_str_len(char *str1, char *str2);
+int			var_exists(char *var);
+char		*get_var(char *var);
+void		replace_var(char *variable, char *left_part);
 
 //Execute
+void		handle_hd(int num);
 void		handler(int num);
 void		execute_builtin(t_com *com);
 void		execute_command(t_com **com);
@@ -126,16 +131,14 @@ void		wait_all_finished(t_com *com);
 //Utils
 t_variables	*vars(void);
 void		dup_env(char **env);
-void		free_arr(void **arr);
 t_com		*com_new(void);
 void		com_add_back(t_com **lst, t_com *new);
+t_com		*last_command(t_com *com);
 char		**list_to_array(t_list *lst);
+int			arr_size(char **arr);
+void		term_change(void);
+void		free_arr(void **arr);
 void		free_vars(void);
 void		free_commands(t_com **command);
-t_com		*last_command(t_com *com);
-int			var_exists(char *var);
-char		*get_var(char *var);
-int			arr_size(char **arr);
-void		replace_var(char *variable, char *left_part);
 
 #endif
