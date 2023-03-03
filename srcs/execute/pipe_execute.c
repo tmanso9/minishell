@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:42:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 14:55:51 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:43:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ void	execute_command(t_com **com)
 {
 	int			id;
 
-	if (!(*com)) /* REVER */
+	if (!(*com))
+	{
+		vars()->status = READING;
 		return ;
+	}
 	if (pipe((*com)->pip) == -1)
 		perror("");
 	id = fork();
@@ -93,13 +96,12 @@ void	execute_command(t_com **com)
 		exec_child(com);
 	(*com)->pid = id;
 	if ((*com)->next && (*com)->pip_after && !(*com)->next->in)
-	{
 		(*com)->next->in = dup((*com)->pip[0]);
-	}
 	if ((*com)->in)
 	{
 		close((*com)->in);
-		if (!ft_strncmp((*com)->infile, ".heredoc", 9) || !ft_strncmp((*com)->infile, ".no_infile", 11))
+		if (!ft_strncmp((*com)->infile, ".heredoc", 9) || \
+			!ft_strncmp((*com)->infile, ".no_infile", 11))
 			unlink((*com)->infile);
 	}
 	close((*com)->pip[0]);

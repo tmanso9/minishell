@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 14:31:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:43:08 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,10 @@ void	execute(t_com *com)
 {
 	while (com)
 	{
-		// printf("Com: '%s'\nOut: %d\nIn: %d\nPipe: %d\n", com->args[0], com->out, com->in, com->pip_after);
 		if (!(com->builtin) || com->in || com->out || com->pip_after)
 		{
 			if ((com->in && com->invalid_infile) || com->out < 0)
-			{
-				// close(com->pip[0]);
-				// close(com->pip[1]);
 				com = com->next;
-				// exit(1);
-			}
 			vars()->status = PIPE;
 			execute_command(&com);
 		}
@@ -44,6 +38,7 @@ void	wait_all_finished(t_com *com)
 	int		status;
 
 	status = 0;
+
 	if (vars()->status == PIPE && com)
 	{
 		while (com)
