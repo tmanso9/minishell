@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 10:44:28 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:38:10 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	check_syntax(char *str)
 	}
 	while (str[i])
 	{
-		if (!count_back(str, i) && ((str[i] == '"' && c != '\'') || (str[i] == '\'' && c != '"')))
+		if (!count_back(str, i) && ((str[i] == '"' && c != '\'') \
+		|| (str[i] == '\'' && c != '"')))
 			c = str[i] * (c != str[i]);
 		i++;
 	}
@@ -92,4 +93,19 @@ void	check_syntax(char *str)
 		(vars())->syntax_error = 1;
 		ft_putendl_fd("Minishell error: unclosed quotes.", 2);
 	}
+}
+
+int	hd_syntax_check(char *str, int i)
+{
+	int	flag;
+
+	flag = 0;
+	while (str[++i] && !flag)
+	{
+		if (str[i] == '<' || str[i] == '>' || str[i] == '|' || str[i] == ';')
+			return (0);
+		else if (!ft_is_space(str[i]))
+			flag = 1;
+	}
+	return (1);
 }
