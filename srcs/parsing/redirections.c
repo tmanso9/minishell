@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 11:37:25 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:51:29 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ char	*filename(char *line, int *i)
 	file = 0;
 	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
-	if ((!line[*i] || line[*i] == '<' || line[*i] == '>' || line[*i] == '|') \
-	&& !vars()->syntax_error)
+	if (!line[*i] || line[*i] == '<' || line[*i] == '>' || line[*i] == '|')
 	{
 		ft_putendl_fd("minishell: syntax error", 2);
 		vars()->syntax_error = 1;
@@ -48,7 +47,7 @@ void	process_infile(char *line, int *i, t_com **com)
 		close((*com)->in);
 		free((*com)->infile);
 	}
-	if (line[*i + 1] && line[*i + 1] == '<' && hd_syntax_check(line, *i + 1))
+	if (line[*i + 1] && line[*i + 1] == '<')
 		process_heredoc(line, i, com);
 	else
 		(*com)->infile = token_treatment(filename(line, i));

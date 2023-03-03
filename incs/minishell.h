@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 12:49:46 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:03:03 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
 void		check_syntax(char *str);
 int			hd_syntax_check(char *str, int i);
+void		check_last_infile(t_com **head, t_com **com);
 
 //Builtins
 void		ft_env(void);
