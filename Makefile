@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/03 12:02:48 by touteiro         ###   ########.fr        #
+#    Updated: 2023/03/03 14:31:26 by amorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ PARSING_SRC =	lexer.c \
 				redirections.c \
 				heredoc.c \
 				parser.c \
-				utils_parser.c
+				utils_parser.c \
+				heredoc_parsing.c
 
 BUILTIN_SRC = 	pwd.c \
 				env.c \
