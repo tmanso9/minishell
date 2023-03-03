@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 15:43:08 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:46:07 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	wait_all_finished(t_com *com)
 	int		status;
 
 	status = 0;
-
 	if (vars()->status == PIPE && com)
 	{
 		while (com)

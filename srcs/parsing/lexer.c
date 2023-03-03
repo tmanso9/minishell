@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 15:30:50 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:32:50 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_com	*parser(char *line)
 		if (com->args)
 			com_add_back(head, com);
 		else
-			free(com);
+			free_commands(com);
 	}
 	com = *head;
 	commands_treatment(&com);
