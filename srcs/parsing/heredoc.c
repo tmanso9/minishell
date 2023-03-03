@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 14:34:16 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:22:47 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	hd_child(t_com **com, char *lim)
 
 	term_change();
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, handle_hd);
-	signal(SIGQUIT, handle_hd);
 	while (1)
 	{
 		ft_putstr_fd("> ", 2);
@@ -65,6 +65,7 @@ void	hd_child(t_com **com, char *lim)
 		}
 	}
 	free(lim);
+	close((*com)->in);
 	free_commands(vars()->cmds);
 	free_vars();
 	exit(0);
