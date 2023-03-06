@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 13:59:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:01:13 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	interrupt(t_com *first)
 	{
 		vars()->hd_int = 0;
 		vars()->syntax_error = 0;
+		vars()->status_code = 2;
 		free_commands(&first);
 		free(vars()->prompt);
 	}
