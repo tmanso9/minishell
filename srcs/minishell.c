@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 14:11:59 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:47:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,20 @@ void	wait_commands(void)
 
 void	init_vars(char **env)
 {
+	char	*temp;
+	char	*final;
+
 	(vars())->env = ft_calloc(1, sizeof(t_list *));
 	(vars())->cmds = ft_calloc(1, sizeof(t_com *));
 	dup_env(env);
+	increase_shlvl();
+	if (var_exists("SHLVL"))
+	{
+		temp = ft_itoa(ft_atoi(get_var("SHLVL")) + 1);
+		final = ft_strjoin("SHLVL=", temp);
+		free(temp);
+		replace_var(final, "SHLVL");
+	}
 	(vars())->status_code = 0;
 }
 
