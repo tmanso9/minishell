@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:41:27 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 17:14:11 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:10:07 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_commands(t_com **command)
 		free((*command)->path);
 		if ((*command)->out > 0)
 			close((*command)->out);
-		if ((*command)->in && !ft_strncmp((*command)->infile, ".heredoc", 9))
+		if ((*command)->in /* && !ft_strncmp((*command)->infile, ".heredoc", 9) */)
 			close((*command)->in);
 		free((*command)->outfile);
 		free((*command)->infile);
@@ -65,8 +65,16 @@ void	free_failed_command(t_com *com)
 	free(com);
 }
 
-void	free_all(void)
+void	free_all(int flag)
 {
+	if (flag)
+		close_fds();
 	free_commands(vars()->cmds);
 	free_vars();
+}
+
+void	close_fds(void)
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 }

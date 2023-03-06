@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:41:00 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 18:50:06 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:12:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	clean_builtin_pipe(t_com *com)
 {
-	// if (com->pip_after || com->out) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
-	// 	close(1);
+	if (com->pip_after || com->out) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
+		close(1);
 	close(0);
 	close(com->in);
 	close(com->out);
-	free_all();
+	free_all(0);
 	exit(vars()->status_code);
 }
 
@@ -42,8 +42,7 @@ void	execute_builtin(t_com *com)
 		ft_exit(com->args);
 		if (vars()->status != PIPE)
 		{
-			free_commands(vars()->cmds);
-			free_vars();
+			free_all(0);
 			exit(vars()->status_code);
 		}
 	}

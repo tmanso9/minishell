@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 18:47:33 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:10:35 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ int			arr_size(char **arr);
 void		term_change(void);
 void		free_arr(void **arr);
 void		free_vars(void);
-void		free_all(void);
+void		free_all(int flag);
+void		close_fds(void);
 void		free_failed_command(t_com *com);
 void		free_commands(t_com **command);
 

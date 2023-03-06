@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:09:36 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 12:18:17 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:15:33 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	handle_hd(int num)
 	if (num == SIGINT)
 	{
 		ft_putstr_fd("^C\n", 2);
-		free_commands(vars()->cmds);
-		free_vars();
+		free_all(0);
 		exit(1);
 	}
 	if (num == SIGQUIT)

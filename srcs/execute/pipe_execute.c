@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:42:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 18:49:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:10:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_errs_before(t_com **com)
 	{
 		ft_putstr_fd((*com)->args[0], 2);
 		ft_putendl_fd(": command not found", 2);
-		free_all();
+		free_all(1);
 		exit(127);
 	}
 	if (S_ISDIR(st.st_mode) && ((*com)->path[0] == '/' || \
@@ -41,12 +41,12 @@ void	check_errs_before(t_com **com)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd((*com)->path, 2);
 		ft_putendl_fd(": Is a directory", 2);
-		free_all();
+		free_all(1);
 		exit(126);
 	}
 	if (fstat((*com)->in, &st) == -1)
 	{
-		free_all();
+		free_all(1);
 		exit(1);
 	}
 }
@@ -59,16 +59,16 @@ void	check_errs_after(t_com **com)
 			!ft_strncmp("./", (*com)->args[0], 2))
 		{
 			perror((*com)->args[0]);
-			free_all();
+			free_all(1);
 			exit(126);
 		}
 		ft_putstr_fd((*com)->args[0], 2);
 		ft_putendl_fd(": command not found", 2);
-		free_all();
+		free_all(1);
 		exit(127);
 	}
 	perror((*com)->args[0]);
-	free_all();
+	free_all(1);
 	exit(127);
 }
 
