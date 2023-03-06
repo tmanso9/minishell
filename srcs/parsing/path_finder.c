@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:25:30 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 13:28:49 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:27:15 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ char	*find_path(char **env_path, char *cmd)
 	int		i;
 
 	i = -1;
+	if (!env_path[0])
+		return (ft_strdup(cmd));
 	path_line = env_path[is_path_line(env_path)] + 5;
+	if (!path_line)
+		return (ft_strdup(cmd));
 	paths = ft_split(path_line, ':');
 	while (paths[++i])
 	{
