@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 13:49:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:59:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	init_vars(char **env)
 		free(temp);
 		replace_var(final, "SHLVL");
 	}
+	else
+		ft_lstadd_back(vars()->env, ft_lstnew(ft_strdup("SHLVL=1")));
 	(vars())->status_code = 0;
 }
 
