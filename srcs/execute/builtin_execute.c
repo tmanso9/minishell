@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:41:00 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 15:46:16 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:50:06 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static void	clean_builtin_pipe(t_com *com)
 	close(0);
 	close(com->in);
 	close(com->out);
-	free_commands(vars()->cmds);
-	free_vars();
+	free_all();
 	exit(vars()->status_code);
 }
 

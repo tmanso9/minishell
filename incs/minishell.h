@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 18:11:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:47:33 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ char		*get_right_part(void);
 
 //Parsing
 t_com		*parser(char *line);
-// char		*treated_input(char *str);
 void		process_heredoc(char *line, int *i, t_com **com);
 int			is_builtin(char *command);
-// void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 char		*find_path(char **env_path, char *cmd);
 void		commands_treatment(t_com **com);
 int			count_back(char *str, int i);
@@ -123,6 +121,7 @@ int			biggest_str_len(char *str1, char *str2);
 int			var_exists(char *var);
 char		*get_var(char *var);
 void		replace_var(char *variable, char *left_part);
+char		*cd_to_home(char *path);
 
 //Execute
 void		handle_hd(int num);

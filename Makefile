@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/03 15:08:46 by amorais-         ###   ########.fr        #
+#    Updated: 2023/03/06 18:48:15 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ BUILTIN_SRC = 	pwd.c \
 				export.c \
 				export_utils.c \
 				cd.c \
+				cd_utils.c \
 				exit.c
 
 EXECUTE_SRC =	execute.c \

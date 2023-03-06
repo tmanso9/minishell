@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 15:34:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:46:24 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,7 @@ char	*input_to_path(char *cmd)
 
 	path = ft_strdup(cmd);
 	if (!ft_strlen(path))
-	{
-		free(path);
-		if (var_exists("HOME"))
-			path = ft_strdup(get_var("HOME"));
-		else
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-			vars()->status_code = 1;
-			return (NULL);
-		}
-	}
+		cd_to_home(path);
 	else if (path && path[0] == '~')
 		path = new_path(path);
 	else if (path && ft_strlen(path) == 1 && path[0] == '-')
