@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 19:12:13 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:58:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	init_vars(env);
 	rl_catch_signals = 0;
-	free_all(0);
+	wait_commands();
+	free_vars();
 	exit (0);
 }
