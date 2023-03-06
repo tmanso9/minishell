@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 10:33:56 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:30:47 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	process_outfile(char *line, int *i, t_com **com)
 	(*com)->outfile = token_treatment(filename(line, i));
 	if (!(*com)->outfile)
 		return ;
-	if (append && !(vars())->syntax_error && !(*com)->invalid_infile /* && (access((*com)->outfile, F_OK) || access((*com)->outfile, W_OK)) */)
+	if (append && !(vars())->syntax_error && !(*com)->invalid_infile)
 		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_APPEND, 0666);
-	else if (!(vars())->syntax_error && !(*com)->invalid_infile /* && (access((*com)->outfile, F_OK) || access((*com)->outfile, W_OK)) */)
+	else if (!(vars())->syntax_error && !(*com)->invalid_infile)
 		(*com)->out = open((*com)->outfile, \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if ((*com)->out < 0 && !(*com)->invalid_infile)
