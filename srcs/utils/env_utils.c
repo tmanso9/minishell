@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:05:24 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 17:10:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 20:04:49 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_var(char *var)
 	char	**split_var;
 
 	temp = *(vars()->env);
-	while (temp && ft_strncmp(var, "EMPTY", 5))
+	while (temp)
 	{
 		split_var = ft_split(temp->content, '=');
 		if (!split_var)

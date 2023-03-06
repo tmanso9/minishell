@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:48:56 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 15:46:07 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 20:51:40 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	execute(t_com *com)
 		{
 			if ((com->in && com->invalid_infile) || com->out < 0)
 				com = com->next;
+			if (com && com->args[0] && \
+				!ft_strlen(com->args[0]) && com->expanded)
+			{
+				free(com->args[0]);
+				com->args[0] = ft_strdup("''");
+			}
 			vars()->status = PIPE;
 			execute_command(&com);
 		}

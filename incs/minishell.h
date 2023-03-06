@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 19:10:35 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 20:11:40 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			is_in_quotes(char *str, int i);
 void		empty_args(t_com **current);
 char		*open_slash(char *str);
 char		*append_rest(char *new, char *str, int *i);
-char		*append_env_var(char *new, char *str, int *i, int flag);
+char		*append_env_var(char *new, char *str, int *i);
 char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
 void		check_syntax(char *str);
