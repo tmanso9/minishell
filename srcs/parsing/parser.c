@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/02 13:15:13 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:06:27 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*expander(char *str, int flag)
 	while (str[i])
 	{
 		if (str[i] == '$' && (i == 0 || !count_back(str, i)))
-			new = append_env_var(new, str, &i);
+			new = append_env_var(new, str, &i, flag);
 		else
 			new = append_rest(new, str, &i);
 	}
@@ -111,6 +111,8 @@ void	commands_treatment(t_com **com)
 		current->env = list_to_array(*(vars()->env));
 		while (current->args[i])
 		{
+			if (ft_strchr(current->args[i], '$'))
+				current->expanded = 1;
 			current->args[i] = token_treatment(current->args[i]);
 			i++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:57:46 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/01 11:24:04 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:07:17 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	empty_args(t_com **current)
 		moved = 0;
 		while ((*current)->args[i])
 		{
-			if (!ft_strlen((*current)->args[i]))
+			if (!ft_strlen((*current)->args[i]) && (*current)->expanded)
 			{
 				moved = 1;
 				free((*current)->args[i]);
@@ -81,7 +81,7 @@ void	empty_args(t_com **current)
 	}
 }
 
-char	*append_env_var(char *new, char *str, int *i)
+char	*append_env_var(char *new, char *str, int *i, int flag)
 {
 	char	*final;
 	char	*temp;
@@ -95,6 +95,11 @@ char	*append_env_var(char *new, char *str, int *i)
 	{
 		(*i)--;
 		temp = env_var(str, i);
+	}
+	if (!ft_strlen(temp) && flag)
+	{
+		free(temp);
+		temp = ft_strdup("''");
 	}
 	if (new)
 		final = ft_strjoin(new, temp);

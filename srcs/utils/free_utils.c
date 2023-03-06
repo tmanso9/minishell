@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:41:27 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 16:42:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:14:11 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,10 @@ void	free_failed_command(t_com *com)
 		free(com->infile);
 	}
 	free(com);
+}
+
+void	free_all(void)
+{
+	free_commands(vars()->cmds);
+	free_vars();
 }

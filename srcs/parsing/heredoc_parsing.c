@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_parsing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:47:28 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/03 14:59:19 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:06:50 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*hd_expander(char *str)
 	while (str && str[i])
 	{
 		if (str[i] == '$' && (i == 0 || !count_back(str, i)))
-			new = append_env_var(new, str, &i);
+			new = append_env_var(new, str, &i, 0);
 		else
 			new = append_rest(new, str, &i);
 	}

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 16:40:56 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:11:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_com
 	int				invalid_infile;
 	char			*outfile;
 	struct s_com	*next;
+	int				expanded;
 }				t_com;
 
 typedef struct s_variables
@@ -86,10 +87,10 @@ char		*get_right_part(void);
 
 //Parsing
 t_com		*parser(char *line);
-char		*treated_input(char *str);
+// char		*treated_input(char *str);
 void		process_heredoc(char *line, int *i, t_com **com);
 int			is_builtin(char *command);
-void		parse_each(char **arr, int *i, t_com **com, int *to_add);
+// void		parse_each(char **arr, int *i, t_com **com, int *to_add);
 char		*find_path(char **env_path, char *cmd);
 void		commands_treatment(t_com **com);
 int			count_back(char *str, int i);
@@ -99,7 +100,7 @@ int			is_in_quotes(char *str, int i);
 void		empty_args(t_com **current);
 char		*open_slash(char *str);
 char		*append_rest(char *new, char *str, int *i);
-char		*append_env_var(char *new, char *str, int *i);
+char		*append_env_var(char *new, char *str, int *i, int flag);
 char		*bar_treatment(char *str, int flag);
 char		*env_var(char *str, int *i);
 void		check_syntax(char *str);
@@ -142,6 +143,7 @@ int			arr_size(char **arr);
 void		term_change(void);
 void		free_arr(void **arr);
 void		free_vars(void);
+void		free_all(void);
 void		free_failed_command(t_com *com);
 void		free_commands(t_com **command);
 

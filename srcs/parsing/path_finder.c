@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:25:30 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 11:41:18 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:33:00 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*find_path(char **env_path, char *cmd)
 		return (ft_strdup(cmd));
 	path_line = env_path[is_path_line(env_path)] + 5;
 	paths = ft_split(path_line, ':');
-	while (paths && paths[++i])
+	while (ft_strlen(cmd) && paths && paths[++i])
 	{
 		intermediate = ft_strjoin(paths[i], "/");
 		final_path = ft_strjoin(intermediate, cmd);
