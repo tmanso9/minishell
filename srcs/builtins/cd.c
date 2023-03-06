@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:09:36 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 18:46:24 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 21:05:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*input_to_path(char *cmd)
 
 	path = ft_strdup(cmd);
 	if (!ft_strlen(path))
-		cd_to_home(path);
+		path = cd_to_home(path);
 	else if (path && path[0] == '~')
 		path = new_path(path);
 	else if (path && ft_strlen(path) == 1 && path[0] == '-')

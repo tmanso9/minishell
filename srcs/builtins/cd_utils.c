@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:04 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 18:46:12 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 21:00:16 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char	*cd_to_home(char *path)
 {
-	free(path);
+	if (path)
+		free(path);
 	if (var_exists("HOME"))
 		path = ft_strdup(get_var("HOME"));
 	else

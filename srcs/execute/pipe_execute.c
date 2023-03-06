@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:42:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 20:37:46 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/06 21:10:42 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	execute_command(t_com **com)
 	if (!(*com) || !(*com)->args[0])
 	{
 		vars()->status = READING;
-		vars()->status_code = 0;
 		return ;
 	}
 	if (pipe((*com)->pip) == -1)
