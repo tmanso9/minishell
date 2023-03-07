@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 18:00:58 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:08:01 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_back(char *str, int i)
+int	count_back(char *str, int i, char c)
 {
-	int	c;
+	int	counter;
 
-	c = 0;
-	while (str && i > 0 && str[--i] == '\\')
-		c++;
-	return (c % 2);
+	counter = 0;
+	while (str && i > 0 && str[--i] == c)
+		counter++;
+	return (counter % 2);
 }
 
 char	*env_var(char *str, int *i)
@@ -83,8 +83,8 @@ void	check_syntax(char *str)
 	}
 	while (str[i])
 	{
-		if (!count_back(str, i) && ((str[i] == '"' && c != '\'') \
-		|| (str[i] == '\'' && c != '"')))
+		if ((c == '\'' || !count_back(str, i, '\\')) && \
+		((str[i] == '"' && c != '\'') || (str[i] == '\'' && c != '"')))
 			c = str[i] * (c != str[i]);
 		i++;
 	}

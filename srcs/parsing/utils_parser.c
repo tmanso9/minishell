@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:57:46 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 20:23:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:07:42 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*append_rest(char *new, char *str, int *i)
 
 	j = 0;
 	y = -1;
-	while (str[(*i)] && (str[(*i)] != '$' || count_back(str, *i)))
+	while (str[(*i)] && (j == 0 || (str[(*i)] != '$' || \
+	count_back(str, *i, '\\'))))
 	{
 		j++;
 		(*i)++;

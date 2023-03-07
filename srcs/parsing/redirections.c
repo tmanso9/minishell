@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 11:30:47 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:33:45 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,9 @@ void	process_outfile(char *line, int *i, t_com **com)
 	int	append;
 
 	if ((*com)->out)
-	{
 		close((*com)->out);
+	if ((*com)->outfile)
 		free((*com)->outfile);
-	}
 	append = line[*i + 1] == '>';
 	(*i) += append;
 	(*com)->outfile = token_treatment(filename(line, i));

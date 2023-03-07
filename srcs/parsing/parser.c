@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/06 20:25:05 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:07:21 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ char	*expander(char *str, int flag)
 	new = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && (i == 0 || !count_back(str, i)))
+		if (str[i] == '$' && (i == 0 || (!count_back(str, i, '\\') \
+		&& !count_back(str, i, '$'))))
 			new = append_env_var(new, str, &i);
 		else
 			new = append_rest(new, str, &i);
 	}
-	if (!flag && count_back(new, ft_strlen(new)))
+	if (!flag && count_back(new, ft_strlen(new), '\\'))
 		new = open_slash(new);
 	new = bar_treatment(new, flag);
 	free(str);
@@ -62,9 +63,10 @@ char	*token_spliter(char *str, int *i)
 	c = str[*i];
 	size = 0;
 	while (str[*i + size] && (!size || \
-	!(((c == '"' || c == '\'') && count_back(str, *i + size) \
+	!(((c == '"' || c == '\'') && count_back(str, *i + size, '\\') \
 	&& str[*i + size] == c) || (((str[*i + size] == '"' && c != '\'') || \
-	(str[*i + size] == '\'' && c != '"')) && !count_back(str, *i + size)))))
+	(str[*i + size] == '\'' && c != '"')) && \
+	!count_back(str, *i + size, '\\')))))
 		size++;
 	size += ((c == '"' || c == '\'') && str[*i + size] == c);
 	temp = ft_calloc(size + 1, 1);

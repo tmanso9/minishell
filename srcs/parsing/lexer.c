@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:37:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 16:41:18 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:06:52 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_in_quotes(char *str, int i)
 	c = 0;
 	while (j < i)
 	{
-		if ((j == 0 || !count_back(str, j)) && \
+		if ((j == 0 || !count_back(str, j, '\\')) && \
 		(str[j] == '"' || str[j] == '\''))
 		{
 			if (c == str[j])
@@ -46,11 +46,12 @@ void	token_identifier(char *line, int *i, t_list **head)
 		{
 			while (line[*i + size] && (((!ft_is_space(line[*i + size])) && \
 				((line[*i + size] != ';' && line[*i + size] != '|') \
-				|| count_back(line, *i + size))) || \
+				|| count_back(line, *i + size, '\\'))) || \
 				is_in_quotes(line, *i + size)))
 				size++;
 			if (ft_is_space(line[*i + size - 1]) && \
-			(line[*i + size - 2] != '\\' || !count_back(line, *i + size - 1)))
+			(line[*i + size - 2] != '\\' || \
+			!count_back(line, *i + size - 1, '\\')))
 				size--;
 			ft_lstadd_back(head, ft_lstnew(ft_substr(line, *i, size)));
 			(*i) += size;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 20:11:40 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:51:26 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		process_heredoc(char *line, int *i, t_com **com);
 int			is_builtin(char *command);
 char		*find_path(char **env_path, char *cmd);
 void		commands_treatment(t_com **com);
-int			count_back(char *str, int i);
+int			count_back(char *str, int i, char c);
 char		*token_treatment(char *str);
 void		redirection_treatment(t_com **com, int i, char **line);
 int			is_in_quotes(char *str, int i);
