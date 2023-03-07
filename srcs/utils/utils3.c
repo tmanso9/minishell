@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:11 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/07 12:08:01 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:53:08 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*env_var(char *str, int *i)
 
 	j = 0;
 	(*i)++;
-	while (str[(*i) + j] && ft_isalnum(str[(*i) + j]))
+	while (str[(*i) + j] && (ft_isalnum(str[(*i) + j]) || str[(*i) + j] == '_'))
 		j++;
 	env_var = ft_substr(str, *i, j);
 	(*i) += j;
