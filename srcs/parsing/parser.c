@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/07 12:07:21 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:24:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ void	commands_treatment(t_com **com)
 		current->env = list_to_array(*(vars()->env));
 		while (current->args[i])
 		{
-			if (ft_strchr(current->args[i], '$') && \
+			if (ft_strchr(current->args[i], '\'') || \
 				ft_strchr(current->args[i], '"'))
-				current->expanded = 1;
+				current->always_do = 1;
 			current->args[i] = token_treatment(current->args[i]);
 			i++;
 		}

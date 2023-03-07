@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 19:58:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:25:54 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_new_line_there(char *new_line)
 	return (1);
 }
 
-int	interrupt(t_com *first)
+int	interrupt(void)
 {
 	int	flag;
 
@@ -37,10 +37,11 @@ int	interrupt(t_com *first)
 		flag = 1;
 	if (flag)
 	{
+		printf("oi\n");
 		vars()->hd_int = 0;
 		vars()->syntax_error = 0;
 		vars()->status_code = 2;
-		free_commands(&first);
+		free_commands(vars()->cmds);
 		free(vars()->prompt);
 	}
 	return (flag);
@@ -64,7 +65,7 @@ void	wait_commands(void)
 		if (ft_strlen(new_line))
 			add_history(new_line);
 		first = parser(new_line);
-		if (interrupt(first))
+		if (interrupt())
 			continue ;
 		execute(first);
 		wait_all_finished(first);

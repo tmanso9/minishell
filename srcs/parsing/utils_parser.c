@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:57:46 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/07 12:07:42 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:24:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	empty_args(t_com **current)
 		moved = 0;
 		while ((*current)->args[i])
 		{
-			if (!ft_strlen((*current)->args[i]) && !(*current)->expanded)
+			if (!ft_strlen((*current)->args[i]) && !(*current)->always_do)
 			{
 				moved = 1;
 				free((*current)->args[i]);

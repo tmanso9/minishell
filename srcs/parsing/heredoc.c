@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/03 15:22:47 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:27:34 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	hd_child(t_com **com, char *lim)
 		}
 	}
 	free(lim);
+	free(str);
 	close((*com)->in);
-	free_commands(vars()->cmds);
-	free_vars();
+	free_all(0);
 	exit(0);
 }
 
@@ -78,13 +78,7 @@ void	hd_parent(t_com **com, char *lim)
 	waitpid(0, &status, 0);
 	free(lim);
 	close((*com)->in);
-	if (WEXITSTATUS(status) == 1)
-	{
-		vars()->hd_int = 1;
-		vars()->status_code = 130;
-	}
-	else
-		parse_heredoc(com);
+	parse_heredoc(com);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	vars()->status = READING;
