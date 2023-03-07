@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:57:46 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/07 12:24:39 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:54:04 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*open_slash(char *str)
-{
-	char	*temp;
-	char	*final;
-
-	temp = readline("> ");
-	final = ft_strjoin(str, temp);
-	free(temp);
-	free(str);
-	return (final);
-}
 
 char	*append_rest(char *new, char *str, int *i)
 {

@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:44:07 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/07 13:33:44 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:53:15 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ char	*expander(char *str, int flag)
 		else
 			new = append_rest(new, str, &i);
 	}
-	if (!flag && count_back(new, ft_strlen(new), '\\'))
-		new = open_slash(new);
 	new = bar_treatment(new, flag);
 	free(str);
 	return (new);

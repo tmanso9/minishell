@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 13:25:54 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:50:55 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	interrupt(void)
 		flag = 1;
 	if (flag)
 	{
-		printf("oi\n");
 		vars()->hd_int = 0;
 		vars()->syntax_error = 0;
 		vars()->status_code = 2;

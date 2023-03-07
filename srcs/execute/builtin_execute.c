@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_execute.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:41:00 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 12:27:06 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:53:03 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	clean_builtin_pipe(t_com *com)
 {
-	if (com->pip_after || com->out) /* ONLY LEAVE IN COMMENTS FOR TEST PURPOSES */
+	if (com->pip_after || com->out)
 		close(1);
 	close(0);
 	close(com->in);

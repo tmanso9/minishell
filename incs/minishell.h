@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 12:24:39 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:54:08 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char		*token_treatment(char *str);
 void		redirection_treatment(t_com **com, int i, char **line);
 int			is_in_quotes(char *str, int i);
 void		empty_args(t_com **current);
-char		*open_slash(char *str);
 char		*append_rest(char *new, char *str, int *i);
 char		*append_env_var(char *new, char *str, int *i);
 char		*bar_treatment(char *str, int flag);
