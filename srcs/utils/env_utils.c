@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:05:24 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 20:04:49 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:53:48 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_var(char *var)
 		split_var = ft_split(temp->content, '=');
 		if (!split_var)
 			return ("");
-		if (!ft_strncmp(split_var[0], var, ft_strlen(split_var[0])))
+		if (!ft_strncmp(split_var[0], var, ft_strlen(var)))
 		{
 			free_arr((void *)split_var);
 			return (temp->content + ft_strlen(var) + 1);
