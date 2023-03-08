@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 13:27:34 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:18:01 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,13 @@ void	process_heredoc(char *line, int *i, t_com **com)
 	int		id;
 
 	(*i) += 2;
+	if (!line[*i] || line[*i] == '<' || line[*i] == '>' || \
+	line[*i] == '|' || line[*i] == ';')
+	{
+		ft_putendl_fd("minishell: syntax error", 2);
+		vars()->syntax_error = 1;
+		return ;
+	}
 	(*com)->infile = ft_strdup(".heredoc");
 	((*com))->in = open((*com)->infile, O_RDWR | O_CREAT, 0666);
 	lim = NULL;

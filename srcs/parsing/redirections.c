@@ -6,7 +6,7 @@
 /*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 11:33:45 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:17:13 by amorais-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*filename(char *line, int *i)
 	file = 0;
 	while (line[*i] && ft_is_space(line[*i]))
 		(*i)++;
-	if (!line[*i] || line[*i] == '<' || line[*i] == '>' || line[*i] == '|')
+	if (!line[*i] || line[*i] == '<' || line[*i] == '>' || line[*i] == '|' || \
+	line[*i] == ';')
 	{
 		ft_putendl_fd("minishell: syntax error", 2);
 		vars()->syntax_error = 1;
