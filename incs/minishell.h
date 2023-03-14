@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:41:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 13:54:08 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:30:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void		handler(int num);
 void		execute_builtin(t_com *com);
 void		execute_command(t_com **com);
 void		execute(t_com *com);
-void		wait_all_finished(t_com *com);
 
 //Utils
 t_variables	*vars(void);
