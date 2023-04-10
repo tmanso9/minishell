@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/14 18:30:16 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:19:24 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	interrupt(void)
 	flag = 0;
 	if (vars()->hd_int)
 	{
-		unlink(".heredoc");
+		unlink("/tmp/heredoc");
 		flag = 1;
 	}
 	if (vars()->syntax_error)

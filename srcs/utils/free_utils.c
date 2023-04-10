@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:41:27 by amorais-          #+#    #+#             */
-/*   Updated: 2023/03/07 13:22:33 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:19:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	free_failed_command(t_com *com)
 		free(com->outfile);
 	if (com->infile)
 	{
-		if (!ft_strncmp(com->infile, ".heredoc", 9) || \
-			!ft_strncmp(com->infile, ".no_infile", 11))
+		if (!ft_strncmp(com->infile, "/tmp/heredoc", 9) || \
+			!ft_strncmp(com->infile, "/tmp/no_infile", 11))
 			unlink(com->infile);
 		free(com->infile);
 	}

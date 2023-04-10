@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorais- <amorais-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:49:19 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/07 14:17:13 by amorais-         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:18:41 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	process_infile(char *line, int *i, t_com **com)
 {
 	if ((*com)->in)
 	{
-		if (!ft_strncmp((*com)->infile, ".heredoc", 9))
+		if (!ft_strncmp((*com)->infile, "/tmp/heredoc", 9))
 			unlink((*com)->infile);
 		close((*com)->in);
 		free((*com)->infile);

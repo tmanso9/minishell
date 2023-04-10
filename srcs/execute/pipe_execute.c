@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:42:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/03/06 21:10:42 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:19:42 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void	execute_command(t_com **com)
 	if ((*com)->in)
 	{
 		close((*com)->in);
-		if (!ft_strncmp((*com)->infile, ".heredoc", 9) || \
-			!ft_strncmp((*com)->infile, ".no_infile", 11))
+		if (!ft_strncmp((*com)->infile, "/tmp/heredoc", 9) || \
+			!ft_strncmp((*com)->infile, "/tmp/no_infile", 11))
 			unlink((*com)->infile);
 	}
 	close((*com)->pip[0]);
