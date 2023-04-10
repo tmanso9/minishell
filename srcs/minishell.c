@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:17:01 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/10 16:19:24 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:26:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	wait_commands(void)
 		if (interrupt())
 			continue ;
 		execute(first);
+		free_commands(&first);
 		free(vars()->prompt);
 	}
 }

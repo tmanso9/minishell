@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:38:57 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/10 16:16:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:28:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	hd_child(t_com **com, char *lim)
 	free(lim);
 	free(str);
 	close((*com)->in);
+	close((*com)->out);
 	free_all(0);
 	exit(0);
 }
