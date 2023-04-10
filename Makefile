@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 15:28:45 by touteiro          #+#    #+#              #
-#    Updated: 2023/03/06 18:48:15 by touteiro         ###   ########.fr        #
+#    Updated: 2023/04/10 21:49:52 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,17 +54,25 @@ UTILS_SRC =		utils.c \
 				free_utils.c
 
 GENERAL_SRC = 	minishell.c
-				
-PROMPT_OBJ = $(addprefix srcs/prompt/, $(PROMPT_SRC:.c=.o))
-PARSING_OBJ = $(addprefix srcs/parsing/, $(PARSING_SRC:.c=.o))
-BUILTIN_OBJ = $(addprefix srcs/builtins/, $(BUILTIN_SRC:.c=.o))
-EXECUTE_OBJ = $(addprefix srcs/execute/, $(EXECUTE_SRC:.c=.o))
-UTILS_OBJ = $(addprefix srcs/utils/, $(UTILS_SRC:.c=.o))
-GENERAL_OBJ = $(addprefix srcs/, $(GENERAL_SRC:.c=.o))
+
+PROMPT = $(addprefix srcs/prompt/, $(PROMPT_SRC))
+PARSING = $(addprefix srcs/parsing/, $(PARSING_SRC))
+BUILTIN = $(addprefix srcs/builtins/, $(BUILTIN_SRC))
+EXECUTE = $(addprefix srcs/execute/, $(EXECUTE_SRC))
+UTILS = $(addprefix srcs/utils/, $(UTILS_SRC))
+GENERAL = $(addprefix srcs/, $(GENERAL_SRC))
+
+PROMPT_OBJ = $(addprefix obj/, $(PROMPT:.c=.o))
+PARSING_OBJ = $(addprefix obj/, $(PARSING:.c=.o))
+BUILTIN_OBJ = $(addprefix obj/, $(BUILTIN:.c=.o))
+EXECUTE_OBJ = $(addprefix obj/, $(EXECUTE:.c=.o))
+UTILS_OBJ = $(addprefix obj/, $(UTILS:.c=.o))
+GENERAL_OBJ = $(addprefix obj/, $(GENERAL:.c=.o))
 OBJ = $(PROMPT_OBJ) $(PARSING_OBJ) $(BUILTIN_OBJ) $(EXECUTE_OBJ) $(UTILS_OBJ) $(GENERAL_OBJ)
 LIBFT = libft/libft.a
 
-%.o: %.c incs/minishell.h
+obj/%.o: %.c incs/minishell.h
+	@mkdir -p $(@D)
 	$(CC) -c $(CFLAGS) -o $@ $< 
 	@echo "\033[33m[OK]	" $@ "\033[0m"
 
@@ -89,6 +97,7 @@ clean: libft_clean
 
 fclean: clean libft_fclean
 	@rm -rf $(NAME)
+	@rm -rf obj/
 	@echo "\033[31mExecutable deleted\033[0m"
 	@echo ""
 
