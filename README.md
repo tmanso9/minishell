@@ -1,4 +1,4 @@
 - **Description**: Shell implementation featuring command-line functionality inspired by Bash.
 - **Language**: C
-- **Team**: Collaborated with [afonsomlcarvalho](https://github.com/afonsomlcarvalho)
+- **Team**: Developed by [afonsomlcarvalho](https://github.com/afonsomlcarvalho) and [tmanso9](https://github.com/tmanso9)
 - **How to run**: run make to compile, run executable as ./minishell
